@@ -11,7 +11,17 @@
 |
 */
 
+/*
 Route::get('/', function()
 {
 	return View::make('hello');
+});
+*/
+
+Route::get('/', function(){
+
+	echo '<pre>';
+	  print_r( Laramill::request_api() );
+	echo '</pre>';
+  
 });
