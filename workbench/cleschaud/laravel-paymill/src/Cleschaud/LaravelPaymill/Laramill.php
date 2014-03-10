@@ -5,8 +5,8 @@ use Paymill;
  
 class Laramill{
 
-	private static $apiKey;
-	private static $apiEndPoint;
+	private  $apiKey;
+	private  $apiEndPoint;
     
     const CLIENTS       =   'clients';
     const PAYMENTS      =   'payments';
@@ -37,6 +37,88 @@ class Laramill{
 		}
 
 	}
+	
+
+ 
+	public function request_api(){
+		
+		// Request to the paymill API	
+		$request = new Paymill\Request($this->apiKey);
+		
+		// id for test
+		$id  = 'client_aac766c78002f4d315a0';
+		$pay = 'pay_dba1845355d9f7a2958e89f6';	
+		
+		/*=============================
+			Create a client	
+		==============================*/
+		/*
+		$client  = new Paymill\Models\Request\Client();	
+		$client->setEmail('cindy.leschaud@gmail.com')
+			   ->setDescription('This is a new client');
+		$response = $request->create($client);
+		*/
+		
+		/*=============================
+			Retrive a client by ID	
+		==============================*/
+		
+		/*
+		$client = new Paymill\Models\Request\Client();
+		$client->setId($id);	
+		$response = $request->getOne($client);
+		*/
+		
+		/*=============================
+			Update a client 	
+		==============================*/
+		
+		/*
+		$client = new Paymill\Models\Request\Client();
+		$client->setId($id)
+		       ->setEmail('pruntrut@yahoo.fr')
+		       ->setDescription('Updated Client');	
+		$response = $request->update($client);
+		*/
+		
+		/*=============================
+			Get list of clients	
+		==============================*/
+			
+		/*
+		$client   = new Paymill\Models\Request\Client();
+		$response = $request->getAll($client);
+		*/
+				
+		/*=============================
+			Create new creditcard
+		==============================*/		
+		
+		/*
+		$payment = new Paymill\Models\Request\Payment();
+		$payment->setToken('098f6bcd4621d373cade4e832627b4f6')
+		        ->setClient($id);
+		
+		$response = $request->create($payment);
+		*/
+				
+		/*=============================
+			Create transaction
+		==============================*/		
+
+		/*
+		$transaction = new Paymill\Models\Request\Transaction();
+		$transaction->setAmount(4200) // e.g. "4200" for 42.00 EUR
+		            ->setCurrency('EUR')
+		            ->setPayment($pay)
+		            ->setDescription('Test Transaction');
+		
+		$response = $request->create($transaction);		
+		*/
+		
+		// return $response;
+	
+	}
 
 	/**
 	 * Authenticate at the Paymill API
@@ -47,6 +129,7 @@ class Laramill{
 	 */
 	function authentication($service)
 	{
+	
 		$apiKey      = $this->apiKey;
 		$apiEndpoint = $this->apiEndPoint;
         
@@ -618,15 +701,5 @@ class Laramill{
 		return $subscriptionsObject->get($params);
 	}
 
- 
-  public static function request_api(){
-  
-  	 $api_key = Config::get('laravel-paymill::api_test');
-	 
-  	 $request = new Paymill\Request($api_key['key_private']);
-  	
-     return $request;
-    
-  }
  
 }
