@@ -18,6 +18,7 @@ Route::get('/', function()
 });
 */
 
+/*
 Route::get('/', function(){
 
 	echo '<pre>';
@@ -25,3 +26,7 @@ Route::get('/', function(){
 	echo '</pre>';
   
 });
+*/
+
+
+Route::get('/', array( 'uses' => 'HomeController@form' ));
