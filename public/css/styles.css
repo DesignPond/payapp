@@ -1393,6 +1393,12 @@ a.button.white i {
 /* -------------------------------- */
 /* Form Elements
 /* -------------------------------- */
+
+label{
+	display: block;
+	padding: 5px 0;
+}
+
 input[type="text"], input[type="textarea"], textarea {
 	font-family: 'raleway', Helvetica, Arial, sans-serif;
 	padding: 0 6px 0 6px;
@@ -1405,7 +1411,21 @@ input[type="text"], input[type="textarea"], textarea {
 	margin-bottom: 10px;
 	outline: none;
 	display: block;
+	width: 100%;
 }
+
+.form-row{
+	width: 100%;
+	display: block
+}
+
+input.small{
+	width: 60px;
+	float: left;
+	margin-right: 10px;
+}
+
+
 .light-bg input[type="text"], .light-bg input[type="textarea"], .light-bg textarea {
 	background-color: #E6E6E6;
 	color: #6f6f6f;
