@@ -19,10 +19,10 @@ $(document).ready(function() {
 		
 			// Insert token into form in order to submit to server
 			form.append("<input type='hidden' name='paymillToken' value='" + token + "'/>");		
-			form.get(0).submit();
+			//form.get(0).submit();
 		}
 		
-		$(".submit-button").removeAttr("disabled");
+		// $(".submit-button").removeAttr("disabled");
 	}
 	
 	$("#payment-form").submit(function (event){

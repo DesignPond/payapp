@@ -29,4 +29,6 @@ Route::get('/', function(){
 */
 
 
-Route::get('/', array( 'uses' => 'HomeController@form' ));
+Route::get('/', array( 'uses' => 'HomeController@index' ));
+
+Route::resource('paymill', 'PaymillController');

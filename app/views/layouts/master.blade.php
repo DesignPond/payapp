@@ -33,7 +33,7 @@
 			var PAYMILL_PUBLIC_KEY = '39700290708f0628c488c250a2c1ee6e';
 		</script>
 		<script type="text/javascript" src="https://bridge.paymill.com/"></script>
-		<script type="text/javascript" src="<?php echo asset('js/main.js');?>"></script>
+		<script type="text/javascript" src="<?php echo asset('js/paymill.js');?>"></script>
 		<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 		<!-- END JavaScript -->
 		<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

@@ -9,7 +9,6 @@
 		"phpunit/phpunit": "3.7.*"
 	},
 	"require-dev": {
-		"codeception/codeception": "dev-master",
 		"mockery/mockery": "dev-master",
 		"fzaninotto/faker": "dev-master"
 	},
