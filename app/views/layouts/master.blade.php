@@ -12,6 +12,7 @@
 		<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 		<!-- CSS -->
 		<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+		<link href="<?php echo asset('css/bootstrap.css');?>" rel="stylesheet">
 		<link href="<?php echo asset('css/styles.css');?>" rel="stylesheet">
 		<link href="<?php echo asset('css/font-awesome.css');?>" rel="stylesheet">
 
@@ -25,6 +26,7 @@
 		<!-- General Site Configuration -->
 		<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 		<script type="text/javascript" src="<?php echo asset('js/common.js');?>"></script>
+		<script type="text/javascript" src="<?php echo asset('js/bootstrap.js');?>"></script>
 		<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 		<!-- Main Paymill Script -->
 		<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -58,9 +60,9 @@
 					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 					<!-- Logo -->
 					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-					<div class="table fullheight">
+					<div class="table fullheight logoHeader">
 						<div class="table-cell fullheight middle">
-							<div class="logo"><a href="index.html"><img alt="" src="images/topbar/logo_white.png" height="17" /></a></div>
+							<div class="logo"><a href="<?php echo url('/'); ?>"><img alt="" src="<?php echo asset('images/topbar/logo_white.png');?>" height="17" /></a></div>
 						</div>
 					</div>
 					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -71,23 +73,9 @@
 					<!-- Main Navigation -->
 					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 					<ul class="topnav">
-						<li><a href="index.html">Home</a></li>
-						<li><a href="about.html">About Us</a></li>
-						<li><a href="portfolio.html" class="drop">Portfolio</a>
-							<ul>
-								<li><a href="portfolio.html">4 Column Portfolio</a></li>
-								<li><a href="portfolio-3-columns.html">3 Column Portfolio</a></li>
-								<li><a href="portfolio-detail.html">Portfolio Detail</a></li>
-							</ul>
-						</li>
-						<li><a href="blog.html" class="drop">Blog</a>
-							<ul>
-								<li><a href="blog.html">Article List</a></li>
-								<li><a href="blog-post.html">Blog Post</a></li>
-							</ul>
-						</li>
-						<li><a href="shortcodes.html">Shortcodes</a></li>
-						<li><a href="contact.html" class="current">Contact Us</a></li>
+						<li><a href="<?php echo url('/'); ?>" class="current">Home</a></li>
+						<li><a href="<?php echo url('paymill'); ?>">Payement</a></li>
+						<li><a href="<?php echo url('clients'); ?>">Clients</a></li>
 					</ul>
 					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 					<!-- END Main Navigation -->

@@ -8,25 +8,32 @@
 	<div class="main-content">
 		<div class="main-content-inner content-width">
 
-			<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 					<!-- Page Title -->
 					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-					<h1>Form</h1>
+					<h1>Add a transaction from credit card</h1>
 					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 					<!-- END Title -->
 					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-
-					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-					<!-- Contact Form -->
-					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 					
-					<p class="payment-errors alert red"></p>
-						
-					<form id="payment-form" class="column-one-third" action="<?php echo url('paymill'); ?>" method="POST">
-	
-						  <input class="card-amount-int" name="card-amount-int" type="hidden" value="15" />
-						  <input class="card-currency" name="card-currency" type="hidden" value="EUR" />
-						
+					@if(Session::has('status'))
+					<div class="alert alert-dismissable alert-{{  Session::get('status') }}">
+						@if(Session::has('message'))
+							{{  Session::get('message') }}
+						@endif
+					</div>
+					@endif
+					
+					<?php if(!empty($client)) {  ?>	
+					
+					<p class="payment-errors alert red"></p>	
+								
+					<form id="payment-form" class="column-one-third" action="<?php echo url('paymill/transaction'); ?>" method="POST">
+													
+						  <input class="clientToken" name="clientToken" type="hidden" value="<?php echo $client->getid(); ?>" />						  
+						  <input class="card-currency" name="card-currency" type="hidden" value="CHF" />
+						  <input class="card-amount-int" name="card-amount-int" type="hidden" value="5000" />
+						  					
 						  <div class="form-row">
 						  	<label>Card number</label>
 						    <input class="card-number" type="text" size="20" />
@@ -52,10 +59,9 @@
 						  <p><input type="submit" class="accent" Value="Submit "/></p>
 						  					
 					</form>
+					
+					<?php } ?>
 
-					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-					<!-- END Contact Form -->
-					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 		</div>
 	</div>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

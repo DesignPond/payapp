@@ -37,7 +37,7 @@
 /* --------------------------------------------------------------------------------- */
 /* CSS Reset
 /* --------------------------------------------------------------------------------- */
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -201,7 +201,7 @@ h6 {
 }
 p {
 	line-height: 21px;
-	margin-bottom: 22px;
+	margin-bottom: 12px;
 	clear: both;
 }
 p:last-child {
@@ -233,6 +233,9 @@ p:last-child {
 .table {
 	display: table;
 	float: left;
+}
+.logoHeader{
+	width: 160px;
 }
 .table-row {
 	display: table-row;
@@ -1403,7 +1406,7 @@ input[type="text"], input[type="textarea"], textarea {
 	font-family: 'raleway', Helvetica, Arial, sans-serif;
 	padding: 0 6px 0 6px;
 	border: none;
-	font-size: 13px;
+	font-size: 15px;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-radius: 2px;
@@ -1944,8 +1947,8 @@ ul.arrow-list {
 .table-style-1 th, .table-style-1 td {
 	text-align: left;
 	padding: 14px 8px 14px 14px;
-	border-left: 1px solid;
 	display: table-cell;
+	border-bottom: 1px solid #ddd !important;
 }
 .table-style-1 th:first-child, .table-style-1 td:first-child {
 	border-left: 0;
@@ -1966,6 +1969,7 @@ ul.arrow-list {
 .dark-bg .table-style-1 th, .dark-bg .table-style-1 td, .dark-bg .table-style-1 tr {
 	border-color: rgba(255,255,255,0.1);
 }
+
 /* --------------------------------------------------------------------------------- */
 /* Client Logos
 /* --------------------------------------------------------------------------------- */

@@ -31,4 +31,8 @@ Route::get('/', function(){
 
 Route::get('/', array( 'uses' => 'HomeController@index' ));
 
+Route::post('paymill/transaction', 'PaymillController@transaction');
 Route::resource('paymill', 'PaymillController');
+
+Route::get('clients/{client}/transaction', 'ClientController@transaction');
+Route::resource('clients', 'ClientController');
