@@ -137,8 +137,11 @@ class Laramill{
 		// make new payement
 		$payment = new Paymill\Models\Request\Payment();
 		
-		$payment->setToken($token)
-		        ->setClient($client);
+		$payment->setToken($token);
+		
+		if($client){
+			$payment->setClient($client);
+		}
 		
 		$response = $request->create($payment);
 		
@@ -158,19 +161,20 @@ class Laramill{
 	 * @param  string, client *optional
 	 * @return array, data debit card payment 
 	 */
-	function newDebitCardPayement($type, $code, $account, $holder, $client = NULL)
-	{
-		$params = array(
-		    'type'    =>  $type,
-		    'code'    =>  $code,
-		    'account' =>  $account,
-		    'holder'  =>  $holder,
-		    'client'  =>  $client
-		);
+	function newDebitCardPayement($token, $client = NULL)
+	{		
+		// request object
+		$request = $this->authentication();
 		
-		$paymentsObject = $this->authentication(self::PAYMENTS);
+		$payment = new Paymill\Models\Request\Payment();
 		
-		return $paymentsObject->create($params);
+		$payment->setToken($token);
+		
+		if($client){
+			$payment->setClient($client);
+		}
+		
+		return $request->create($payment);
 	}
 	
 	/**
@@ -181,9 +185,15 @@ class Laramill{
 	 */
 	function getPayment($id)
 	{
-	    $paymentsObject = $this->authentication(self::PAYMENTS);
-        
-		return $paymentsObject->getOne($id);
+		// request object
+		$request = $this->authentication();
+		
+		$payment = new Paymill\Models\Request\Payment();
+		
+		$payment->setId($id);
+		
+		return  $request->getOne($payment);
+
 	}
 	
 	/**
@@ -202,9 +212,12 @@ class Laramill{
            'created_at'    =>  $created_at
         );
         
-	    $paymentsObject = $this->authentication(self::PAYMENTS);
-        
-		return $paymentsObject->get($params);
+		// request object
+		$request = $this->authentication();
+		
+		$payment = new Paymill\Models\Request\Payment($params);
+		
+		return  $request->getAll($payment);
 	}
 	
 	/**
@@ -215,9 +228,13 @@ class Laramill{
 	 */
 	function removePayment($id)
 	{
-	    $paymentsObject = $this->authentication(self::PAYMENTS);
-        
-		return $paymentsObject->delete($id);
+		// request object
+		$request = $this->authentication();
+		
+		$payment = new Paymill\Models\Request\Payment();
+		$payment->setId($id);
+		
+		return  $request->delete($payment);
 	}
 	
 	/**
@@ -263,6 +280,7 @@ class Laramill{
 	 * @param  string, client *optional
 	 * @return array, transaction data 
 	 */
+/*
 	function newTransactionPayment($amount, $currency, $payment, $description = NULL, $client = NULL)
 	{
 		$params = array(
@@ -273,10 +291,10 @@ class Laramill{
 		    'client'      =>  $client
 		);
 		
-		$transactionsObject = $this->authentication(self::TRANSACTIONS);
-		
-		return $transactionsObject->create($params);
+		// request object
+		$request = $this->authentication();
 	}
+*/
 	
 	/**
 	 * Get a transaction object with the information of the used payment,
@@ -287,9 +305,13 @@ class Laramill{
 	 */
 	function getTransaction($id)
 	{
-	    $transactionsObject = $this->authentication(self::TRANSACTIONS);
-        
-		return $transactionsObject->getOne($id);
+		// request object
+		$request = $this->authentication();
+		
+		$transaction = new Paymill\Models\Request\Transaction();
+		$transaction->setId($id);
+		
+		return  $request->getOne($transaction);
 	}
 	
 	/**
@@ -314,9 +336,8 @@ class Laramill{
         
 	    $transaction = new Paymill\Models\Request\Transaction($params);
 
-		$response = $request->getAll($transaction);
-        
-		return $response;
+		return $request->getAll($transaction);
+
 	}
 	
 	/**
@@ -333,18 +354,15 @@ class Laramill{
 	 */
 	function refundTransaction($transactionId, $amount, $description = NULL)
 	{
-		$params = array(
-		  'transactionId'     =>  $transactionId,
-		  'params'            =>  array(
-		      'amount'        =>  $amount,
-		      'description'   =>  $description
-          )
-		    
-		);
+		// request object
+		$request = $this->authentication();
 		
-		$refundsObject = $this->authentication(self::REFUNDS);
+		$refund = new Paymill\Models\Request\Refund();
+		$refund->setId($transactionId)
+		       ->setAmount($amount) // e.g. "4200" for 42.00 EUR
+		       ->setDescription($description);
 		
-		return $refundsObject->create($params);
+		return  $request->create($refund);
 	}
 	
 	/**
@@ -355,9 +373,13 @@ class Laramill{
 	 */
 	function getRefund($id)
 	{
-	    $refundsObject = $this->authentication(self::REFUNDS);
-        
-		return $refundsObject->getOne($id);
+		// request object
+		$request = $this->authentication();
+		
+		$refund = new Paymill\Models\Request\Refund();
+		$refund->setId($id);
+		
+		return  $request->getOne($refund);
 	}
 	
 	/**
@@ -371,8 +393,7 @@ class Laramill{
      * @param   ¿?, created_at *optional
      * @return  array, transaction list
      */
-	function getListRefund($count = NULL, $offset = NULL, $transaction = NULL, $client = NULL,
-                        $amount = NULL, $created_at = NULL)
+	function getListRefund($count = NULL, $offset = NULL, $transaction = NULL, $client = NULL, $amount = NULL, $created_at = NULL)
 	{
 	    $params = array(
            'count'          =>  $count,
@@ -383,9 +404,12 @@ class Laramill{
            'created_at'     =>  $created_at
         );
         
-	    $refundsObject = $this->authentication(self::REFUNDS);
-        
-        return $refundsObject->get($params);
+		// request object
+		$request = $this->authentication();
+		        
+		$refund = new Paymill\Models\Request\Refund($params);
+		
+		return  $request->getAll($refund);
 	}
 	
 	/**
@@ -397,14 +421,14 @@ class Laramill{
 	 */
 	function newClient($email = NULL, $description = NULL)
 	{
-		$params = array(
-		    'email'			=>	$email,
-		    'description'	=>	$description
-		);
+		// request object
+		$request = $this->authentication();
 		
-		$clientsObject = $this->authentication(self::CLIENTS);
+		$client = new Paymill\Models\Request\Client();
+		$client->setEmail($email)
+		       ->setDescription($description)
 		
-		return $clientsObject->create($params);
+		return  $request->create($client);
 	}
 	
 	/**
@@ -442,15 +466,15 @@ class Laramill{
 	 */
 	function updateClient($id, $email = NULL, $description = NULL)
 	{
-		$params = array(
-		    'id'			=>	$id,
-		    'email'			=>	$email,
-		    'description'	=>	$description
-		);
+		// request object
+		$request = $this->authentication();
 		
-        $clientsObject = $this->authentication(self::CLIENTS);
-        
-		return $clientsObject->update($params);
+		$client = new Paymill\Models\Request\Client();
+		$client->setId($id)
+		       ->setEmail($email)
+		       ->setDescription($description);
+		
+		return $request->update($client);
 	}
 	
 	/**
@@ -461,9 +485,14 @@ class Laramill{
 	 */
 	function removeClient($id)
 	{
-		$clientsObject = $this->authentication(self::CLIENTS);
+		// request object
+		$request = $this->authentication();
 		
-		return $clientsObject->delete($id);
+		$client = new Paymill\Models\Request\Client();
+		$client->setId($id);
+		
+		return $request->delete($client);
+
 	}
 	
 	/**
@@ -505,16 +534,18 @@ class Laramill{
 	 */
 	function newOffer($amount, $currency, $interval, $name)
 	{
-		$params = array(
-		    'amount'	=>	$amount,
-		    'currency'	=>	$currency,
-		    'interval'	=>	$interval,
-		    'name'		=>	$name
-		);
+		// request object
+		$request = $this->authentication();
+
+		$offer = new Paymill\Models\Request\Offer();
 		
-		$offersObject = $this->authentication(self::OFFERS);
+		$offer->setAmount($amount)
+		      ->setCurrency($currency)
+		      ->setInterval($interval)
+		      ->setName($name);
 		
-		return $offersObject->create($params);
+		return $request->create($offer);
+
 	}
 	
 	/**
@@ -524,10 +555,14 @@ class Laramill{
 	 * @return array, offer data
 	 */
 	function getOffer($id)
-	{
-	    $offersObject = $this->authentication(self::OFFERS);
-        
-		return $offersObject->getOne($id);
+	{		
+		// request object
+		$request = $this->authentication();
+			
+		$offer = new Paymill\Models\Request\Offer();
+		$offer->setId($id);
+		
+		return $request->getOne($offer);		
 	}
 	
 	/**
@@ -539,14 +574,14 @@ class Laramill{
 	 */
 	function updateOffer($id, $name)
 	{
-		$params = array(
-		    'id'	=>	$id,
-		    'name'	=>	$name
-		);
+		// request object
+		$request = $this->authentication();
         
-        $offersObject = $this->authentication(self::OFFERS);
+		$offer = new Paymill\Models\Request\Offer();
+		$offer->setId($id)
+		      ->setName($name);
 		
-		return $offersObject->update($params);
+		return  $request->update($offer);
 	}
 	
 	/**
@@ -558,9 +593,13 @@ class Laramill{
 	 */
 	function removeOffer($id)
 	{
-		$offersObject = $this->authentication(self::OFFERS);
+		// request object
+		$request = $this->authentication();
 		
-		return $offersObject->delete($id);
+		$offer = new Paymill\Models\Request\Offer();
+		$offer->setId($id);
+		
+		return  $request->delete($offer);
 	}
 	
 	/**
@@ -574,10 +613,12 @@ class Laramill{
      * @param   ¿?, trial_period_days *optional
      * @return  array, offer list
      */
-	function getListOffer($count = NULL, $offset = NULL, $interval = NULL, $amount = NULL,
-                        $created_at = NULL, $trial_period_days = NULL)
+	function getListOffer($count = NULL, $offset = NULL, $interval = NULL, $amount = NULL, $created_at = NULL, $trial_period_days = NULL)
 	{
-	     $params = array(
+		// request object
+		$request = $this->authentication();
+				
+	    $params = array(
            'count'              =>  $count,
            'offset'             =>  $offset,
            'interval'           =>  $interval,
@@ -586,9 +627,95 @@ class Laramill{
            'trial_period_days'  =>  $trial_period_days
         );
         
-	    $offersObject = $this->authentication(self::OFFERS);
+	    $offer = new Paymill\Models\Request\Offer($params);
+
+		return $request->getAll($offer);
+	}
+	
+	
+	/**
+	 * Create an offer.
+	 * 
+	 * @param  integer, amount
+	 * @param  string, current
+	 * @param  enum (week, month, year), interval
+	 * @param  string, name
+	 * @return array, offer data
+	 */
+	function newPreauthorization($amount, $currency, $token)
+	{
+		// request object
+		$request = $this->authentication();
+
+		$preAuth = new Paymill\Models\Request\Preauthorization();
+		$preAuth->setToken($token)
+		        ->setAmount($amount)
+		        ->setCurrency($currency);
+		
+		return  $request->create($preAuth);
+
+	}
+	
+	/**
+	 * Getting detailed information about an offer requested with the offer ID.
+	 * 
+	 * @param  string, offer id
+	 * @return array, offer data
+	 */
+	function getPreauthorization($id)
+	{		
+		// request object
+		$request = $this->authentication();
+		
+		$preAuth = new Paymill\Models\Request\Preauthorization();
+		$preAuth->setId($id);
+		
+		return  $request->getOne($preAuth);	
+	}
+	
+	/**
+	 * Remove offer.
+	 * You only can delete an offer if no client is subscribed to this offer.
+	 * 
+	 * @param  string, offer id
+	 * @return array, empty
+	 */
+	function removePreauthorization($id)
+	{
+		// request object
+		$request = $this->authentication();
+		
+		$preAuth = new Paymill\Models\Request\Preauthorization();
+		$preAuth->setId($id);
+
+		return  $request->delete($preAuth);
+	}
+	
+	/**
+     * Get offer list
+     * 
+     * @param   int, count *optional
+     * @param   int, offset *optional
+     * @param   string, interval *optional
+     * @param   int, amount *optional
+     * @param   ¿?, created_at *optional
+     * @param   ¿?, trial_period_days *optional
+     * @return  array, offer list
+     */
+	function getListPreauthorization($count = NULL, $offset = NULL, $created_at = NULL)
+	{
+		// request object
+		$request = $this->authentication();
+				
+	    $params = array(
+           'count'              =>  $count,
+           'offset'             =>  $offset,
+           'created_at'         =>  $created_at
+        );
         
-		return $offersObject->get($params);
+		$preAuth = new Paymill\Models\Request\Preauthorization($params);
+
+		return  $request->getAll($preAuth);
 	}
 	
 	/**
@@ -604,15 +731,17 @@ class Laramill{
 	 */
 	function newSubscription($client, $offer, $payment) //payment??
 	{
-		$params = array(
-		    'client'	=>	$client,
-		    'offer'		=>	$offer,
-		    'payment'	=>	$payment
-		);
+		// request object
+		$request = $this->authentication();
 		
-		$subscriptionsObject = $this->authentication(self::SUBSCRIPTIONS);
+		$subscription = new Paymill\Models\Request\Subscription();
 		
-		return $subscriptionsObject->create($params);
+		$subscription->setClient($client)
+		             ->setOffer($offer)
+		             ->setPayment($payment);
+		
+		return $request->create($subscription);
+		
 	}
 	
 	/**
@@ -623,9 +752,14 @@ class Laramill{
 	 */
 	function getSubscription($id)
 	{
-        $subscriptionsObject = $this->authentication(self::SUBSCRIPTIONS);
-        
-		return $subscriptionsObject->getOne($id);
+		// request object
+		$request = $this->authentication();
+		
+		$subscription = new Paymill\Models\Request\Subscription();
+		$subscription->setId($id);
+		
+		return $request->getOne($subscription);
+
 	}
 	
 	/**
@@ -635,16 +769,19 @@ class Laramill{
 	 * @param  boolean, Cancel this subscription immediately or at the end of the current period
 	 * @return array, subscription data
 	 */
-	function updateSubscription($id, $cancel_at_period_end)
+	function updateSubscription( $id , $offer , $payement , $cancelAtPeriodEnd = false)
 	{
-		$params = array(
-		    'id'					=>	$id,
-		    'cancel_at_period_end'	=>	$cancel_at_period_end
-		);
-		
-        $subscriptionsObject = $this->authentication(self::SUBSCRIPTIONS);
+		// request object
+		$request = $this->authentication();
         
-		return $subscriptionsObject->update($params);
+		$subscription = new Paymill\Models\Request\Subscription();
+		$subscription->setId($id)
+		             ->setOffer($offer)
+		             ->setPayment($payement)
+		             ->setCancelAtPeriodEnd($cancelAtPeriodEnd);
+		
+		return $request->update($subscription);
+
 	}
 	
 	/**
@@ -659,9 +796,13 @@ class Laramill{
 	 */
 	function removeSubscription($id)
 	{
-		$subscriptionsObject = $this->authentication(self::SUBSCRIPTIONS);
+		// request object
+		$request = $this->authentication();
 		
-		return $subscriptionsObject->delete($id);
+		$subscription = new Paymill\Models\Request\Subscription();
+		$subscription->setId($id);
+
+		return $request->delete($subscription);
 	}
 	
 	/**
@@ -684,9 +825,13 @@ class Laramill{
            'canceled_at' =>  $canceled_at,
         );
         
-	    $subscriptionsObject = $this->authentication(self::SUBSCRIPTIONS);
-        
-		return $subscriptionsObject->get($params);
+		// request object
+		$request = $this->authentication();
+		
+		$subscription = new Paymill\Models\Request\Subscription($params);
+		
+		$response = $request->getAll($subscription);
+
 	}
 
  
