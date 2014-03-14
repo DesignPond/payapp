@@ -21,10 +21,11 @@
 				<table class="table-style-1">
 					<thead>
 						<tr>
-							<th width="40%"><strong>Name</strong></th>
+							<th width="25%"><strong>Name</strong></th>
 							<th><strong>Interval</strong></th>
 							<th><strong>Currency</strong></th>
 							<th><strong>Amount</strong></th>
+							<th class="text-right" width="25%"><strong>Action</strong></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -37,7 +38,13 @@
 									echo '<td>'.$offer['name'].'</td>';									
 									echo '<td>'.$offer['interval'].'</td>';	
 									echo '<td>'.$offer['currency'].'</td>';
-									echo '<td>'.number_format(($offer['amount']/100), 2).'</td>';									
+									echo '<td>'.number_format(($offer['amount']/100), 2).'</td>';
+									echo '<td>
+										<div class="btn-group pull-right">
+											<a class="btn btn-sm btn-primary" data-action="offer" href="'.url('paymill/offer/'.$offer['id']).'">Update</a>
+											<a class="btn btn-sm btn-danger deleteAction" data-action="offer" href="'.url('paymill/deleteOffer/'.$offer['id']).'">Delete</a>
+										</div>
+									</td>';										
 									
 								echo '</tr>';										
 							}		

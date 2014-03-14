@@ -43,6 +43,11 @@ class PaymillController extends \BaseController {
 
 	}
 	
+	
+	/* ===================================
+		Transactions
+	===================================== */
+	
 	public function transaction(){
 	
 		$token    = Input::get('paymillToken');
@@ -72,6 +77,21 @@ class PaymillController extends \BaseController {
 		return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with token') ); 
 	}
 	
+	/* ===================================
+		Offers subscription
+	===================================== */
+	
+	// show offer
+	
+	public function offer($offer){
+	
+		$offer = Laramill::getOffer($offer);
+		
+		return View::make('offers.show')->with( array( 'offer' => $offer ) );
+
+	}
+	// create offer
+	
 	public function newOffer(){
 	
 		$amount   = Input::get('amount');
@@ -87,52 +107,24 @@ class PaymillController extends \BaseController {
 			return Redirect::to('paymill');
 		}
 
-		return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with cration') ); 
+		return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with creation') ); 
 
 	}
+	
+	// delete offer
+	
+	public function deleteOffer($offer){
+	
+		$deleted = Laramill::removeOffer( $offer );
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
+		if($deleted)
+		{			
+			return Redirect::to('paymill');
+		}
+
+		return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with delete') ); 
+		
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
 
 }

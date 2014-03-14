@@ -1946,7 +1946,6 @@ ul.arrow-list {
 	color: rgba(255,255,255,0.9);
 }
 .table-style-1 th, .table-style-1 td {
-	text-align: left;
 	padding: 14px 8px 14px 14px;
 	display: table-cell;
 	border-bottom: 1px solid #ddd !important;

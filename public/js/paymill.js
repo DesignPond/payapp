@@ -63,5 +63,22 @@ $(document).ready(function() {
 		return false;
 		
 	});
+	
+	/*
+	 * Common functions
+	*/
+	
+		 
+	$('body').on('click','.deleteAction',function(){
+		
+		var $this   = $(this);
+		var action  = $this.data('action');
+		
+		var answer = confirm('Voulez-vous vraiment supprimer : '+ action +' ?');
+	    if (answer){
+			return true;
+	    }
+	    return false;	
+	});
   
 });	
