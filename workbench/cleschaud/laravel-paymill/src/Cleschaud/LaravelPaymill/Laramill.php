@@ -426,7 +426,7 @@ class Laramill{
 		
 		$client = new Paymill\Models\Request\Client();
 		$client->setEmail($email)
-		       ->setDescription($description)
+		       ->setDescription($description);
 		
 		return  $request->create($client);
 	}
@@ -532,7 +532,7 @@ class Laramill{
 	 * @param  string, name
 	 * @return array, offer data
 	 */
-	function newOffer($amount, $currency, $interval, $name)
+	function newOffer($amount, $currency, $interval, $name, $trial_period_days = NULL)
 	{
 		// request object
 		$request = $this->authentication();
@@ -543,6 +543,11 @@ class Laramill{
 		      ->setCurrency($currency)
 		      ->setInterval($interval)
 		      ->setName($name);
+		      
+		if($trial_period_days)
+		{
+			$offer->setTrialPeriodDays($trial_period_days);
+		}
 		
 		return $request->create($offer);
 

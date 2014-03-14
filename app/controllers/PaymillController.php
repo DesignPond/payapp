@@ -11,7 +11,9 @@ class PaymillController extends \BaseController {
 	public function index()
 	{
 		
+		$offers = Laramill::getListOffer();
 		
+		return View::make('offers.index')->with( array( 'offers' => $offers ) );			
 		
 	}
 
@@ -23,6 +25,7 @@ class PaymillController extends \BaseController {
 	public function store()
 	{
 
+/*
 		$token    = Input::get('paymillToken');
 		$currency = Input::get('card-currency');
 		$amount   = Input::get('card-amount-int');
@@ -36,6 +39,7 @@ class PaymillController extends \BaseController {
 			$paymentId = $response->getId();
 		    print_r($paymentId);		    
 		}
+*/
 
 	}
 	
@@ -47,8 +51,7 @@ class PaymillController extends \BaseController {
 		$client   = Input::get('clientToken');
 		
 		if ($token) 
-		{
-				
+		{				
 			$payement = Laramill::newCreditCardPayement( $token, $client );
 
 			if($payement)
@@ -67,6 +70,25 @@ class PaymillController extends \BaseController {
 		}
 		
 		return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with token') ); 
+	}
+	
+	public function newOffer(){
+	
+		$amount   = Input::get('amount');
+		$amount   = $amount * 100;
+		$currency = Input::get('currency');
+		$name     = Input::get('name');
+		$interval = Input::get('interval');
+					
+		$offer = Laramill::newOffer( $amount, $currency, $interval, $name , null);
+
+		if($offer)
+		{			
+			return Redirect::to('paymill');
+		}
+
+		return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with cration') ); 
+
 	}
 
 	/**

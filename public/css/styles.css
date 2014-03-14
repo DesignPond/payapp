@@ -1447,6 +1447,7 @@ input[type="submit"] {
 	outline: none;
 	border: none;
 	margin: 0;
+	margin-top: 10px;
 }
 textarea {
 	width: 100%;

@@ -103,9 +103,7 @@
 							<?php 
 							
 								if(!empty($transactions)){
-									
-									setlocale(LC_MONETARY, 'fr_FR');
-									
+
 									foreach($transactions as $transaction){
 										
 										echo '<tr>';

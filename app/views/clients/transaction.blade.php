@@ -34,22 +34,22 @@
 						  <input class="card-currency" name="card-currency" type="hidden" value="CHF" />
 						  <input class="card-amount-int" name="card-amount-int" type="hidden" value="5000" />
 						  					
-						  <div class="form-row">
+						  <div class="form-group">
 						  	<label>Card number</label>
 						    <input class="card-number" type="text" size="20" />
 						  </div>
 						
-						  <div class="form-row">
+						  <div class="form-group">
 						  	<label>CVC</label>
 						    <input class="card-cvc" type="text" size="4" />
 						  </div>
 						
-						  <div class="form-row">
+						  <div class="form-group">
 						  	<label>Name</label>
 						    <input class="card-holdername" type="text" size="4" />
 						  </div>
 						
-						  <div class="form-row ">
+						  <div class="form-group ">
 						  	<label>Expiry date (MM/YYYY)</label>
 						    <input class="card-expiry-month small" placeholder="MM" type="text" size="2" />
 						    <input class="card-expiry-year small" placeholder="YYYY" type="text" size="4" />
