@@ -1303,7 +1303,7 @@ body.home .topbar-outer.dark {
 /* --------------------------------------------------------------------------------- */
 /* Buttons
 /* -------------------------------- */
-a.button, input[type="submit"] {
+a.button {
 	background-color: #36a582;
 	color: #fff;
 	padding: 11px 14px;
@@ -1338,10 +1338,10 @@ a.button, input[type="submit"] {
 	-o-transition: all 0.1s ease-in-out;
 	transition: all 0.1s ease-in-out;
 }
-a.button:hover, input[type="submit"]:hover {
+a.button:hover{
 	background-position: 0 -60px;
 }
-a.button.accent, input.accent[type="submit"] {
+a.button.accent {
 	color: #fff;
 	background-color: #36a582;
 }
@@ -1406,12 +1406,11 @@ input[type="text"], input[type="textarea"], textarea {
 	font-family: 'raleway', Helvetica, Arial, sans-serif;
 	padding: 0 6px 0 6px;
 	border: none;
-	font-size: 15px;
+	font-size: 14px;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-radius: 2px;
-	height: 34px;
-	margin-bottom: 10px;
+	height: 28px;
 	outline: none;
 	display: block;
 	width: 100%;
@@ -1443,12 +1442,7 @@ input.small{
 .dark-bg input[type="text"]:focus, .dark-bg input[type="textarea"]:focus, .dark-bg textarea:focus {
 	background-color: rgba(255,255,255,0.15) !important;
 }
-input[type="submit"] {
-	outline: none;
-	border: none;
-	margin: 0;
-	margin-top: 10px;
-}
+
 textarea {
 	width: 100%;
 	max-width: 100%;

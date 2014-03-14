@@ -90,6 +90,25 @@ class PaymillController extends \BaseController {
 		return View::make('offers.show')->with( array( 'offer' => $offer ) );
 
 	}
+	
+	// update offer
+	
+	public function updateOffer(){
+		
+		$name   = Input::get('name');
+		$id    = Input::get('id');
+		
+		$offer  = Laramill::updateOffer($id , $name);
+
+		if($offer)
+		{			
+			return Redirect::to('paymill');
+		}
+
+		return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with update') ); 
+					
+	}
+		
 	// create offer
 	
 	public function newOffer(){

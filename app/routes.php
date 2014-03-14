@@ -31,12 +31,19 @@ Route::get('/', function(){
 
 Route::get('/', array( 'uses' => 'HomeController@index' ));
 
+// transactions
 Route::post('paymill/transaction', 'PaymillController@transaction');
+
+// Offers
 Route::post('paymill/newOffer', 'PaymillController@newOffer');
+Route::post('paymill/updateOffer', 'PaymillController@updateOffer');
+Route::get('paymill/offer', 'PaymillController@offer');
 Route::get('paymill/offer/{offer}', 'PaymillController@offer');
 Route::get('paymill/deleteOffer/{offer}', 'PaymillController@deleteOffer');
 
 Route::resource('paymill', 'PaymillController');
 
+
+// clients
 Route::get('clients/{client}/transaction', 'ClientController@transaction');
 Route::resource('clients', 'ClientController');
