@@ -80,9 +80,19 @@ class PaymillController extends \BaseController {
 	/* ===================================
 		Offers subscription
 	===================================== */
+
 	
-	// show offer
+	// Display all offers
+	public function offers()
+	{
+		
+		$offers = Laramill::getListOffer();
+		
+		return View::make('offers.index')->with( array( 'offers' => $offers ) );			
+		
+	}
 	
+	// Show offer
 	public function offer($offer){
 	
 		$offer = Laramill::getOffer($offer);
@@ -91,8 +101,7 @@ class PaymillController extends \BaseController {
 
 	}
 	
-	// update offer
-	
+	// Update offer	
 	public function updateOffer(){
 		
 		$name   = Input::get('name');

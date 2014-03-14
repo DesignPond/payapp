@@ -75,6 +75,7 @@
 					<ul class="topnav">
 						<li><a href="<?php echo url('/'); ?>" class="current">Home</a></li>
 						<li><a href="<?php echo url('paymill'); ?>">Payement</a></li>
+						<li><a href="<?php echo url('paymill/offers'); ?>">Offers</a></li>
 						<li><a href="<?php echo url('clients'); ?>">Clients</a></li>
 					</ul>
 					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -131,15 +132,6 @@
 						<!-- Footer Navigation -->
 						<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 						<div class="footer-lower-container">
-
-							<ul class="footer-lower">
-								<li><a href="index.html">Home</a></li>
-								<li><a href="about.html">About Us</a></li>
-								<li><a href="portfolio.html">Portfolio</a></li>
-								<li><a href="blog.html">Blog</a></li>
-								<li><a href="shortcodes.html">Shortcodes</a></li>
-								<li><a href="contact.html">Contact Us</a></li>
-							</ul>
 
 							<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 							<!-- Copyright -->

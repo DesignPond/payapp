@@ -35,11 +35,8 @@ Route::get('/', array( 'uses' => 'HomeController@index' ));
 Route::post('paymill/transaction', 'PaymillController@transaction');
 
 // Offers
-Route::post('paymill/newOffer', 'PaymillController@newOffer');
-Route::post('paymill/updateOffer', 'PaymillController@updateOffer');
-Route::get('paymill/offer', 'PaymillController@offer');
-Route::get('paymill/offer/{offer}', 'PaymillController@offer');
-Route::get('paymill/deleteOffer/{offer}', 'PaymillController@deleteOffer');
+
+Route::resource('offers', 'OfferController');
 
 Route::resource('paymill', 'PaymillController');
 

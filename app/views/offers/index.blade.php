@@ -9,102 +9,66 @@
 		<div class="main-content-inner content-width">
 
 			<!-- Page Title -->
-			<h1>Offer</h1>
+			<h1>Offers</h1>
 			<!-- END Title -->
 			
 			<div class="row"><!-- start row -->
 			
 				<h2><span class="glyphicon glyphicon-saved"></span> &nbsp;Offers</h2>
 				
-				<?php if(!empty($offers)) {	 ?>
+				<div class="col-sm-12">
 					
-				<table class="table-style-1">
-					<thead>
-						<tr>
-							<th width="25%"><strong>Name</strong></th>
-							<th><strong>Interval</strong></th>
-							<th><strong>Currency</strong></th>
-							<th><strong>Amount</strong></th>
-							<th class="text-right" width="25%"><strong>Action</strong></th>
-						</tr>
-					</thead>
-					<tbody>
+					<p><a class="btn btn-sm btn-info pull-right" href="<?php echo url('offers/create'); ?>">Add</a></p>
+					<div class="spacer"></div>
 				
-					<?php 												
-							foreach($offers as $offer){
-								
-								echo '<tr>';
-
-									echo '<td>'.$offer['name'].'</td>';									
-									echo '<td>'.$offer['interval'].'</td>';	
-									echo '<td>'.$offer['currency'].'</td>';
-									echo '<td>'.number_format(($offer['amount']/100), 2).'</td>';
-									echo '<td>
-										<div class="btn-group pull-right">
-											<a class="btn btn-sm btn-primary" data-action="offer" href="'.url('paymill/offer/'.$offer['id']).'">Update</a>
-											<a class="btn btn-sm btn-danger deleteAction" data-action="offer" href="'.url('paymill/deleteOffer/'.$offer['id']).'">Delete</a>
-										</div>
-									</td>';										
+					<?php if(!empty($offers)) {	 ?>
+						
+					<table class="table-style-1">
+						<thead>
+							<tr>
+								<th width="25%"><strong>Name</strong></th>
+								<th><strong>Interval</strong></th>
+								<th><strong>Currency</strong></th>
+								<th><strong>Amount</strong></th>
+								<th class="text-right" width="25%"><strong>Action</strong></th>
+							</tr>
+						</thead>
+						<tbody>
+					
+						<?php 												
+								foreach($offers as $offer){
 									
-								echo '</tr>';										
-							}		
-					?>	
+									echo '<tr>';
+	
+										echo '<td>'.$offer['name'].'</td>';									
+										echo '<td>'.$offer['interval'].'</td>';	
+										echo '<td>'.$offer['currency'].'</td>';
+										echo '<td>'.number_format(($offer['amount']/100), 2).'</td>';
+										echo '<td>';
+		
+											echo Form::open(array( 'url' => 'offers/'.$offer['id'] , 'method' => 'delete' ));
+												echo '<div class="btn-group pull-right">';
+												echo Form::hidden('id' , $offer['id'] ); 
+												echo '<a class="btn btn-sm btn-primary" href="'.url('offers/'.$offer['id']).'">Update</a>';
+												echo '<button type="submit" data-action="offer" class="btn btn-sm btn-danger deleteAction">delete</button>';
+												echo '</div>'; 
+											echo Form::close();												
+											
+										echo '</td>';										
 										
-					</tbody>
-				</table>
-				
-				<?php }else{ echo 'No offers yet!';  } ?>
+									echo '</tr>';										
+								}		
+						?>	
+											
+						</tbody>
+					</table>
+					
+					<?php }else{ echo 'No offers yet!';  } ?>
+					
+				</div><!-- End col -->
 				
 			</div><!-- End row -->
 			
-			<div class="spacer"></div>
-			<div class="spacer"></div>
-			
-			<div class="row"><!-- start row -->
-			
-				<h2><span class="glyphicon glyphicon-saved"></span> &nbsp;New offer</h2>
-					
-				<form action="<?php echo url('paymill/newOffer'); ?>" method="POST">
-				
-					<div class="col-sm-6">
-					
-						<div class="row form-group">
-							<div class="col-sm-12">
-								<label>Name</label>
-								<input name="name" type="text" />
-							</div>
-						</div>	
-						<div class="row form-group">
-							<div class=" col-sm-12">
-								<label>Interval</label>
-								<select class="col-sm-12 form-control" name="interval">
-									<option value="15 DAY">15 DAY</option> 
-									<option value="1 WEEK">1 WEEK</option>
-									<option value="1 MONTH">1 MONTH</option>
-									<option value="1 YEAR">1 YEAR</option>
-								</select>
-							</div>
-						</div>
-						
-						<div class="row form-group">
-							<div class=" col-sm-6">
-								<label>Amount </label>
-								<input name="amount" type="text" value="" />
-							</div>
-							
-							<div class="col-sm-6">
-								<label>Currency</label>
-								<input name="currency" type="text" value="" />
-							</div>
-						</div>
-															
-						<p><input type="submit" class="btn btn-sm btn-primary" Value="Create "/></p>
-						
-					</div> 
-					 					
-				</form>
-			</div><!-- End row -->
-
 		</div>
 	</div>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
