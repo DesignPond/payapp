@@ -21,8 +21,7 @@
 					
 						<div class="col-sm-12">
 							
-							<div class="row form-group">
-								
+							<div class="row form-group">								
 								<div class="col-sm-6">
 									<label>Description</label>
 									<input name="description" type="text" value="<?php echo $client->getdescription(); ?>" />
@@ -32,8 +31,7 @@
 									<label>&nbsp;</label>
 									<input name="id" type="hidden" value="<?php echo $client->getid(); ?>" />
 									<input type="submit" class="btn btn-sm btn-primary" Value="Update"/>
-								</div>
-								
+								</div>								
 							</div>
 							
 						</div> 
@@ -41,7 +39,6 @@
 					</form>
 				</div><!-- End row -->
 	
-				
 				
 				<div class="spacer"></div>
 				<div class="spacer"></div>	
@@ -106,30 +103,28 @@
 						
 						<h2><span class="glyphicon glyphicon-saved"></span> &nbsp;Transactions</h2>
 						
-						<table class="table-style-1">
-							<thead>
-								<tr>
-									<th width="40%"><strong>Description</strong></th>
-									<th><strong>Amount</strong></th>
-									<th><strong>Currency</strong></th>
-									<th><strong>Date</strong></th>
-									<th><strong>Card</strong></th>
-								</tr>
-							</thead>
-							<tbody>
+						<p><a class="btn btn-sm btn-info pull-right" href="<?php echo url('clients/'.$client->getid().'/transaction'); ?>">add</a></p>
 						
-							<?php 
+						<?php if(!empty($transactions)){ ?>
+						
+							<table class="table-style-1">
+								<thead>
+									<tr>
+										<th width="40%"><strong>Description</strong></th>
+										<th><strong>Amount</strong></th>
+										<th><strong>Currency</strong></th>
+										<th><strong>Date</strong></th>
+										<th><strong>Card</strong></th>
+									</tr>
+								</thead>
+								<tbody>
 							
-							echo '<pre>';
-							print_r($transactions);
-							echo '</pre>';
-							
-								if(!empty($transactions)){
-
+								<?php 
+	
 									foreach($transactions as $transaction){
 										
 										echo '<tr>';
-
+	
 											echo '<td>'.$transaction['description'].'</td>';									
 											echo '<td>'.number_format(($transaction['amount']/100), 2).'</td>';
 											echo '<td>'.$transaction['currency'].'</td>';	
@@ -137,14 +132,13 @@
 											echo '<td>'.$transaction['payment']['card_type'].'</td>';
 											
 										echo '</tr>';										
-									}		
-								} 
-							
-							?>						
-							</tbody>
-						</table>
-						<br/>
-						<p><a class="button blue" href="<?php echo url('clients/'.$client->getid().'/transaction'); ?>">add</a></p>
+									}		 
+								
+								?>						
+								</tbody>
+							</table>
+						
+						<?php } else{ echo '<p>No transaction</p>'; } ?>
 
 				<?php } ?>				
 		</div>
