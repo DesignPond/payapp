@@ -14,7 +14,7 @@
 			
 			<div class="row"><!-- start row -->
 			
-				<h2><span class="glyphicon glyphicon-saved"></span> &nbsp;Update offer</h2>
+				<h1><span class="glyphicon glyphicon-saved"></span> &nbsp;Update offer</h1>
 				
 				<?php if(!empty($offer)) {  ?>
 	

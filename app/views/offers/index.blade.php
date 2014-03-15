@@ -8,13 +8,9 @@
 	<div class="main-content">
 		<div class="main-content-inner content-width">
 
-			<!-- Page Title -->
-			<h1>Offers</h1>
-			<!-- END Title -->
-			
 			<div class="row"><!-- start row -->
 			
-				<h2><span class="glyphicon glyphicon-saved"></span> &nbsp;Offers</h2>
+				<h1><span class="glyphicon glyphicon-saved"></span> &nbsp;Offers</h1>
 				
 				<div class="col-sm-12">
 					

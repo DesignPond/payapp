@@ -322,16 +322,16 @@ class Laramill{
      * @param   ¿?, created_at *optional
      * @return  array, transaction list
      */
-	function getListTransaction($client ,$count = NULL, $offset = NULL, $created_at = NULL)
+	function getListTransaction($client = NULL ,$count = NULL, $offset = NULL, $created_at = NULL)
 	{	
 		// request object
 		$request = $this->authentication();
 		
 	    $params = array(
-           'count'         =>  $count,
-           'offset'        =>  $offset,
-           'created_at'    =>  $created_at,
-           'byClientId'    =>  $client
+           'count'      =>  $count,
+           'offset'     =>  $offset,
+           'created_at' =>  $created_at,
+           'client'     =>  $client
         );
         
 	    $transaction = new Paymill\Models\Request\Transaction($params);
@@ -424,9 +424,15 @@ class Laramill{
 		// request object
 		$request = $this->authentication();
 		
-		$client = new Paymill\Models\Request\Client();
-		$client->setEmail($email)
-		       ->setDescription($description);
+		$client  = new Paymill\Models\Request\Client();
+		
+		if($email){
+			$client->setEmail($email);
+		}
+		
+		if($description){
+			$client->setDescription($description);
+		}
 		
 		return  $request->create($client);
 	}

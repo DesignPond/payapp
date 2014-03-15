@@ -22,7 +22,7 @@ class ClientController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('clients.create');
 	}
 
 	/**
@@ -32,7 +32,18 @@ class ClientController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+
+		$email       = Input::get('email');
+		$description = Input::get('description');
+					
+		$client = Laramill::newClient($email , $description );
+
+		if($client)
+		{			
+			return Redirect::to('clients');
+		}
+
+		return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with creation') ); 
 	}
 
 	/**
@@ -44,7 +55,7 @@ class ClientController extends \BaseController {
 	public function show($id)
 	{
 		$client       = Laramill::getClient($id);
-		$transactions = Laramill::getListTransaction($id);
+		$transactions = Laramill::getListTransaction( $id , NULL, NULL , NULL );
 		
 		return View::make('clients.show')->with( array( 'client' => $client , 'transactions' => $transactions ) );	
 	}

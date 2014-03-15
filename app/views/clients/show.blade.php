@@ -9,20 +9,38 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<div class="main-content">
 		<div class="main-content-inner content-width">
-
-				<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-				<!-- Page Title -->
-				<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-				<h1>Client</h1>
-				<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-				<!-- END Title -->
-				<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 				
 				<?php if(!empty($client)) {  ?>
 				
 				<h2><span class="glyphicon glyphicon-user"></span> &nbsp;Cindy Leschaud</h2>
 				<p><strong>Email :</strong> <?php echo $client->getemail(); ?></p>
-				<p><strong>Description :</strong> <?php echo $client->getdescription(); ?></p>	
+				
+				<div class="row"><!-- start row -->
+						
+					<form action="<?php echo url('clients'); ?>" method="PUT">
+					
+						<div class="col-sm-12">
+							
+							<div class="row form-group">
+								
+								<div class="col-sm-6">
+									<label>Description</label>
+									<input name="description" type="text" value="<?php echo $client->getdescription(); ?>" />
+								</div>
+								
+								<div class="col-sm-2">
+									<label>&nbsp;</label>
+									<input name="id" type="hidden" value="<?php echo $client->getid(); ?>" />
+									<input type="submit" class="btn btn-sm btn-primary" Value="Update"/>
+								</div>
+								
+							</div>
+							
+						</div> 
+						 					
+					</form>
+				</div><!-- End row -->
+	
 				
 				
 				<div class="spacer"></div>
@@ -80,7 +98,7 @@
 								</div>
 							</div>
 															
-							<?php } } ?>
+							<?php } }else{ echo '<p class=" col-sm-12">No credit card used</p>';} ?>
 						</div>
 						
 						<div class="spacer"></div>
@@ -101,6 +119,10 @@
 							<tbody>
 						
 							<?php 
+							
+							echo '<pre>';
+							print_r($transactions);
+							echo '</pre>';
 							
 								if(!empty($transactions)){
 
