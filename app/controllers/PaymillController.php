@@ -11,9 +11,7 @@ class PaymillController extends \BaseController {
 	public function index()
 	{
 		
-		$offers = Laramill::getListOffer();
-		
-		return View::make('offers.index')->with( array( 'offers' => $offers ) );			
+		return View::make('index');			
 		
 	}
 
@@ -53,106 +51,38 @@ class PaymillController extends \BaseController {
 		$token    = Input::get('paymillToken');
 		$currency = Input::get('card-currency');
 		$amount   = Input::get('card-amount-int');
-		$client   = Input::get('clientToken');
+		$email    = Input::get('email');
+					
+		$client   = Laramill::newClient( $email );
+
+		if($client)
+		{			
+			
+			$clientId = $client->getId();
 		
-		if ($token) 
-		{				
-			$payement = Laramill::newCreditCardPayement( $token, $client );
-
-			if($payement)
-			{
-				$paymentId = $payement->getId();
+			if ($token && $clientId) 
+			{	
+						
+				$payement = Laramill::newCreditCardPayement( $token, $clientId );
+	
+				if($payement)
+				{
+					$paymentId = $payement->getId();
+					
+					$response  = Laramill::newTransactionToken($amount, $currency , $paymentId, 'Transaction from client');
+					
+					return Redirect::to('clients/'.$clientId);
+				}
+				else
+				{
+					return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with transaction') ); 
+				}	
 				
-				$response  = Laramill::newTransactionToken($amount, $currency , $paymentId, 'Transaction from client');
-				
-				return Redirect::to('clients/'.$client);
-			}
-			else
-			{
-				return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with transaction') ); 
-			}
-
+			} // end if client & token		
 		}
 		
 		return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with token') ); 
 	}
 	
-	/* ===================================
-		Offers subscription
-	===================================== */
-
-	
-	// Display all offers
-	public function offers()
-	{
-		
-		$offers = Laramill::getListOffer();
-		
-		return View::make('offers.index')->with( array( 'offers' => $offers ) );			
-		
-	}
-	
-	// Show offer
-	public function offer($offer){
-	
-		$offer = Laramill::getOffer($offer);
-		
-		return View::make('offers.show')->with( array( 'offer' => $offer ) );
-
-	}
-	
-	// Update offer	
-	public function updateOffer(){
-		
-		$name   = Input::get('name');
-		$id    = Input::get('id');
-		
-		$offer  = Laramill::updateOffer($id , $name);
-
-		if($offer)
-		{			
-			return Redirect::to('paymill');
-		}
-
-		return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with update') ); 
-					
-	}
-		
-	// create offer
-	
-	public function newOffer(){
-	
-		$amount   = Input::get('amount');
-		$amount   = $amount * 100;
-		$currency = Input::get('currency');
-		$name     = Input::get('name');
-		$interval = Input::get('interval');
-					
-		$offer = Laramill::newOffer( $amount, $currency, $interval, $name , null);
-
-		if($offer)
-		{			
-			return Redirect::to('paymill');
-		}
-
-		return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with creation') ); 
-
-	}
-	
-	// delete offer
-	
-	public function deleteOffer($offer){
-	
-		$deleted = Laramill::removeOffer( $offer );
-
-		if($deleted)
-		{			
-			return Redirect::to('paymill');
-		}
-
-		return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with delete') ); 
-		
-	}
-
 
 }

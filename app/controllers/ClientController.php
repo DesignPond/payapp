@@ -10,9 +10,9 @@ class ClientController extends \BaseController {
 	public function index()
 	{
 				
-		$listClients = Laramill::getListClient($count = NULL, $offset = NULL, $creditcard = NULL, $email = NULL, $created_at = NULL);
+		$clients = Laramill::getListClient($count = NULL, $offset = NULL, $creditcard = NULL, $email = NULL, $created_at = NULL);
 		
-		return View::make('clients.index')->with( array( 'listClients' => $listClients ) );		
+		return View::make('clients.index')->with( array( 'clients' => $clients ) );		
 	}
 
 	/**
@@ -44,6 +44,7 @@ class ClientController extends \BaseController {
 		}
 
 		return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with creation') ); 
+		
 	}
 
 	/**
@@ -90,9 +91,20 @@ class ClientController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+		$id          = Input::get('id');
+		$email       = Input::get('email');
+		$description = Input::get('description');
+					
+		$client = Laramill::updateClient( $id , $email , $description );
+
+		if($client)
+		{			
+			return Redirect::to('clients/'.$id);
+		}
+
+		return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with update') ); 
 	}
 
 	/**
@@ -103,7 +115,14 @@ class ClientController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$deleted = Laramill::removeClient( $id );
+
+		if($deleted)
+		{			
+			return Redirect::to('clients');
+		}
+
+		return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with delete') ); 
 	}
 
 }

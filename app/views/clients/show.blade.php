@@ -10,67 +10,76 @@
 	<div class="main-content">
 		<div class="main-content-inner content-width">
 				
-				<?php if(!empty($client)) {  ?>
-				
-				<h2><span class="glyphicon glyphicon-user"></span> &nbsp;Cindy Leschaud</h2>
-				<p><strong>Email :</strong> <?php echo $client->getemail(); ?></p>
-				
-				<div class="row"><!-- start row -->
-						
-					<form action="<?php echo url('clients'); ?>" method="PUT">
-					
-						<div class="col-sm-12">
-							
-							<div class="row form-group">								
-								<div class="col-sm-6">
-									<label>Description</label>
-									<input name="description" type="text" value="<?php echo $client->getdescription(); ?>" />
-								</div>
-								
-								<div class="col-sm-2">
-									<label>&nbsp;</label>
-									<input name="id" type="hidden" value="<?php echo $client->getid(); ?>" />
-									<input type="submit" class="btn btn-sm btn-primary" Value="Update"/>
-								</div>								
-							</div>
-							
-						</div> 
-						 					
-					</form>
-				</div><!-- End row -->
-	
-				
-				<div class="spacer"></div>
+			<div class="row"><!-- start row -->													
+				<div class="col-sm-12"><!-- strat col -->
+												
+				<p><a class="btn btn-sm btn-info pull-right" href="<?php echo url('clients'); ?>">Return to list</a></p>
 				<div class="spacer"></div>	
 				
-				<h2><span class="glyphicon glyphicon-credit-card"></span> &nbsp;Crédit cards</h2>
-							
-				<div class="row">
+				<?php if(!empty($client)) {  ?>
 				
-						<?php  
+				<h2><span class="glyphicon glyphicon-user"></span> &nbsp;Client name</h2>
+					
+					<div class="well"><!-- start well -->
 						
-							$payement = $client->getpayment();
-							
-							if( !empty($payement) ){
-							
-								foreach($payement as $cardinfo)
-								{
-				
-									$cardType    = $cardinfo->getcardType();
-									$expireMonth = $cardinfo->getexpireMonth();
-									$expireYear  = $cardinfo->getexpireYear();
-									$lastFour    = $cardinfo->getlastFour();
+						{{ Form::open(array('route' => 'clients.update', 'method' => 'put')) }}
 								
-						?>	
-							
-						<div class=" col-sm-4">
-							<div class="panel panel-primary">
-								<!-- Default panel contents -->
-								<div class="panel-heading">Carte de crédit</div>
-								<div class="panel-body">	
-																	
-										<form role="form">
+								<div class="row form-group">
+								
+									<div class="col-sm-4">
+										<label>Email</label>
+										<input name="email" type="text" value="<?php echo $client->getemail(); ?>" />
+									</div>
+																
+									<div class="col-sm-6">
+										<label>Description</label>
+										<input name="description" type="text" value="<?php echo $client->getdescription(); ?>" />
+									</div>
+									
+									<div class="col-sm-2">
+										<label>&nbsp;</label>
+										<input name="id" type="hidden" value="<?php echo $client->getid(); ?>" />
+										<input type="submit" class="btn btn-primary" Value="Update"/>
+									</div>	
+																
+								</div>							
+													 					
+						{{ Form::close() }}
+						
+						<p class="clear"></p>
+					
+					</div><!-- end well -->
+
+				
+				<div class="spacer"></div>
+				<div class="spacer"></div>		
 			
+					<h2><span class="glyphicon glyphicon-credit-card"></span> &nbsp;Credit cards</h2>
+								
+					<div class="row"><!-- start row for CC -->	
+					<?php  
+					
+						$payement = $client->getpayment();
+						
+						if( !empty($payement) ){
+						
+							foreach($payement as $cardinfo)
+							{
+			
+								$cardType    = $cardinfo->getcardType();
+								$expireMonth = $cardinfo->getexpireMonth();
+								$expireYear  = $cardinfo->getexpireYear();
+								$lastFour    = $cardinfo->getlastFour();
+							
+					?>	
+							
+							<div class=" col-sm-4">
+							
+								<div class="panel panel-primary">
+									<div class="panel-heading">Credit card</div>
+									<div class="panel-body">	
+																	
+										<form role="form">			
 											<p><strong>Card type :</strong> <?php echo $cardType; ?></p>
 			
 											<div class="row">									
@@ -91,12 +100,13 @@
 											</div>
 										</form>
 				
-									</div>
-								</div>
-							</div>
+									</div><!-- end panel body-->
+								</div><!-- end panel-->
+								
+							</div><!-- end col -->
 															
-							<?php } }else{ echo '<p class=" col-sm-12">No credit card used</p>';} ?>
-						</div>
+							<?php } }else{ echo '<p class="col-sm-12">No credit card used</p>';} ?>
+						</div><!-- End row -->
 						
 						<div class="spacer"></div>
 						<div class="spacer"></div>
@@ -140,7 +150,11 @@
 						
 						<?php } else{ echo '<p>No transaction</p>'; } ?>
 
-				<?php } ?>				
+				<?php } ?>	
+				
+				</div> <!-- end col -->					
+			</div><!-- End row -->
+						
 		</div>
 	</div>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

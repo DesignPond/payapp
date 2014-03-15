@@ -71,10 +71,7 @@ class OfferController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-	
-		$offer = Laramill::getOffer($id);
-		
-		return View::make('offers.edit')->with( array( 'offer' => $offer ) );
+		//
 	}
 
 	/**
@@ -87,12 +84,13 @@ class OfferController extends \BaseController {
 	{
 	
 		$name  = Input::get('name');
+		$id    = Input::get('id');
 		
-		$offer  = Laramill::updateOffer($id , $name);
+		$offer = Laramill::updateOffer($id , $name);
 
 		if($offer)
 		{			
-			return Redirect::to('offers');
+			return Redirect::to('offers/'.$id);
 		}
 
 		return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with update') ); 

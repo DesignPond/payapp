@@ -670,9 +670,15 @@ class Laramill{
 			$client = new Paymill\Models\Request\Client();
 			
 			// set params
-			$client->setId($id)
-			       ->setEmail($email)
-			       ->setDescription($description);
+			$client->setId($id);
+			
+			if($email){
+				$client->setEmail($email);
+			}
+			
+			if($description){
+				$client->setDescription($description);
+			}			       
 			
 			return $request->update($client);		
 	      
@@ -1274,7 +1280,7 @@ class Laramill{
 			// set filters
 			$subscription->setFilter($params);
 			
-			$response = $request->getAll($subscription);
+			return  $request->getAll($subscription);
 	      
 	    }
 	    catch(PaymillException $e){

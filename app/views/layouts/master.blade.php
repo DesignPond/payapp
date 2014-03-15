@@ -73,8 +73,8 @@
 					<!-- Main Navigation -->
 					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 					<ul class="topnav">
-						<li><a href="<?php echo url('/'); ?>" class="current">Home</a></li>
-						<li><a href="<?php echo url('paymill'); ?>">Payement</a></li>
+						<li><a href="<?php echo url('paymill'); ?>" class="current">Home</a></li>
+						<li><a href="<?php echo url('subscriptions'); ?>">Subscriptions</a></li>
 						<li><a href="<?php echo url('offers'); ?>">Offers</a></li>
 						<li><a href="<?php echo url('clients'); ?>">Clients</a></li>
 					</ul>

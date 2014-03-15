@@ -38,6 +38,8 @@ Route::post('paymill/transaction', 'PaymillController@transaction');
 
 Route::resource('offers', 'OfferController');
 
+Route::resource('subscriptions', 'SubscriptionController');
+
 Route::resource('paymill', 'PaymillController');
 
 

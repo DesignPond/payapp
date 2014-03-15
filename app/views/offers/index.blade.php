@@ -8,14 +8,13 @@
 	<div class="main-content">
 		<div class="main-content-inner content-width">
 
-			<div class="row"><!-- start row -->
+			<div class="row"><!-- start row -->													
+				<div class="col-sm-12"><!-- strat col -->
 			
-				<h1><span class="glyphicon glyphicon-saved"></span> &nbsp;Offers</h1>
-				
-				<div class="col-sm-12">
+					<h2><span class="glyphicon glyphicon-saved"></span> &nbsp;Offers</h2>
 					
 					<p><a class="btn btn-sm btn-info pull-right" href="<?php echo url('offers/create'); ?>">Add</a></p>
-					<div class="spacer"></div>
+					<div class="spacer"></div>	
 				
 					<?php if(!empty($offers)) {	 ?>
 						
@@ -31,29 +30,31 @@
 						</thead>
 						<tbody>
 					
-						<?php 												
-								foreach($offers as $offer){
-									
-									echo '<tr>';
+						<?php 	
+																	
+							foreach($offers as $offer){
+								
+								echo '<tr>';
+
+									echo '<td>'.$offer['name'].'</td>';									
+									echo '<td>'.$offer['interval'].'</td>';	
+									echo '<td>'.$offer['currency'].'</td>';
+									echo '<td>'.number_format(($offer['amount']/100), 2).'</td>';
+									echo '<td>';
 	
-										echo '<td>'.$offer['name'].'</td>';									
-										echo '<td>'.$offer['interval'].'</td>';	
-										echo '<td>'.$offer['currency'].'</td>';
-										echo '<td>'.number_format(($offer['amount']/100), 2).'</td>';
-										echo '<td>';
-		
-											echo Form::open(array( 'url' => 'offers/'.$offer['id'] , 'method' => 'delete' ));
-												echo '<div class="btn-group pull-right">';
-												echo Form::hidden('id' , $offer['id'] ); 
-												echo '<a class="btn btn-sm btn-primary" href="'.url('offers/'.$offer['id']).'">Update</a>';
-												echo '<button type="submit" data-action="offer" class="btn btn-sm btn-danger deleteAction">delete</button>';
-												echo '</div>'; 
-											echo Form::close();												
-											
-										echo '</td>';										
+										echo Form::open(array( 'url' => 'offers/'.$offer['id'] , 'method' => 'delete' ));
+											echo '<div class="btn-group pull-right">';
+											echo Form::hidden('id' , $offer['id'] ); 
+											echo '<a class="btn btn-sm btn-primary" href="'.url('offers/'.$offer['id']).'">Update</a>';
+											echo '<button type="submit" data-action="offer" class="btn btn-sm btn-danger deleteAction">delete</button>';
+											echo '</div>'; 
+										echo Form::close();												
 										
-									echo '</tr>';										
-								}		
+									echo '</td>';										
+									
+								echo '</tr>';										
+							}		
+							
 						?>	
 											
 						</tbody>
@@ -61,9 +62,8 @@
 					
 					<?php }else{ echo 'No offers yet!';  } ?>
 					
-				</div><!-- End col -->
-				
-			</div><!-- End row -->
+				</div><!-- end col -->
+			</div><!-- end row -->
 			
 		</div>
 	</div>

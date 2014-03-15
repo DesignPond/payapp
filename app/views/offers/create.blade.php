@@ -8,26 +8,24 @@
 	<div class="main-content">
 		<div class="main-content-inner content-width">
 
-			<!-- Page Title -->
-			<h1>Offers</h1>
-			<!-- END Title -->
-			
-			<div class="row"><!-- start row -->
+			<div class="row"><!-- start row -->													
+				<div class="col-sm-12"><!-- strat col -->
+				
+				<p><a class="btn btn-sm btn-info pull-right" href="<?php echo url('clients'); ?>">Return to list</a></p>
+				<div class="spacer"></div>	
 			
 				<h2><span class="glyphicon glyphicon-saved"></span> &nbsp;New offer</h2>
 					
-				<form action="<?php echo url('offers'); ?>" method="POST">
-				
-					<div class="col-sm-6">
+				{{ Form::open(array('url' => 'offers', 'method' => 'post')) }}
 					
 						<div class="row form-group">
-							<div class="col-sm-12">
+							<div class="col-sm-6">
 								<label>Name</label>
 								<input name="name" type="text" />
 							</div>
 						</div>	
 						<div class="row form-group">
-							<div class=" col-sm-12">
+							<div class=" col-sm-6">
 								<label>Interval</label>
 								<select class="col-sm-12 form-control" name="interval">
 									<option value="15 DAY">15 DAY</option> 
@@ -39,23 +37,23 @@
 						</div>
 						
 						<div class="row form-group">
-							<div class=" col-sm-6">
+							<div class=" col-sm-3">
 								<label>Amount </label>
 								<input name="amount" type="text" value="" />
 							</div>
 							
-							<div class="col-sm-6">
+							<div class="col-sm-3">
 								<label>Currency</label>
 								<input name="currency" type="text" value="" />
 							</div>
 						</div>
 															
-						<p><input type="submit" class="btn btn-sm btn-primary" Value="Create "/></p>
-						
-					</div> 
+						<p><input type="submit" class="btn btn-primary" Value="Create "/></p>
 					 					
-				</form>
-			</div><!-- End row -->
+				{{ Form::close() }}
+				
+				</div><!-- end col -->
+			</div><!-- end row -->
 
 		</div>
 	</div>
