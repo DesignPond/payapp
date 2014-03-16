@@ -5,29 +5,30 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- Main Content -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<div class="main-content">
-		<div class="main-content-inner content-width">
-
-			<div class="row"><!-- start row -->													
-				<div class="col-sm-12"><!-- strat col -->
-				
-				<p><a class="btn btn-sm btn-info pull-right" href="<?php echo url('clients'); ?>">Return to list</a></p>
-				<div class="spacer"></div>	
+	<div class="static-page"><!-- start static page  -->
+					
+		<div class="row-fluid"><!-- start row -->							
+			<div class="span12"><!-- start col -->
 			
-				<h2><span class="glyphicon glyphicon-saved"></span> &nbsp;New offer</h2>
+				<div class="content"><!-- start content -->
+				
+				<div class="row-fluid">	
+					<h2 class="span10">New offer</h2>						
+					<p class="span2"><a class="btn btn-small btn-peterriver pull-right" href="<?php echo url('offers'); ?>">Return to list</a></p>
+				</div>	
 					
 				{{ Form::open(array('url' => 'offers', 'method' => 'post')) }}
 					
-						<div class="row form-group">
-							<div class="col-sm-6">
+						<div class="row-fluid form-group">
+							<div class="span6">
 								<label>Name</label>
 								<input name="name" type="text" />
 							</div>
 						</div>	
-						<div class="row form-group">
-							<div class=" col-sm-6">
+						<div class="row-fluid form-group">
+							<div class=" span6">
 								<label>Interval</label>
-								<select class="col-sm-12 form-control" name="interval">
+								<select class="span12 form-control" name="interval">
 									<option value="15 DAY">15 DAY</option> 
 									<option value="1 WEEK">1 WEEK</option>
 									<option value="1 MONTH">1 MONTH</option>
@@ -36,27 +37,29 @@
 							</div>
 						</div>
 						
-						<div class="row form-group">
-							<div class=" col-sm-3">
+						<div class="row-fluid form-group">
+							<div class=" span3">
 								<label>Amount </label>
 								<input name="amount" type="text" value="" />
 							</div>
 							
-							<div class="col-sm-3">
+							<div class="span3">
 								<label>Currency</label>
 								<input name="currency" type="text" value="" />
 							</div>
 						</div>
 															
-						<p><input type="submit" class="btn btn-primary" Value="Create "/></p>
+						<p><input type="submit" class="btn btn-small btn-primary" Value="Create "/></p>
 					 					
 				{{ Form::close() }}
 				
-				</div><!-- end col -->
-			</div><!-- end row -->
-
-		</div>
-	</div>
+				
+				</div><!-- end content -->
+				
+			</div><!-- end col -->
+		</div><!-- end row -->
+						
+	</div><!-- end static page -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- END Main Content -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

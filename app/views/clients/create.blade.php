@@ -5,36 +5,37 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- Main Content -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<div class="main-content">
-		<div class="main-content-inner content-width">
+	<div class="static-page"><!-- start static page  -->
+					
+		<div class="row-fluid"><!-- start row -->							
+			<div class="span12"><!-- start col -->
 			
-			<div class="row"><!-- start row -->							
-				<div class="col-sm-12"><!-- start col -->
+				<div class="content"><!-- start content -->
 			
-					<p><a class="btn btn-sm btn-info pull-right" href="<?php echo url('clients'); ?>">Return to list</a></p>
+					<p><a class="btn btn-small btn-peterriver pull-right" href="<?php echo url('clients'); ?>">Return to list</a></p>
 					<div class="spacer"></div>	
 				
-					<h2><span class="glyphicon glyphicon-user"></span> &nbsp;New client</h2>
+					<h2>New client</h2>
 					
 					<div class="well"><!-- start well -->
 						
 						{{ Form::open(array('url' => 'clients', 'method' => 'post')) }}
 	
-							<div class="row form-group">
+							<div class="row-fluid form-group">
 							
-								<div class="col-sm-4">
+								<div class="span4">
 									<label>Email</label>
 									<input name="email" type="text" value="" />
 								</div>
 								
-								<div class="col-sm-6">
+								<div class="span6">
 									<label>Description</label>
 									<input name="description" type="text" value="" />
 								</div>
 								
-								<div class="col-sm-2">
+								<div class="span2">
 									<label>&nbsp;</label>
-									<input type="submit" class="btn btn-primary" Value="Create"/>
+									<input type="submit" class="btn btn-small btn-primary" Value="Create"/>
 								</div>
 								
 							</div>
@@ -43,11 +44,12 @@
 					
 					</div><!-- end well --> 
 				
-				</div><!-- end col -->
-			</div><!-- end row -->
-
-		</div>
-	</div>
+				</div><!-- end content -->
+				
+			</div><!-- end col -->
+		</div><!-- end row -->
+						
+	</div><!-- end static page -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- END Main Content -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

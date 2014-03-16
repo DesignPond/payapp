@@ -7,117 +7,122 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- Main Content -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<div class="main-content">
-		<div class="main-content-inner content-width">
+	<div class="static-page"><!-- start static page  -->
+					
+		<div class="row-fluid"><!-- start row -->							
+			<div class="span12"><!-- start col -->
+			
+				<div class="content"><!-- start content -->
 				
-			<div class="row"><!-- start row -->													
-				<div class="col-sm-12"><!-- strat col -->
-												
-				<p><a class="btn btn-sm btn-info pull-right" href="<?php echo url('clients'); ?>">Return to list</a></p>
-				<div class="spacer"></div>	
-				
+				<div class="row-fluid">	
+					<h2 class="span10">Client name</h2>						
+					<p class="span2"><a class="btn btn-small btn-peterriver pull-right" href="<?php echo url('clients'); ?>">Return to list</a></p>
+				</div>	
+															
 				<?php if(!empty($client)) {  ?>
-				
-				<h2><span class="glyphicon glyphicon-user"></span> &nbsp;Client name</h2>
 					
 					<div class="well"><!-- start well -->
 						
 						{{ Form::open(array('route' => 'clients.update', 'method' => 'put')) }}
 								
-								<div class="row form-group">
+							<div class="row-fluid form-group">
+							
+								<div class="span4">
+									<label>Email</label>
+									<input name="email" type="text" value="<?php echo $client->getemail(); ?>" />
+								</div>
+															
+								<div class="span6">
+									<label>Description</label>
+									<input name="description" type="text" value="<?php echo $client->getdescription(); ?>" />
+								</div>
 								
-									<div class="col-sm-4">
-										<label>Email</label>
-										<input name="email" type="text" value="<?php echo $client->getemail(); ?>" />
-									</div>
-																
-									<div class="col-sm-6">
-										<label>Description</label>
-										<input name="description" type="text" value="<?php echo $client->getdescription(); ?>" />
-									</div>
-									
-									<div class="col-sm-2">
-										<label>&nbsp;</label>
-										<input name="id" type="hidden" value="<?php echo $client->getid(); ?>" />
-										<input type="submit" class="btn btn-primary" Value="Update"/>
-									</div>	
-																
-								</div>							
+								<div class="span2">
+									<label>&nbsp;</label>
+									<input name="id" type="hidden" value="<?php echo $client->getid(); ?>" />
+									<input type="submit" class="btn btn-small btn-primary" Value="Update"/>
+								</div>	
+															
+							</div>							
 													 					
 						{{ Form::close() }}
-						
-						<p class="clear"></p>
 					
 					</div><!-- end well -->
-
-				
-				<div class="spacer"></div>
-				<div class="spacer"></div>		
 			
-					<h2><span class="glyphicon glyphicon-credit-card"></span> &nbsp;Credit cards</h2>
+					<h2>Credit cards</h2>
 								
-					<div class="row"><!-- start row for CC -->	
-					<?php  
+					<?php 
 					
 						$payement = $client->getpayment();
 						
 						if( !empty($payement) ){
 						
-							foreach($payement as $cardinfo)
+													
+							/* ================================
+								Cut array in chunks
+							=================================== */ 
+							
+							$chunk = array_chunk($payement, 3);
+
+							foreach($chunk as $card)
 							{
-			
-								$cardType    = $cardinfo->getcardType();
-								$expireMonth = $cardinfo->getexpireMonth();
-								$expireYear  = $cardinfo->getexpireYear();
-								$lastFour    = $cardinfo->getlastFour();
 							
-					?>	
+					 ?>	
+						
+						<div class="row-fluid"><!-- start row for CC -->
 							
-							<div class=" col-sm-4">
-							
-								<div class="panel panel-primary">
-									<div class="panel-heading">Credit card</div>
-									<div class="panel-body">	
-																	
+							<?php
+								
+								foreach($card as $cardinfo)
+								{
+				
+									$cardType    = $cardinfo->getcardType();
+									$expireMonth = $cardinfo->getexpireMonth();
+									$expireYear  = $cardinfo->getexpireYear();
+									$lastFour    = $cardinfo->getlastFour();
+									
+							?>
+								
+								<div class="span4">
+									<div class="well">
 										<form role="form">			
 											<p><strong>Card type :</strong> <?php echo $cardType; ?></p>
 			
-											<div class="row">									
-												<div class="form-group col-sm-6">
+											<div class="row-fluid">									
+												<div class="form-group span4">
 													<label for="exampleInputEmail2">Expire month</label>
 													<input value="<?php echo $expireMonth; ?>" type="text" class="form-control" disabled>
 												</div>
-												<div class="form-group col-sm-6">
+												<div class="form-group span4">
 													<label for="exampleInputPassword2">Expire year</label>
 													<input value="<?php echo $expireYear; ?>" type="text" class="form-control" disabled>
 												</div>
-											<div class="row">	
 											</div>
-												<div class="form-group col-sm-12">
+											<div class="row-fluid">	
+												<div class="form-group span12">
 													<label for="exampleInputPassword2">Card 4 last digits</label>
 													<input value="**** **** **** <?php echo $lastFour; ?>" type="text" class="form-control" disabled>
 												</div>
 											</div>
 										</form>
-				
-									</div><!-- end panel body-->
-								</div><!-- end panel-->
+									</div>
+								</div><!-- end col -->
 								
-							</div><!-- end col -->
-															
-							<?php } }else{ echo '<p class="col-sm-12">No credit card used</p>';} ?>
+								<?php } ?>							
+							
 						</div><!-- End row -->
 						
-						<div class="spacer"></div>
-						<div class="spacer"></div>
+						<?php } ?>
 						
-						<h2><span class="glyphicon glyphicon-saved"></span> &nbsp;Transactions</h2>
+						<?php } else{ echo '<p class="span12">No credit card used</p>';} ?>
 						
-						<p><a class="btn btn-sm btn-info pull-right" href="<?php echo url('clients/'.$client->getid().'/transaction'); ?>">add</a></p>
-						
+						<div class="row-fluid">	
+							<h2 class="span11">Transactions</h2>						
+							<p class="span1"><a class="btn btn-small btn-peterriver" href="<?php echo url('clients/'.$client->getid().'/transaction'); ?>">add</a></p>
+						</div>
 						<?php if(!empty($transactions)){ ?>
 						
-							<table class="table-style-1">
+							<table class="table">
 								<thead>
 									<tr>
 										<th width="40%"><strong>Description</strong></th>
@@ -152,11 +157,12 @@
 
 				<?php } ?>	
 				
-				</div> <!-- end col -->					
-			</div><!-- End row -->
+				</div><!-- end content -->
+				
+			</div><!-- end col -->
+		</div><!-- end row -->
 						
-		</div>
-	</div>
+	</div><!-- end static page -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- END Main Content -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

@@ -5,15 +5,17 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- Main Content -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<div class="main-content">
-		<div class="main-content-inner content-width">
+	<div class="static-page"><!-- start static page  -->
+					
+		<div class="row-fluid"><!-- start row -->							
+			<div class="span12"><!-- start col -->
 			
-			<div class="row"><!-- start row -->
-			
-				<h2><span class="glyphicon glyphicon-saved"></span> &nbsp;Update subscription</h2>
-				
-				<p><a class="btn btn-sm btn-info" href="<?php echo url('subscriptions'); ?>">Return to list</a></p>
-				<div class="spacer"></div>	
+				<div class="content"><!-- start content -->
+
+				<div class="row-fluid">	
+					<h2 class="span10">Update subscription</h2>						
+					<p class="span2"><a class="btn btn-small btn-peterriver" href="<?php echo url('subscriptions'); ?>">Return to list</a></p>
+				</div>	
 				
 				<div class="well"><!-- start well -->
 					<?php if(!empty($subscription)) {  ?>
@@ -49,10 +51,13 @@
 					
 					<?php } ?>
 				</div><!-- end well -->
-			</div><!-- End row -->
-
-		</div>
-	</div>
+				
+				</div><!-- end content -->
+				
+			</div><!-- end col -->
+		</div><!-- end row -->
+						
+	</div><!-- end static page -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- END Main Content -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

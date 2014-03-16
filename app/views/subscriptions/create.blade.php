@@ -5,16 +5,17 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- Main Content -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<div class="main-content">
-		<div class="main-content-inner content-width">
-
-			<div class="row"><!-- start row -->													
-				<div class="col-sm-12"><!-- strat col -->
-				
-				<p><a class="btn btn-sm btn-info pull-right" href="<?php echo url('subscriptions'); ?>">Return to list</a></p>
-				<div class="spacer"></div>	
+	<div class="static-page"><!-- start static page  -->
+					
+		<div class="row-fluid"><!-- start row -->							
+			<div class="span12"><!-- start col -->
 			
-				<h2><span class="glyphicon glyphicon-saved"></span> &nbsp;New subscription</h2>
+				<div class="content"><!-- start content -->
+
+					<div class="row-fluid">	
+						<h2 class="span10">New subscription</h2>						
+						<p class="span2"><a class="btn btn-small btn-peterriver pull-right" href="<?php echo url('subscriptions'); ?>">Return to list</a></p>
+					</div>	
 		
 					@if(Session::has('status'))
 					<div class="alert alert-dismissable alert-{{  Session::get('status') }}">
@@ -29,8 +30,8 @@
 						<input class="card-amount-int" name="card-amount-int" type="hidden" value="20000" />
 						<input class="card-currency" name="card-currency" type="hidden" value="CHF" />
 						  
-						<div class="row form-group">
-							<div class=" col-sm-6">
+						<div class="row-fluid form-group">
+							<div class=" span6">
 								<label>Client</label>
 								<select class="form-control" name="client">
 									<?php 
@@ -44,8 +45,8 @@
 								</select>
 							</div>
 						</div>
-						<div class="row form-group">
-							<div class=" col-sm-6">
+						<div class="row-fluid form-group">
+							<div class=" span6">
 								<label>Offer</label>
 								<select class="form-control" name="offer">
 									<?php 
@@ -60,44 +61,48 @@
 							</div>
 						</div>
 						
-						<div class="row form-group">
-							<div class="col-sm-4">
+						<div class="row-fluid form-group">
+							<div class="span4">
 							  	<label>Card number</label>
 							    <input class="card-number form-control" type="text" size="20" />
 							</div>
 						</div>
 						
-						<div class="row form-group">
-							<div class="col-sm-2">
+						<div class="row-fluid form-group">
+							<div class="span2">
 							  	<label>CVC</label>
 							    <input class="card-cvc form-control" type="text" size="4" />
 							</div>
 						</div>
 						
-						<div class="row form-group">
-							<div class=" col-sm-6">
+						<div class="row-fluid form-group">
+							<div class="span6">
 							    <label>Name</label>
 							    <input class="card-holdername form-control" type="text" size="4" />
 							</div>
 						</div>
 						
-						<div class="row form-group">
-							<div class=" col-sm-6">
+						<div class="row-fluid form-group">
+							<div class="span6">
+							
 							  	<label>Expiry date (MM/YYYY)</label>
-							    <input class="card-expiry-month small" placeholder="MM" type="text" size="2" />
-							    <input class="card-expiry-year small" placeholder="YYYY" type="text" size="4" />
+							  	<div class="row-fluid">
+							    	<input class="card-expiry-month span3" placeholder="MM" type="text" size="2" />
+							   		<input class="card-expiry-year span3" placeholder="YYYY" type="text" size="4" />
+							    </div>
 							</div>
 						</div>
 											
-						<p><input type="submit" class="btn btn-primary" Value="Submit "/></p>
+						<p><input type="submit" class="btn btn-small btn-primary" Value="Submit "/></p>
 					 					
 					{{ Form::close() }}
 				
-				</div><!-- end col -->
-			</div><!-- end row -->
-
-		</div>
-	</div>
+				</div><!-- end content -->
+				
+			</div><!-- end col -->
+		</div><!-- end row -->
+						
+	</div><!-- end static page -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- END Main Content -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

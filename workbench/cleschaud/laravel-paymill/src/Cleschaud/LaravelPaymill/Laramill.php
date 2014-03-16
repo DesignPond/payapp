@@ -69,10 +69,11 @@ class Laramill{
 						      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	        
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
+			
 	    }
 		
 	}
@@ -113,11 +114,11 @@ class Laramill{
 	      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
-	    }	
+	        
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );		
+	    }
 	    
 	}
 	
@@ -145,10 +146,10 @@ class Laramill{
 	      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	        
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );		
 	    }
 
 	}
@@ -187,10 +188,10 @@ class Laramill{
 	      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	        
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );		
 	    }
 
 	}
@@ -220,10 +221,10 @@ class Laramill{
 	      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	        
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );		
 	    }
 
 	}
@@ -266,11 +267,12 @@ class Laramill{
 	      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
-	    }	
+	        
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
+			
+	    }
 	
 	}
 	
@@ -317,10 +319,10 @@ class Laramill{
 		
 		}
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 
 	}
@@ -369,10 +371,10 @@ class Laramill{
 		
 		}
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 
 	}
@@ -402,10 +404,10 @@ class Laramill{
 	      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 
 	}
@@ -445,10 +447,10 @@ class Laramill{
 			      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 
 	}
@@ -486,10 +488,10 @@ class Laramill{
 			      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 
 	}
@@ -519,10 +521,10 @@ class Laramill{
 	      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 
 	}
@@ -567,10 +569,10 @@ class Laramill{
 	      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 
 	}
@@ -607,10 +609,10 @@ class Laramill{
 	      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 
 	}
@@ -639,10 +641,10 @@ class Laramill{
 	      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 
 	}
@@ -684,10 +686,10 @@ class Laramill{
 	      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 
 	}
@@ -716,10 +718,10 @@ class Laramill{
 			      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 
 	}
@@ -762,10 +764,10 @@ class Laramill{
 	      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 
 	}
@@ -805,10 +807,10 @@ class Laramill{
 	      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 
 	}
@@ -837,10 +839,10 @@ class Laramill{
 			      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 		
 	}
@@ -871,10 +873,10 @@ class Laramill{
 	      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 
 	}
@@ -904,10 +906,10 @@ class Laramill{
 		      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 
 	}
@@ -950,10 +952,10 @@ class Laramill{
 	      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 	    
 	}
@@ -988,10 +990,10 @@ class Laramill{
 			      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 	    
 	}
@@ -1020,10 +1022,10 @@ class Laramill{
 			      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 	    		
 	}
@@ -1053,10 +1055,10 @@ class Laramill{
 			      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 	    
 	}
@@ -1097,10 +1099,10 @@ class Laramill{
 	      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 	    
 	}
@@ -1136,10 +1138,10 @@ class Laramill{
 			      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 	    
 	}
@@ -1168,10 +1170,10 @@ class Laramill{
 	      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 
 	}
@@ -1204,10 +1206,10 @@ class Laramill{
 	      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 
 	}
@@ -1240,10 +1242,10 @@ class Laramill{
 	      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 	    
 	}
@@ -1284,10 +1286,10 @@ class Laramill{
 	      
 	    }
 	    catch(PaymillException $e){
-	        //Do something with the error informations below
-	        $e->getResponseCode();
-	        $e->getStatusCode();
-	        $e->getErrorMessage();
+	    
+	        Log::info( 'Responde code: '.$exception->getResponseCode() );
+			Log::info( 'Status code: '.$exception->getStatusCode() );
+			Log::info( 'Message: '.$exception->getErrorMessage() );
 	    }
 	    
 

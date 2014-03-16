@@ -7,18 +7,19 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- Main Content -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<div class="main-content">
-		<div class="main-content-inner content-width">
-
-			<div class="row"><!-- start row -->							
-				<div class="col-sm-12"><!-- start col -->
-			
-				<h2><span class="glyphicon glyphicon-user"></span> &nbsp;Clients</h2>
-										
-					<p><a class="btn btn-sm btn-info pull-right" href="<?php echo url('clients/create'); ?>">Add</a></p>
-					<div class="spacer"></div>
+	<div class="static-page"><!-- start static page  -->
 					
-					<table class="table-style-1">
+		<div class="row-fluid"><!-- start row -->							
+			<div class="span12"><!-- start col -->
+			
+				<div class="content"><!-- start content -->
+
+					<div class="row-fluid">	
+						<h2 class="span10">Clients</h2>						
+						<p class="span2"><a class="btn btn-small btn-peterriver pull-right" href="<?php echo url('clients/create'); ?>">Add</a></p>
+					</div>	
+					
+					<table class="table">
 						<thead>
 							<tr>
 								<th width="25%"><strong>Email</strong></th>
@@ -42,12 +43,12 @@
 											echo '<td>'.$custom->formatFromTimestamp($client['created_at']).'</td>';
 											echo '<td>'.$custom->formatFromTimestamp($client['updated_at']).'</td>';
 											echo '<td>';
-	
+		
 												echo Form::open(array( 'url' => 'clients/'.$client['id'] , 'method' => 'delete' ));
 													echo '<div class="btn-group pull-right">';
 													echo Form::hidden('id' , $client['id'] ); 
-													echo '<a class="btn btn-sm btn-primary" href="'.url('clients/'.$client['id']).'">Update</a>';
-													echo '<button type="submit" data-action="client" class="btn btn-sm btn-danger deleteAction">delete</button>';
+													echo '<a class="btn btn-small btn-primary" href="'.url('clients/'.$client['id']).'">Update</a>';
+													echo '<button type="submit" data-action="client" class="btn btn-small btn-alizarin deleteAction">delete</button>';
 													echo '</div>'; 
 												echo Form::close();												
 												
@@ -58,15 +59,16 @@
 								}
 								
 							?>
-	
+		
 						</tbody>
 					</table>
-					
-				</div><!-- end col -->
-			</div><!-- end row -->
-			
-		</div>
-	</div>
+				
+				</div><!-- end content -->
+				
+			</div><!-- end col -->
+		</div><!-- end row -->
+						
+	</div><!-- end static page -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- END Main Content -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

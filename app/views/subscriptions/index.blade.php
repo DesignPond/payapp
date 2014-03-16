@@ -7,20 +7,21 @@
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- Main Content -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-	<div class="main-content">
-		<div class="main-content-inner content-width">
-
-			<div class="row"><!-- start row -->													
-				<div class="col-sm-12"><!-- strat col -->
-			
-					<h2><span class="glyphicon glyphicon-saved"></span> &nbsp;Subscriptions</h2>
+	<div class="static-page"><!-- start static page  -->
 					
-					<p><a class="btn btn-sm btn-info pull-right" href="<?php echo url('subscriptions/create'); ?>">Add</a></p>
-					<div class="spacer"></div>		
+		<div class="row-fluid"><!-- start row -->							
+			<div class="span12"><!-- start col -->
+			
+				<div class="content"><!-- start content -->
+			
+					<div class="row-fluid">	
+						<h2 class="span10">Subscriptions</h2>						
+						<p class="span2"><a class="btn btn-small btn-peterriver pull-right" href="<?php echo url('subscriptions/create'); ?>">Add</a></p>
+					</div>	
 				
 					<?php if(!empty($subscriptions)) {	 ?>
 						
-					<table class="table-style-1">
+					<table class="table">
 						<thead>
 							<tr>
 								<th width="20%"><strong>Offer</strong></th>
@@ -50,7 +51,7 @@
 											echo '<div class="btn-group pull-right">';
 											echo Form::hidden('id' , $subscription['id'] ); 
 											// echo '<a class="btn btn-sm btn-primary" href="'.url('subscriptions/'.$subscription['id']).'">Update</a>';
-											echo '<button type="submit" data-action="offer" class="btn btn-sm btn-danger deleteAction">delete</button>';
+											echo '<button type="submit" data-action="offer" class="btn btn-small btn-alizarin deleteAction">delete</button>';
 											echo '</div>'; 
 										echo Form::close();												
 										
@@ -67,11 +68,12 @@
 					
 					<?php }else{ echo 'No subscription yet!';  } ?>
 					
-				</div><!-- end col -->
-			</div><!-- end row -->
-			
-		</div>
-	</div>
+				</div><!-- end content -->
+				
+			</div><!-- end col -->
+		</div><!-- end row -->
+						
+	</div><!-- end static page -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- END Main Content -->
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
