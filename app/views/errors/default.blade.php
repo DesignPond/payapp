@@ -11,36 +11,14 @@
 			<div class="span12"><!-- start col -->
 			
 				<div class="content"><!-- start content -->
-
-					<div class="row-fluid">	
-						<h2 class="span10">New client</h2>						
-						<p class="span2"><a class="btn btn-small btn-peterriver pull-right" href="<?php echo url('clients'); ?>">Return to list</a></p>
-					</div>	
+			
+					<p><a class="btn btn-small btn-peterriver pull-right" href="<?php echo url('/'); ?>">Home</a></p>
+				
+					<h2>Error</h2>
 					
 					<div class="well"><!-- start well -->
 						
-						{{ Form::open(array('url' => 'clients', 'method' => 'post')) }}
-	
-							<div class="row-fluid form-group">
-							
-								<div class="span4">
-									<label>Email</label>
-									<input name="email" type="text" value="" />
-								</div>
-								
-								<div class="span6">
-									<label>Description</label>
-									<input name="description" type="text" value="" />
-								</div>
-								
-								<div class="span2">
-									<label>&nbsp;</label>
-									<input type="submit" class="btn btn-small btn-primary" Value="Create"/>
-								</div>
-								
-							</div>
-							 					
-						{{ Form::close() }}
+						<p>Une erreur est survenue</p>
 					
 					</div><!-- end well --> 
 				

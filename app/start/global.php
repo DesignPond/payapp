@@ -52,7 +52,7 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 App::error(function(Paymill\Services\PaymillException $exception)
 {
 
-	Log::info( 'Responde code: '.$exception->getResponseCode() );
+	Log::info( 'Response code: '.$exception->getResponseCode() );
 	Log::info( 'Status code: '.$exception->getStatusCode() );
 	Log::info( 'Message: '.$exception->getErrorMessage() );
     
@@ -62,23 +62,35 @@ App::error(function(Paymill\Services\PaymillException $exception)
 
 App::error(function(Exception $exception, $code)
 {
-	Log::error($exception);
+
+	$pathInfo = Request::getPathInfo();
+    $message  = $exception->getMessage() ?: 'Exception';
+    $previous = URL::previous();
+
+    if($code == 404){
+
+        Log::error("$code - $message @ $pathInfo (ref: $previous)");
+        return Response::view('error.404', array(), 404);
+    }else{
+        Log::error("$code - $message @ $pathInfo (ref: $previous)\r\n$exception");
+    }
 	
 	if (Config::get('app.debug') == false) {
-		
+
 		switch ($code)
 		{
 			case 403:
-			    return Response::view('errors.403', array(), 403);
+			    return Response::view('errors.default', array(), 403);
 			
 			case 404:
-			    return Response::view('errors.404', array(), 404);
+			    return Response::view('errors.default', array(), 404);
 			
 			case 500:
-			    return Response::view('errors.500', array(), 500);
+			    return Response::view('errors.default', array(), 500);
 			
 			default:
 			    return Response::view('errors.default', array(), $code);
+			    
 		}
 		
 	}
