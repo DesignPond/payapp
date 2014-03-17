@@ -19,6 +19,7 @@
 					<div class="well"><!-- start well -->
 						
 						<p>Une erreur est survenue</p>
+						<p>Code : </p>
 					
 					</div><!-- end well --> 
 				
