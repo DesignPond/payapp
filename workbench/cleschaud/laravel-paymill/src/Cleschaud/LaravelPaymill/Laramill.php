@@ -48,33 +48,22 @@ class Laramill{
 	 */
 	function newCreditCardPayement($token, $client = NULL)
 	{
-	
-	   try{	
-	   	
-			// request object
-			$request = $this->authentication();
-					
-			// make new payement
-			$payment = new Paymill\Models\Request\Payment();
-			
-			// set the token
-			$payment->setToken($token);
-			
-			// set client with id
-			if($client){
-				$payment->setClient($client);
-			}
-			
-			return $request->create($payment);	
-						      
-	    }
-	    catch(PaymillException $e){
-	        
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-			
-	    }
+		
+		// request object
+		$request = $this->authentication();
+				
+		// make new payement
+		$payment = new Paymill\Models\Request\Payment();
+		
+		// set the token
+		$payment->setToken($token);
+		
+		// set client with id
+		if($client){
+			$payment->setClient($client);
+		}
+		
+		return $request->create($payment);							      
 		
 	}
 	
@@ -92,34 +81,23 @@ class Laramill{
 	 */
 	function newDebitCardPayement($token, $client = NULL)
 	{	
-	
-		try{
-		    
-			// request object
-			$request = $this->authentication();
-			
-			// new payement object
-			$payment = new Paymill\Models\Request\Payment();
-			
-			// set the token
-			$payment->setToken($token);
-			
-			// set client with id
-			if($client){
-				$payment->setClient($client);
-			}
-			
-			return $request->create($payment);		
+			    
+		// request object
+		$request = $this->authentication();
 		
-	      
-	    }
-	    catch(PaymillException $e){
-	        
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );		
-	    }
-	    
+		// new payement object
+		$payment = new Paymill\Models\Request\Payment();
+		
+		// set the token
+		$payment->setToken($token);
+		
+		// set client with id
+		if($client){
+			$payment->setClient($client);
+		}
+		
+		return $request->create($payment);		
+		   	    
 	}
 	
 	/**
@@ -131,26 +109,16 @@ class Laramill{
 	function getPayment($id)
 	{
 	
-		try{
-	    
-			// request object
-			$request = $this->authentication();
-			
-			// new payement object
-			$payment = new Paymill\Models\Request\Payment();
-			
-			// set id
-			$payment->setId($id);
-			
-			return  $request->getOne($payment);				
-	      
-	    }
-	    catch(PaymillException $e){
-	        
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );		
-	    }
+		// request object
+		$request = $this->authentication();
+		
+		// new payement object
+		$payment = new Paymill\Models\Request\Payment();
+		
+		// set id
+		$payment->setId($id);
+		
+		return  $request->getOne($payment);				
 
 	}
 	
@@ -165,34 +133,24 @@ class Laramill{
 	function getListPayment($count = NULL, $offset = NULL, $created_at = NULL)
 	{
 	
-		try{
+		// request object
+		$request = $this->authentication();
 		
-			// request object
-			$request = $this->authentication();
-			
-			// set params
-		    $params = array(
-	           'count'         =>  $count,
-	           'offset'        =>  $offset,
-	           'created_at'    =>  $created_at
-	        );
-			
-			// new payement object
-			$payment = new Paymill\Models\Request\Payment();
-					
-			// set filters
-			$payment->setFilter($params);
-			
-			// get list of all payements
-			return  $request->getAll($payment);				
-	      
-	    }
-	    catch(PaymillException $e){
-	        
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );		
-	    }
+		// set params
+	    $params = array(
+           'count'         =>  $count,
+           'offset'        =>  $offset,
+           'created_at'    =>  $created_at
+        );
+		
+		// new payement object
+		$payment = new Paymill\Models\Request\Payment();
+				
+		// set filters
+		$payment->setFilter($params);
+		
+		// get list of all payements
+		return  $request->getAll($payment);				
 
 	}
 	
@@ -204,29 +162,18 @@ class Laramill{
 	 */
 	function removePayment($id)
 	{
-	
-		try{	
 			
-			// request object
-			$request = $this->authentication();
-			
-			// new payement object
-			$payment = new Paymill\Models\Request\Payment();
-			
-			// set id
-			$payment->setId($id);
-			
-			// remove payement
-			return  $request->delete($payment);		
-	      
-	    }
-	    catch(PaymillException $e){
-	        
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );		
-	    }
-
+		// request object
+		$request = $this->authentication();
+		
+		// new payement object
+		$payment = new Paymill\Models\Request\Payment();
+		
+		// set id
+		$payment->setId($id);
+		
+		// remove payement
+		return  $request->delete($payment);		
 	}
 	
 	/**
@@ -243,36 +190,25 @@ class Laramill{
 	 */
 	function newTransactionToken($amount, $currency, $token, $description = NULL)
 	{
-	
-		try{
-	    		
-			// request object
-			$request = $this->authentication();
 			
-			// new transaction object
-			$transaction = new Paymill\Models\Request\Transaction();
-			
-			// set the params for transaction
-			$transaction->setAmount($amount) // e.g. "4200" for 42.00 EUR
-			            ->setCurrency($currency)
-			            ->setPayment($token);
-			
-			// if description
-			if($description){
-				$transaction->setDescription($description);
-			} 
-			
-			// create transaction from token
-			return $request->create($transaction);					
-	      
-	    }
-	    catch(PaymillException $e){
-	        
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-			
-	    }
+		// request object
+		$request = $this->authentication();
+		
+		// new transaction object
+		$transaction = new Paymill\Models\Request\Transaction();
+		
+		// set the params for transaction
+		$transaction->setAmount($amount) // e.g. "4200" for 42.00 EUR
+		            ->setCurrency($currency)
+		            ->setPayment($token);
+		
+		// if description
+		if($description){
+			$transaction->setDescription($description);
+		} 
+		
+		// create transaction from token
+		return $request->create($transaction);					
 	
 	}
 	
@@ -292,38 +228,29 @@ class Laramill{
 
 	function newTransactionPayment($amount, $currency, $payment, $description = NULL, $client = NULL)
 	{
-		try{
+	
+		// request object
+		$request = $this->authentication();
 		
-			// request object
-			$request = $this->authentication();
-			
-			// new transaction object
-			$transaction = new Paymill\Models\Request\Transaction();
-			
-			// set params
-			$transaction->setAmount($amount) 
-			            ->setCurrency($currency)
-			            ->setPayment($payment);
-			
-			// if description
-			if($description){
-				$transaction->setDescription($description);
-			} 
-			 
-			// if client           
-			if($client){
-				$transaction->setClient($client);
-			}          
-			
-			$response = $request->create($transaction);
+		// new transaction object
+		$transaction = new Paymill\Models\Request\Transaction();
 		
-		}
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
+		// set params
+		$transaction->setAmount($amount) 
+		            ->setCurrency($currency)
+		            ->setPayment($payment);
+		
+		// if description
+		if($description){
+			$transaction->setDescription($description);
+		} 
+		 
+		// if client           
+		if($client){
+			$transaction->setClient($client);
+		}          
+		
+		$response = $request->create($transaction);
 
 	}
 
@@ -343,39 +270,30 @@ class Laramill{
 
 	function newTransactionPreauthorization($amount, $currency, $preauthorization , $description = NULL, $client = NULL  )
 	{
-		try{
+	
+		// request object
+		$request = $this->authentication();
 		
-			// request object
-			$request = $this->authentication();
-			
-			// new transaction object
-			$transaction = new Paymill\Models\Request\Transaction();
-			
-			// set params
-			$transaction->setAmount($amount) 
-			            ->setCurrency($currency)
-			            ->setPreauthorization($preauthorization);
-			
-			// if description
-			if($description){
-				$transaction->setDescription($description);
-			} 
-			 
-			// if client           
-			if($client){
-				$transaction->setClient($client);
-			}           
-			
-			// return new transaction
-			$response = $request->create($transaction);
+		// new transaction object
+		$transaction = new Paymill\Models\Request\Transaction();
 		
-		}
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
+		// set params
+		$transaction->setAmount($amount) 
+		            ->setCurrency($currency)
+		            ->setPreauthorization($preauthorization);
+		
+		// if description
+		if($description){
+			$transaction->setDescription($description);
+		} 
+		 
+		// if client           
+		if($client){
+			$transaction->setClient($client);
+		}           
+		
+		// return new transaction
+		$response = $request->create($transaction);
 
 	}
 	
@@ -389,26 +307,17 @@ class Laramill{
 	function getTransaction($id)
 	{
 	
-		try{
-	    
-			// request object
-			$request = $this->authentication();
-			
-			// new transaction object
-			$transaction = new Paymill\Models\Request\Transaction();
-			
-			// set the id of transaction
-			$transaction->setId($id);
-			
-			return  $request->getOne($transaction);				
-	      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
+
+		// request object
+		$request = $this->authentication();
+		
+		// new transaction object
+		$transaction = new Paymill\Models\Request\Transaction();
+		
+		// set the id of transaction
+		$transaction->setId($id);
+		
+		return  $request->getOne($transaction);				
 
 	}
 	
@@ -422,37 +331,27 @@ class Laramill{
      */
 	function getListTransaction($client = NULL ,$count = NULL, $offset = NULL, $created_at = NULL)
 	{	
-	
-		try{
+	 
+		// request object
+		$request = $this->authentication();
+		
+		// set parames
+	    $params = array(
+           'count'      =>  $count,
+           'offset'     =>  $offset,
+           'created_at' =>  $created_at,
+           'client'     =>  $client
+        );
+        
+        // new transaction object
+	    $transaction = new Paymill\Models\Request\Transaction();
 	    
-			// request object
-			$request = $this->authentication();
-			
-			// set parames
-		    $params = array(
-	           'count'      =>  $count,
-	           'offset'     =>  $offset,
-	           'created_at' =>  $created_at,
-	           'client'     =>  $client
-	        );
-	        
-	        // new transaction object
-		    $transaction = new Paymill\Models\Request\Transaction();
-		    
-		    // set filters
-		    $transaction->setFilter($params);
-			
-			// return all transactions
-			return $request->getAll($transaction);		
+	    // set filters
+	    $transaction->setFilter($params);
+		
+		// return all transactions
+		return $request->getAll($transaction);		
 			      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
-
 	}
 	
 	/**
@@ -469,31 +368,20 @@ class Laramill{
 	 */
 	function refundTransaction($transactionId, $amount, $description = NULL)
 	{
-	
-		try{
 	    
-			// request object
-			$request = $this->authentication();
-			
-			// new refund object
-			$refund = new Paymill\Models\Request\Refund();
-			
-			// set params
-			$refund->setId($transactionId)
-			       ->setAmount($amount) // e.g. "4200" for 42.00 EUR
-			       ->setDescription($description);
-			
-			// return new refund created
-			return  $request->create($refund);		
-			      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
-
+		// request object
+		$request = $this->authentication();
+		
+		// new refund object
+		$refund = new Paymill\Models\Request\Refund();
+		
+		// set params
+		$refund->setId($transactionId)
+		       ->setAmount($amount) // e.g. "4200" for 42.00 EUR
+		       ->setDescription($description);
+		
+		// return new refund created
+		return  $request->create($refund);		
 	}
 	
 	/**
@@ -504,29 +392,19 @@ class Laramill{
 	 */
 	function getRefund($id)
 	{
-	
-		try{
-		   
-			// request object
-			$request = $this->authentication();
+	   
+		// request object
+		$request = $this->authentication();
+		
+		// new refund object
+		$refund = new Paymill\Models\Request\Refund();
+		
+		// set id
+		$refund->setId($id);
+		
+		// return refund
+		return  $request->getOne($refund);	
 			
-			// new refund object
-			$refund = new Paymill\Models\Request\Refund();
-			
-			// set id
-			$refund->setId($id);
-			
-			// return refund
-			return  $request->getOne($refund);		
-	      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
-
 	}
 	
 	/**
@@ -542,38 +420,28 @@ class Laramill{
      */
 	function getListRefund($count = NULL, $offset = NULL, $transaction = NULL, $client = NULL, $amount = NULL, $created_at = NULL)
 	{
-	
-		try{
-        
-			// request object
-			$request = $this->authentication();		
-			
-			// params	    		    
-		    $params = array(
-	           'count'          =>  $count,
-	           'offset'         =>  $offset,
-	           'transaction'    =>  $transaction,
-	           'client'         =>  $client,
-	           'amount'         =>  $amount,
-	           'created_at'     =>  $created_at
-	        );
-	
-			// new list of refund with params        
-			$refund = new Paymill\Models\Request\Refund();
-			
-			// set filters
-			$refund->setFilter($params);
-			
-			// return all refunds
-			return  $request->getAll($refund);
-	      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
+
+		// request object
+		$request = $this->authentication();		
+		
+		// params	    		    
+	    $params = array(
+           'count'          =>  $count,
+           'offset'         =>  $offset,
+           'transaction'    =>  $transaction,
+           'client'         =>  $client,
+           'amount'         =>  $amount,
+           'created_at'     =>  $created_at
+        );
+
+		// new list of refund with params        
+		$refund = new Paymill\Models\Request\Refund();
+		
+		// set filters
+		$refund->setFilter($params);
+		
+		// return all refunds
+		return  $request->getAll($refund);
 
 	}
 	
@@ -587,34 +455,24 @@ class Laramill{
 	function newClient($email = NULL, $description = NULL)
 	{
 	
-		try{
-		    
-			// request object
-			$request = $this->authentication();
-			
-			// new client object
-			$client  = new Paymill\Models\Request\Client();
-			
-			// if email
-			if($email){
-				$client->setEmail($email);
-			}
-			
-			// if description
-			if($description){
-				$client->setDescription($description);
-			}
-			
-			return  $request->create($client);		
+		// request object
+		$request = $this->authentication();
+		
+		// new client object
+		$client  = new Paymill\Models\Request\Client();
+		
+		// if email
+		if($email){
+			$client->setEmail($email);
+		}
+		
+		// if description
+		if($description){
+			$client->setDescription($description);
+		}
+		
+		return  $request->create($client);		
 	      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
-
 	}
 	
 	/**
@@ -626,27 +484,17 @@ class Laramill{
 	function getClient($id)
 	{
 	
-		try{
-	    
-			// request object
-			$request = $this->authentication();
-			
-			// get client object
-			$client = new Paymill\Models\Request\Client();
-			
-			// fetch client by id
-			$client->setId($id);
-			
-			return $request->getOne($client);			
+		// request object
+		$request = $this->authentication();
+		
+		// get client object
+		$client = new Paymill\Models\Request\Client();
+		
+		// fetch client by id
+		$client->setId($id);
+		
+		return $request->getOne($client);			
 	      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
-
 	}
 	
 	/**
@@ -663,35 +511,25 @@ class Laramill{
 	function updateClient($id, $email = NULL, $description = NULL)
 	{
 	
-		try{
-	    
-			// request object
-			$request = $this->authentication();
+		// request object
+		$request = $this->authentication();
+		
+		// new client object
+		$client = new Paymill\Models\Request\Client();
+		
+		// set params
+		$client->setId($id);
+		
+		if($email){
+			$client->setEmail($email);
+		}
+		
+		if($description){
+			$client->setDescription($description);
+		}			       
+		
+		return $request->update($client);		
 			
-			// new client object
-			$client = new Paymill\Models\Request\Client();
-			
-			// set params
-			$client->setId($id);
-			
-			if($email){
-				$client->setEmail($email);
-			}
-			
-			if($description){
-				$client->setDescription($description);
-			}			       
-			
-			return $request->update($client);		
-	      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
-
 	}
 	
 	/**
@@ -703,26 +541,16 @@ class Laramill{
 	function removeClient($id)
 	{
 	
-		try{
-	    
-			// request object
-			$request = $this->authentication();
-			
-			// new client object
-			$client = new Paymill\Models\Request\Client();
-			
-			// set id
-			$client->setId($id);
-			
-			return $request->delete($client);		
-			      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
+		// request object
+		$request = $this->authentication();
+		
+		// new client object
+		$client = new Paymill\Models\Request\Client();
+		
+		// set id
+		$client->setId($id);
+		
+		return $request->delete($client);		
 
 	}
 	
@@ -739,36 +567,26 @@ class Laramill{
 	function getListClient($count = NULL, $offset = NULL, $creditcard = NULL, $email = NULL, $created_at = NULL)
 	{
 	
-		try{
+	    // request object
+		$request = $this->authentication();		
 		
-		    // request object
-			$request = $this->authentication();		
-			
-			// params	    
-		    $params = array(
-		       'count'         =>  $count,
-		       'offset'        =>  $offset,
-		       'creditcard'    =>  $creditcard,
-		       'email'         =>  $email,
-		       'created_at'    =>  $created_at
-	        );
-			
-			// new client object
-			$client  = new Paymill\Models\Request\Client();
-			
-			// set filters
-			$client->setFilter($params);
-			
-			// return all clients
-			return $request->getAll($client);
-	      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
+		// params	    
+	    $params = array(
+	       'count'         =>  $count,
+	       'offset'        =>  $offset,
+	       'creditcard'    =>  $creditcard,
+	       'email'         =>  $email,
+	       'created_at'    =>  $created_at
+        );
+		
+		// new client object
+		$client  = new Paymill\Models\Request\Client();
+		
+		// set filters
+		$client->setFilter($params);
+		
+		// return all clients
+		return $request->getAll($client);
 
 	}
 	
@@ -784,35 +602,24 @@ class Laramill{
 	function newOffer($amount, $currency, $interval, $name, $trial_period_days = NULL)
 	{
 	
-		try{
-	    
-			// request object
-			$request = $this->authentication();
-			
-			// new offer object
-			$offer = new Paymill\Models\Request\Offer();
-			
-			// set params
-			$offer->setAmount($amount)
-			      ->setCurrency($currency)
-			      ->setInterval($interval)
-			      ->setName($name);
-			      
-			if($trial_period_days)
-			{
-				$offer->setTrialPeriodDays($trial_period_days);
-			}
-			
-			return $request->create($offer);				
-	      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
-
+		// request object
+		$request = $this->authentication();
+		
+		// new offer object
+		$offer = new Paymill\Models\Request\Offer();
+		
+		// set params
+		$offer->setAmount($amount)
+		      ->setCurrency($currency)
+		      ->setInterval($interval)
+		      ->setName($name);
+		      
+		if($trial_period_days)
+		{
+			$offer->setTrialPeriodDays($trial_period_days);
+		}
+		
+		return $request->create($offer);				
 	}
 	
 	/**
@@ -824,27 +631,17 @@ class Laramill{
 	function getOffer($id)
 	{	
 	
-		try{
-	    	
-			// request object
-			$request = $this->authentication();
+		// request object
+		$request = $this->authentication();
 
-			// new offer object				
-			$offer = new Paymill\Models\Request\Offer();
-			
-			// set id
-			$offer->setId($id);
-			
-			return $request->getOne($offer);		
-			      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
+		// new offer object				
+		$offer = new Paymill\Models\Request\Offer();
 		
+		// set id
+		$offer->setId($id);
+		
+		return $request->getOne($offer);		
+
 	}
 	
 	/**
@@ -856,28 +653,18 @@ class Laramill{
 	 */
 	function updateOffer($id, $name)
 	{
+    
+		// request object
+		$request = $this->authentication();
 		
-		try{
-				    
-			// request object
-			$request = $this->authentication();
-			
-	        // new offer object
-			$offer = new Paymill\Models\Request\Offer();
-			
-			// update name
-			$offer->setId($id)
-			      ->setName($name);
-			
-			return  $request->update($offer);	
-	      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
+        // new offer object
+		$offer = new Paymill\Models\Request\Offer();
+		
+		// update name
+		$offer->setId($id)
+		      ->setName($name);
+		
+		return  $request->update($offer);	
 
 	}
 	
@@ -891,27 +678,17 @@ class Laramill{
 	function removeOffer($id)
 	{
 	
-		try{		
-		    
-			// request object
-			$request = $this->authentication();
-			
-			// new offer object
-			$offer = new Paymill\Models\Request\Offer();
-			
-			// get by id
-			$offer->setId($id);
-			
-			return  $request->delete($offer);
-		      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
-
+		// request object
+		$request = $this->authentication();
+		
+		// new offer object
+		$offer = new Paymill\Models\Request\Offer();
+		
+		// get by id
+		$offer->setId($id);
+		
+		return  $request->delete($offer);
+		     
 	}
 	
 	/**
@@ -928,35 +705,25 @@ class Laramill{
 	function getListOffer($count = NULL, $offset = NULL, $interval = NULL, $amount = NULL, $created_at = NULL, $trial_period_days = NULL)
 	{
 	
-		try{
-		
-			// request object
-			$request = $this->authentication();
-					
-		    $params = array(
-	           'count'              =>  $count,
-	           'offset'             =>  $offset,
-	           'interval'           =>  $interval,
-	           'amount'             =>  $amount,
-	           'created_at'         =>  $created_at,
-	           'trial_period_days'  =>  $trial_period_days
-	        );
-	        
-	        // new offer object by params
-		    $offer = new Paymill\Models\Request\Offer();
-		    
-			// set filters
-			$offer->setFilter($params);
-	
-			return $request->getAll($offer);		
-	      
-	    }
-	    catch(PaymillException $e){
+		// request object
+		$request = $this->authentication();
+				
+	    $params = array(
+           'count'              =>  $count,
+           'offset'             =>  $offset,
+           'interval'           =>  $interval,
+           'amount'             =>  $amount,
+           'created_at'         =>  $created_at,
+           'trial_period_days'  =>  $trial_period_days
+        );
+        
+        // new offer object by params
+	    $offer = new Paymill\Models\Request\Offer();
 	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
+		// set filters
+		$offer->setFilter($params);
+
+		return $request->getAll($offer);		
 	    
 	}
 	
@@ -973,28 +740,18 @@ class Laramill{
 	function newPreauthorization($amount, $currency, $token)
 	{
 	
-		try{
+		// request object
+		$request = $this->authentication();
 		
-			// request object
-			$request = $this->authentication();
-			
-			// new preauthorization object
-			$preAuth = new Paymill\Models\Request\Preauthorization();
-			
-			// set params
-			$preAuth->setToken($token)
-			        ->setAmount($amount)
-			        ->setCurrency($currency);
-			
-			return  $request->create($preAuth);		
-			      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
+		// new preauthorization object
+		$preAuth = new Paymill\Models\Request\Preauthorization();
+		
+		// set params
+		$preAuth->setToken($token)
+		        ->setAmount($amount)
+		        ->setCurrency($currency);
+		
+		return  $request->create($preAuth);		
 	    
 	}
 	
@@ -1006,27 +763,17 @@ class Laramill{
 	 */
 	function getPreauthorization($id)
 	{
-	
-		try{
+
+		// request object
+		$request = $this->authentication();
 		
-			// request object
-			$request = $this->authentication();
-			
-			// new preauthorization object
-			$preAuth = new Paymill\Models\Request\Preauthorization();
-			
-			// get by id
-			$preAuth->setId($id);
-			
-			return  $request->getOne($preAuth);			
-			      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
+		// new preauthorization object
+		$preAuth = new Paymill\Models\Request\Preauthorization();
+		
+		// get by id
+		$preAuth->setId($id);
+		
+		return  $request->getOne($preAuth);			
 	    		
 	}
 	
@@ -1040,26 +787,16 @@ class Laramill{
 	function removePreauthorization($id)
 	{
 	
-		try{
+		// request object
+		$request = $this->authentication();
 		
-			// request object
-			$request = $this->authentication();
-			
-			// new preauthorization object
-			$preAuth = new Paymill\Models\Request\Preauthorization();
-			
-			// get by id
-			$preAuth->setId($id);
-	
-			return  $request->delete($preAuth);		
-			      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
+		// new preauthorization object
+		$preAuth = new Paymill\Models\Request\Preauthorization();
+		
+		// get by id
+		$preAuth->setId($id);
+
+		return  $request->delete($preAuth);		
 	    
 	}
 	
@@ -1077,33 +814,23 @@ class Laramill{
 	function getListPreauthorization($count = NULL, $offset = NULL, $created_at = NULL)
 	{
 	
-		try{
+		// request object
+		$request = $this->authentication();
 		
-			// request object
-			$request = $this->authentication();
-			
-			// params		
-		    $params = array(
-	           'count'              =>  $count,
-	           'offset'             =>  $offset,
-	           'created_at'         =>  $created_at
-	        );
-	        
-	        // new preauthorization object
-			$preAuth = new Paymill\Models\Request\Preauthorization();
-			
-			// set filters
-			$preAuth->setFilter($params);
-	
-			return  $request->getAll($preAuth);		
-	      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
+		// params		
+	    $params = array(
+           'count'              =>  $count,
+           'offset'             =>  $offset,
+           'created_at'         =>  $created_at
+        );
+        
+        // new preauthorization object
+		$preAuth = new Paymill\Models\Request\Preauthorization();
+		
+		// set filters
+		$preAuth->setFilter($params);
+
+		return  $request->getAll($preAuth);		
 	    
 	}
 	
@@ -1121,28 +848,18 @@ class Laramill{
 	function newSubscription($client, $offer, $payment) //payment??
 	{
 	
-		try{
+		// request object
+		$request = $this->authentication();
 		
-			// request object
-			$request = $this->authentication();
-			
-			// new subscription object
-			$subscription = new Paymill\Models\Request\Subscription();
-			
-			// set params
-			$subscription->setClient($client)
-			             ->setOffer($offer)
-			             ->setPayment($payment);
-			
-			return $request->create($subscription);
-			      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
+		// new subscription object
+		$subscription = new Paymill\Models\Request\Subscription();
+		
+		// set params
+		$subscription->setClient($client)
+		             ->setOffer($offer)
+		             ->setPayment($payment);
+		
+		return $request->create($subscription);
 	    
 	}
 	
@@ -1155,26 +872,16 @@ class Laramill{
 	function getSubscription($id)
 	{
 	
-		try{
+		// request object
+		$request = $this->authentication();
 		
-			// request object
-			$request = $this->authentication();
-			
-			// new subscription object
-			$subscription = new Paymill\Models\Request\Subscription();
-			
-			// get by id
-			$subscription->setId($id);
-			
-			return $request->getOne($subscription);	
-	      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
+		// new subscription object
+		$subscription = new Paymill\Models\Request\Subscription();
+		
+		// get by id
+		$subscription->setId($id);
+		
+		return $request->getOne($subscription);	
 
 	}
 	
@@ -1187,30 +894,20 @@ class Laramill{
 	 */
 	function updateSubscription( $id , $offer , $payement , $cancelAtPeriodEnd = false)
 	{
-	
-		try{
+
+		// request object
+		$request = $this->authentication();
+        
+        // new subscription object
+		$subscription = new Paymill\Models\Request\Subscription();
 		
-			// request object
-			$request = $this->authentication();
-	        
-	        // new subscription object
-			$subscription = new Paymill\Models\Request\Subscription();
-			
-			// set params
-			$subscription->setId($id)
-			             ->setOffer($offer)
-			             ->setPayment($payement)
-			             ->setCancelAtPeriodEnd($cancelAtPeriodEnd);
-			
-			return $request->update($subscription);	
-	      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
+		// set params
+		$subscription->setId($id)
+		             ->setOffer($offer)
+		             ->setPayment($payement)
+		             ->setCancelAtPeriodEnd($cancelAtPeriodEnd);
+		
+		return $request->update($subscription);	
 
 	}
 	
@@ -1227,26 +924,16 @@ class Laramill{
 	function removeSubscription($id)
 	{
 	
-		try{
+		// request object
+		$request = $this->authentication();
 		
-			// request object
-			$request = $this->authentication();
-			
-			// new subscription object
-			$subscription = new Paymill\Models\Request\Subscription();
-			
-			// get by id
-			$subscription->setId($id);
-	
-			return $request->delete($subscription);
-	      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
+		// new subscription object
+		$subscription = new Paymill\Models\Request\Subscription();
+		
+		// get by id
+		$subscription->setId($id);
+
+		return $request->delete($subscription);
 	    
 	}
 	
@@ -1263,35 +950,24 @@ class Laramill{
 	function getListSubscription($count = NULL, $offset = NULL, $offer = NULL,  $canceled_at = NULL, $created_at = NULL)
 	{
 	
-		try{
-        
-			// request object
-			$request = $this->authentication();	
-				
-		    $params = array(
-	           'count'       =>  $count,
-	           'offset'      =>  $offset,
-	           'offer'       =>  $offer,
-	           'created_at'  =>  $created_at,
-	           'canceled_at' =>  $canceled_at,
-	        );
+		// request object
+		$request = $this->authentication();	
 			
-			// new subscription object
-			$subscription = new Paymill\Models\Request\Subscription();
-			
-			// set filters
-			$subscription->setFilter($params);
-			
-			return  $request->getAll($subscription);
-	      
-	    }
-	    catch(PaymillException $e){
-	    
-	        Log::info( 'Responde code: '.$exception->getResponseCode() );
-			Log::info( 'Status code: '.$exception->getStatusCode() );
-			Log::info( 'Message: '.$exception->getErrorMessage() );
-	    }
-	    
+	    $params = array(
+           'count'       =>  $count,
+           'offset'      =>  $offset,
+           'offer'       =>  $offer,
+           'created_at'  =>  $created_at,
+           'canceled_at' =>  $canceled_at,
+        );
+		
+		// new subscription object
+		$subscription = new Paymill\Models\Request\Subscription();
+		
+		// set filters
+		$subscription->setFilter($params);
+		
+		return  $request->getAll($subscription);	    
 
 	}
 

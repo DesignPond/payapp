@@ -64,20 +64,27 @@ App::error(function(Exception $exception, $code)
     Log::error($exception);
 
     if (!Config::get('app.debug')) {
+    
+    	if ( !in_array( $code , array(401,403,404,500) ) )
+    	{
+	       Log::info( 'Message: other code in exeption' );
+	    }
+    
 	    switch ($code)
 	    {
 	        case 403:
-	            return Response::view('errors.index', array(), 403);
+	            return Response::view('errors.index', array( ), 403);
 	 
 	        case 404:
-	            return Response::view('errors.index', array(), 404);
+	            return Response::view('errors.index', array( ), 404);
 	 
 	        case 500:
-	            return Response::view('errors.index', array(), 500);
+	            return Response::view('errors.index', array( ), 500);
 	 
 	        default:
-	            return Response::view('errors.index', array(), $code);
+	            return Response::view('errors.index', array( ), $code);
 	    }
+	    
     }
     
 });
