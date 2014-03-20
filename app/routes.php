@@ -11,16 +11,23 @@
 |
 */
 
-/*
-Route::get('/', function()
+
+Route::get('hello', function()
 {
-	return View::make('hello');
+	return Cart::content();
 });
-*/
+
+View::share('cartTotalCount', Cart::count() );
+
+Route::get('/', array( 'uses' => 'ShopController@index' ));
 
 
-Route::get('/', array( 'uses' => 'HomeController@index' ));
+// Products
+Route::resource('products', 'ProductController');
 
+
+// Cart
+Route::resource('cart', 'CartController');
 
 // Offers
 Route::resource('offers', 'OfferController');

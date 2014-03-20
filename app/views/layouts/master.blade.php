@@ -37,7 +37,6 @@
 		<script src=""<?php echo asset('js/html5shiv.js');?>"></script>
 		<![endif]-->
 		<script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
-		
 		<script type="text/javascript" src="<?php echo asset('js/jquery-ui-1.10.2.custom.js');?>"></script>
 		<script type="text/javascript" src="<?php echo asset('js/jquery.easing-1.3.min.js');?>"></script>
 		<script type="text/javascript" src="<?php echo asset('js/bootstrap.js');?>"></script>
@@ -119,8 +118,8 @@
 			                            
 			                            <!-- Mini cart -->
 			                            <div class="mini-cart">
-			                                <a href="cart.html" title="Go to cart &rarr;">
-			                                    <span>3</span>
+			                                <a href="<?php echo url('cart'); ?>" title="Go to cart &rarr;">
+			                                    <span><?php echo ( !empty($cartTotalCount) ? $cartTotalCount : 0 ); ?></span>			                                    
 			                                </a>									
 			                            </div>
 			                            <!-- End class="mini-cart" -->
@@ -150,11 +149,11 @@
 							    <div class="menu-main-navigation-container">
 							    
 							        <ul id="menu-main-navigation" class="main-menu">
-							            <li ><a href="cart.html">Cart</a></li>
 							            <li><a href="<?php echo url('/'); ?>">Home</a></li>
 										<li><a href="<?php echo url('subscriptions'); ?>">Subscriptions</a></li>
 										<li><a href="<?php echo url('offers'); ?>">Offers</a></li>
 										<li><a href="<?php echo url('clients'); ?>">Clients</a></li>
+										<li ><a href="<?php echo url('cart'); ?>">Cart</a></li>
 							        </ul>
 							        
 							    </div>   							     

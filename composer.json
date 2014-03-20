@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.1.*",
 		"way/generators": "dev-master",
-		"phpunit/phpunit": "3.7.*"
+		"phpunit/phpunit": "3.7.*",
+		"gloudemans/shoppingcart": "dev-master"
 	},
 	"require-dev": {
 		"mockery/mockery": "dev-master",
