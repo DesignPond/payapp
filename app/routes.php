@@ -11,6 +11,8 @@
 |
 */
 
+//Cart::add('345', 'Other product 1', 1, 20.00, array('size' => 'bigger'));
+
 
 Route::get('hello', function()
 {

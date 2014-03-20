@@ -13,6 +13,11 @@
             <div class="row">
 
                 <div class="span9">
+<?php
+echo '<pre>';
+print_r($cart);
+echo '</pre>';
+?>
                     
                     <!-- Cart -->
                     <div class="box">
@@ -37,83 +42,42 @@
                                             </tr>
                                         </thead>
 
-                                        <tbody>									
-                                            <tr>
-                                                <td data-title="Product" class="col_product text-left">
-                                                    <div class="image visible-desktop">
-                                                        <a href="product.html">
-                                                            <img src="img/thumbnails/db_file_img_230_60xauto.jpg" alt="Helen Romper">
-                                                        </a>
-                                                    </div>
-
-                                                    <h5>
-                                                        <a href="product.html">Helen Romper</a>
-                                                    </h5>
-
-                                                </td>
-
-                                                <td data-title="Remove" class="col_remove text-right">
-                                                    <a href="#">
-                                                        <i class="icon-trash icon-large"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td data-title="Qty" class="col_qty text-right">
-                                                    <input type="text" name="item_quantity[]" value="2" />
-                                                </td>
-
-                                                <td data-title="Single" class="col_single text-right">
-                                                    <span class="single-price">£43.99</span>
-                                                </td>
-
-                                                <td data-title="Discount" class="col_discount text-right">
-                                                    <span class="discount">£0.00</span>
-                                                </td>
-
-                                                <td data-title="Total" class="col_total text-right">
-                                                    <span class="total-price">£87.98</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td data-title="Product" class="col_product text-left">
-                                                    <div class="image visible-desktop">
-                                                        <a href="product.html">
-                                                            <img src="img/thumbnails/db_file_img_17_60xauto.jpg" alt="1300 in Grey">
-                                                        </a>
-                                                    </div>
-
-                                                    <h5>
-                                                        <a href="product.html">1300 in Grey</a>
-                                                    </h5>
-
-                                                    <ul class="options">
-                                                        <li>Size: UK 9</li>
-                                                        <li>Color: Gray</li>
-                                                    </ul>
-                                                </td>
-
-                                                <td data-title="Remove" class="col_remove text-right">
-                                                    <a href="#">
-                                                        <i class="icon-trash icon-large"></i>
-                                                    </a>
-                                                </td>
-
-                                                <td data-title="Qty" class="col_qty text-right">
-                                                    <input type="text" name="item_quantity[]" value="1" />
-                                                </td>
-
-                                                <td data-title="Single" class="col_single text-right">
-                                                    <span class="single-price">£160.00</span>
-                                                </td>
-
-                                                <td data-title="Discount" class="col_discount text-right">
-                                                    <span class="discount">£0.00</span>
-                                                </td>
-
-                                                <td data-title="Total" class="col_total text-right">
-                                                    <span class="total-price">£160.00</span>
-                                                </td>
-                                            </tr>
+                                        <tbody>	
+                                        								
+                                            @if( !$cart->isEmpty() )
+	                                            @foreach($cart as $item)
+	                                            
+	                                            <tr>
+	                                            	<?php echo $item; ?>
+	                                                <td data-title="Product" class="col_product text-left">
+	                                                
+	                                                    <div class="image visible-desktop">
+	                                                        <a href="product.html"><img src="img/thumbnails/db_file_img_17_60xauto.jpg" alt="<?php echo $item->name; ?>"></a>
+	                                                    </div>
+	
+	                                                    <h5><a href="product.html"><?php echo $item->name; ?></a></h5>
+														
+														@if( !$cart->options->isEmpty()  )
+	                                                    <ul class="options">
+	                                                    	@foreach( $cart->options as $type => $option )
+	                                                        <li>{{ $type }}: {{ $option }}</li>
+	                                                        @endforeach
+	                                                    </ul>
+	                                                    @endif
+	                                                    
+	                                                </td>
+	
+	                                                <td data-title="Remove" class="col_remove text-right"><a href="#"><i class="icon-trash icon-large"></i></a></td>	
+	                                                <td data-title="Qty" class="col_qty text-right"><input type="text" name="item_quantity[]" value="<?php echo $item->name; ?>" /></td>	
+	                                                <td data-title="Single" class="col_single text-right"><span class="single-price">CHF <?php echo $item->price; ?></span></td>	
+	                                                <td data-title="Discount" class="col_discount text-right"><span class="discount">CHF 0.00</span></td>	
+	                                                <td data-title="Total" class="col_total text-right"><span class="total-price">CHF <?php echo $item->subtotal; ?></span></td>
+	                                                
+	                                            </tr>
+	                                            
+	                                            @endforeach
+                                            @endif
+                                            
                                         </tbody>
                                     </table>
                                 </div>
