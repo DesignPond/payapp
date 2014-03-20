@@ -3,7 +3,7 @@
 class SubscriptionController extends \BaseController {
 
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing of the subscriptions.
 	 *
 	 * @return Response
 	 */
@@ -17,7 +17,7 @@ class SubscriptionController extends \BaseController {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new subscription.
 	 *
 	 * @return Response
 	 */
@@ -30,7 +30,7 @@ class SubscriptionController extends \BaseController {
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a newly created subscription in storage.
 	 *
 	 * @return Response
 	 */
@@ -66,7 +66,7 @@ class SubscriptionController extends \BaseController {
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Display the specified subscription.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -81,7 +81,7 @@ class SubscriptionController extends \BaseController {
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
+	 * Show the form for editing the specified subscription.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -92,7 +92,7 @@ class SubscriptionController extends \BaseController {
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Update the specified subscription in storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -103,7 +103,7 @@ class SubscriptionController extends \BaseController {
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove the specified subscription from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response

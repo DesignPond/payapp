@@ -18,31 +18,24 @@ Route::get('/', function()
 });
 */
 
-/*
-Route::get('/', function(){
-
-	echo '<pre>';
-	  print_r( Laramill::request_api() );
-	echo '</pre>';
-  
-});
-*/
-
 
 Route::get('/', array( 'uses' => 'HomeController@index' ));
 
-// transactions
-Route::post('paymill/transaction', 'PaymillController@transaction');
 
 // Offers
-
 Route::resource('offers', 'OfferController');
 
+
+// Subscription
 Route::resource('subscriptions', 'SubscriptionController');
 
+
+// Transactions
+Route::post('paymill/transaction', 'PaymillController@transaction');
+Route::post('paymill/transactionClient', 'PaymillController@transactionClient');
 Route::resource('paymill', 'PaymillController');
 
 
-// clients
+// Clients
 Route::get('clients/{client}/transaction', 'ClientController@transaction');
 Route::resource('clients', 'ClientController');

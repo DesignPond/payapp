@@ -2,48 +2,9 @@
 
 class PaymillController extends \BaseController {
 
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		
-		return View::make('index');			
-		
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-
-/*
-		$token    = Input::get('paymillToken');
-		$currency = Input::get('card-currency');
-		$amount   = Input::get('card-amount-int');
-		$client   = 'client_aac766c78002f4d315a0';
-		$cc       = 'pay_dba1845355d9f7a2958e89f6';
-		
-		if ($token) 
-		{
-			$response = Laramill::newTransactionToken(1600, 'CHF', $cc, ' transaction from form');
-			// $response = Laramill::newCreditCardPayement( $token, $client );
-			$paymentId = $response->getId();
-		    print_r($paymentId);		    
-		}
-*/
-
-	}
-	
 	
 	/* ===================================
-		Transactions
+		Transactions simple
 	===================================== */
 	
 	public function transaction(){
@@ -52,23 +13,26 @@ class PaymillController extends \BaseController {
 		$currency = Input::get('card-currency');
 		$amount   = Input::get('card-amount-int');
 		$email    = Input::get('email');
-					
+		
+		// Create client with email			
 		$client   = Laramill::newClient( $email );
 
 		if($client)
 		{			
-			
+			// Get lcient id
 			$clientId = $client->getId();
 		
 			if ($token && $clientId) 
 			{	
-						
+				// create a credit card payement with token and client id		
 				$payement = Laramill::newCreditCardPayement( $token, $clientId );
 	
 				if($payement)
 				{
+					// Get payement id
 					$paymentId = $payement->getId();
 					
+					// Create new transaction with payement token
 					$response  = Laramill::newTransactionToken($amount, $currency , $paymentId, 'Transaction from client');
 					
 					return Redirect::to('clients/'.$clientId);
@@ -84,5 +48,44 @@ class PaymillController extends \BaseController {
 		return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with token') ); 
 	}
 	
+		
+	/* ===================================
+		Transactions for client
+	===================================== */	
+	
+	public function transactionClient(){
+
+		$token    = Input::get('paymillToken');
+		$currency = Input::get('card-currency');
+		$amount   = Input::get('card-amount-int');
+		$client   = Input::get('clientToken');
+		
+		if ($token)
+		{	
+			// create a credit card payement with token and client id		
+			$payement = Laramill::newCreditCardPayement( $token, $client );
+			
+			if($payement)
+			{
+				// Get payement id
+				$paymentId = $payement->getId();
+				
+				// Create new transaction with payement token
+				$response  = Laramill::newTransactionToken($amount, $currency , $paymentId, 'Transaction from client');
+				
+				return Redirect::to('clients/'.$client);
+			}
+			else
+			{
+				return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with transaction') );
+			}
+		
+		}
+		
+		return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with token') );
+		
+	}
+
+					
 
 }

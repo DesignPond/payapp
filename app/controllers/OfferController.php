@@ -16,7 +16,7 @@ class OfferController extends \BaseController {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new offer.
 	 *
 	 * @return Response
 	 */
@@ -26,7 +26,7 @@ class OfferController extends \BaseController {
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a newly created offer in storage.
 	 *
 	 * @return Response
 	 */
@@ -50,7 +50,7 @@ class OfferController extends \BaseController {
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Display the specified offer.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -75,7 +75,7 @@ class OfferController extends \BaseController {
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Update the specified offer in storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -97,7 +97,7 @@ class OfferController extends \BaseController {
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove the specified offer from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response

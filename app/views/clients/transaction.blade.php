@@ -30,7 +30,7 @@
 	
 						<div class="payment-errors alert alert-dismissable alert-error"></div>	
 									
-						<form id="payment-form" action="<?php echo url('paymill/transaction'); ?>" method="POST">
+						<form id="payment-form" action="<?php echo url('paymill/transactionClient'); ?>" method="POST">
 														
 							<input class="clientToken" name="clientToken" type="hidden" value="<?php echo $client->getid(); ?>" />						  						  
 							<input class="card-amount-int" name="card-amount-int" type="hidden" value="20000" />
