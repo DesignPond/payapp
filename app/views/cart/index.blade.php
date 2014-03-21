@@ -13,16 +13,10 @@
             <div class="row">
 
                 <div class="span9">
-<?php
-echo '<pre>';
-print_r($cart);
-echo '</pre>';
-?>
-                    
+                
                     <!-- Cart -->
                     <div class="box">
-                        <form enctype="multipart/form-data" action="checkout-start.html" method="post" >
-                            
+                        {{ Form::open(array('url' => 'cart/update', 'method' => 'put')) }}   
                             <div class="box-header">
                                 <h3>Shopping cart</h3>
                                 <h5>You currently have <strong><?php echo ( !empty($cartTotalCount) ? $cartTotalCount : 0 ); ?></strong> item(s) in your cart</h5>
@@ -48,31 +42,34 @@ echo '</pre>';
 	                                            @foreach($cart as $item)
 	                                            
 	                                            <tr>
-	                                            	<?php echo $item; ?>
 	                                                <td data-title="Product" class="col_product text-left">
 	                                                
 	                                                    <div class="image visible-desktop">
-	                                                        <a href="product.html"><img src="img/thumbnails/db_file_img_17_60xauto.jpg" alt="<?php echo $item->name; ?>"></a>
+	                                                        <a href="product.html"><img src="img/thumbnails/db_file_img_17_60xauto.jpg" alt="<?php echo $item->name; ?>"></a>
 	                                                    </div>
-	
-	                                                    <h5><a href="product.html"><?php echo $item->name; ?></a></h5>
-														
-														@if( !$cart->options->isEmpty()  )
+	                                                    
+	                                                    <h5><a href="product.html"><?php echo $item->name; ?></a></h5>                                                    
+
+														@if( !$item->options->isEmpty() )
+														<?php $items = $item->options->toArray(); ?>
 	                                                    <ul class="options">
-	                                                    	@foreach( $cart->options as $type => $option )
-	                                                        <li>{{ $type }}: {{ $option }}</li>
+	                                                    	@foreach( $items as $type => $option )
+	                                                        <li><?php echo $type; ?> : <?php echo $option; ?></li>
 	                                                        @endforeach
 	                                                    </ul>
 	                                                    @endif
 	                                                    
 	                                                </td>
-	
-	                                                <td data-title="Remove" class="col_remove text-right"><a href="#"><i class="icon-trash icon-large"></i></a></td>	
-	                                                <td data-title="Qty" class="col_qty text-right"><input type="text" name="item_quantity[]" value="<?php echo $item->name; ?>" /></td>	
-	                                                <td data-title="Single" class="col_single text-right"><span class="single-price">CHF <?php echo $item->price; ?></span></td>	
+	                                                <td data-title="Remove" class="col_remove text-right">
+	                                                	<a href="<?php echo url('cart/delete/'.$item->rowid); ?>"><i class="icon-trash icon-large"></i></a>
+	                                                </td>	
+	                                                <td data-title="Qty" class="col_qty text-right">	                                                	
+	                                                	<input type="hidden" name="rowid[]" value="<?php echo $item->rowid; ?>" />
+	                                                	<input type="text" name="item_quantity[]" value="<?php echo $item->qty; ?>" />                                           	
+	                                                </td>
+	                                                <td data-title="Single" class="col_single text-right"><span class="single-price">CHF <?php echo $item->price; ?></span></td>	
 	                                                <td data-title="Discount" class="col_discount text-right"><span class="discount">CHF 0.00</span></td>	
-	                                                <td data-title="Total" class="col_total text-right"><span class="total-price">CHF <?php echo $item->subtotal; ?></span></td>
-	                                                
+	                                                <td data-title="Total" class="col_total text-right"><span class="total-price">CHF <?php echo $item->subtotal; ?></span></td>
 	                                            </tr>
 	                                            
 	                                            @endforeach
@@ -100,7 +97,7 @@ echo '</pre>';
                                     </button>
                                 </div>
                             </div>
-                        </form>			
+                        {{ Form::close() }}		
                     </div>
                     <!-- End Cart -->
 

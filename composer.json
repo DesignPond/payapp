@@ -23,7 +23,7 @@
 			"app/tests/TestCase.php"
 		],
 		"psr-0":{
-			"Mind" : "app/"
+			"Shop" : "app/"
 		}
 	},
 	"scripts": {

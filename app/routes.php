@@ -11,7 +11,7 @@
 |
 */
 
-//Cart::add('345', 'Other product 1', 1, 20.00, array('size' => 'bigger'));
+//Cart::add('234', 'Other product 4534', 1, 120.00, array('size' => 'M'));
 
 
 Route::get('hello', function()
@@ -29,6 +29,9 @@ Route::resource('products', 'ProductController');
 
 
 // Cart
+Route::get('cart/checkout',array( 'uses' => 'CartController@checkout' ));
+Route::get('cart/update',  array( 'uses' => 'CartController@update' ));
+Route::get('cart/delete/{row}',  array( 'uses' => 'CartController@delete' ));
 Route::resource('cart', 'CartController');
 
 // Offers

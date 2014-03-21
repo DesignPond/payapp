@@ -1,6 +1,15 @@
 <?php
 
+use Shop\Repo\Cart\CartInterface;
+
 class CartController extends \BaseController {
+
+	protected $cart;
+	
+	public function __construct( CartInterface $cart ){
+		
+		$this->cart    = $cart;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -9,7 +18,7 @@ class CartController extends \BaseController {
 	 */
 	public function index()
 	{
-		$cart = Cart::content();
+		$cart = $this->cart->get();
 		
 		return View::make('cart/index')->with( array( 'cart' => $cart ) );
 	}
@@ -31,7 +40,9 @@ class CartController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+	
+		$this->cart->update( Input::all() );
+		
 	}
 
 	/**
@@ -62,9 +73,19 @@ class CartController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+		// test if is checkout
+		if( Input::get('checkout') )
+		{
+			return Redirect::to('cart/checkout');
+		}
+		
+		// else update the cart
+		$this->cart->update( Input::all() );
+		
+		return Redirect::to('cart');
+	
 	}
 
 	/**
@@ -73,9 +94,11 @@ class CartController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function delete($row)
 	{
-		//
+		$this->cart->delete($row);
+		
+		return Redirect::to('cart');
 	}
 
 }

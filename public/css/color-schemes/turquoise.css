@@ -3636,8 +3636,9 @@ html[xmlns] .slides {
   text-decoration: none;
 }
 .cart-items .col_qty input[type="text"] {
-  width: 20px;
-  text-align: right;
+  width: 40px;
+  padding: 4px 2px;
+  text-align: center;
 }
 .cart-items .col_single .single-price,
 .cart-items .col_total .single-price,

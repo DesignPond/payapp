@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost',
+	'url' => 'http://paymill.local',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -108,7 +108,8 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
 		'Gloudemans\Shoppingcart\ShoppingcartServiceProvider',
-		'Cleschaud\LaravelPaymill\LaravelPaymillServiceProvider'
+		'Cleschaud\LaravelPaymill\LaravelPaymillServiceProvider',
+		'Shop\ShopServiceProvider'
 
 	),
 

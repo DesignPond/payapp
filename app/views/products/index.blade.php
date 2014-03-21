@@ -63,18 +63,16 @@
                                     
                                     <!-- Product tab -->
                                     <div class="tab-pane active" id="product">
-                                        <form enctype="multipart/form-data" action="#" onsubmit="return false;" method="post">
+                                        {{ Form::open(array('url' => 'cart', 'method' => 'post' , 'onsubmit' => 'return false;' )) }}
                                             
                                             <div class="details">
                                                 <h1><?php echo $product['title']; ?></h1>
                                                 <div class="prices"><span class="price">CHF <?php echo $product['price']; ?></span></div>
-
                                                 <div class="meta">
                                                     <div class="sku">
                                                         <i class="icon-pencil"></i>
                                                         <span rel="tooltip" title="SKU is 0092">0092</span>
                                                     </div>
-
                                                     <div class="categories">
                                                         <span><i class="icon-tags"></i><a href="category.html" title="Dresses">Game</a></span>, <a href="category.html" title="Womens">Fantasy</a>
                                                     </div>
@@ -82,15 +80,13 @@
                                             </div>
 
                                             <div class="short-description">
-                                                <p>Lorem ipsum dolor sit amet</p>
-                                               
+                                                <p>Lorem ipsum dolor sit amet</p>                                              
                                             </div>
                                             
                                             <div class="options">
                                                 <div class="row-fluid">
                                                     <div class="span6">
                                                         <div class="control-group">
-
                                                             <label for="product_options" class="control-label">Console</label>
                                                             <div class="controls">
                                                                 <select id="product_options" name="product_options[]" class="span12">
@@ -103,12 +99,13 @@
                                                 </div>
                                             </div>
 
-                                            <div class="add-to-cart">
+                                            <div class="add-to-cart">                                           	
                                                 <button class="btn btn-primary btn-large" onclick="$('#added').modal('show')">
                                                     <i class="icon-plus"></i> &nbsp; Add to cart
-                                                </button>
+                                                </button>                                               
                                             </div>
-                                        </form>						
+                                            
+                                        {{ Form::close() }}					
                                     </div>
                                     <!-- End id="product" -->
                                     
