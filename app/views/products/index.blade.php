@@ -57,21 +57,20 @@
                                 </ul>
                                 <!-- End Tab panels' navigation -->
 
-                                <!-- Tab panels container -->
-                                
+                                <!-- Tab panels container -->                                
                                 <div class="tab-content">
                                     
                                     <!-- Product tab -->
                                     <div class="tab-pane active" id="product">
-                                        {{ Form::open(array('url' => 'cart', 'method' => 'post' , 'onsubmit' => 'return false;' )) }}
+                                    
+                                        {{ Form::open(array('url' => 'cart', 'method' => 'post' , 'class' => 'productToCart' )) }}
                                             
                                             <div class="details">
                                                 <h1><?php echo $product['title']; ?></h1>
                                                 <div class="prices"><span class="price">CHF <?php echo $product['price']; ?></span></div>
                                                 <div class="meta">
                                                     <div class="sku">
-                                                        <i class="icon-pencil"></i>
-                                                        <span rel="tooltip" title="SKU is 0092">0092</span>
+                                                        <i class="icon-pencil"></i><span rel="tooltip" title="SKU is 0092">0092</span>
                                                     </div>
                                                     <div class="categories">
                                                         <span><i class="icon-tags"></i><a href="category.html" title="Dresses">Game</a></span>, <a href="category.html" title="Womens">Fantasy</a>
@@ -86,26 +85,42 @@
                                             <div class="options">
                                                 <div class="row-fluid">
                                                     <div class="span6">
+                                                    
                                                         <div class="control-group">
                                                             <label for="product_options" class="control-label">Console</label>
                                                             <div class="controls">
-                                                                <select id="product_options" name="product_options[]" class="span12">
-                                                                    <option value="Brown">Xbox</option>
-                                                                    <option value="Black" selected="selected">Playstation 3</option>
+                                                                <select id="product_options" name="options[console]" class="span12">
+                                                                    <option value="Xbox">Xbox</option>
+                                                                    <option value="Playstation 3" selected="selected">Playstation 3</option>
                                                                 </select>
                                                             </div>
                                                         </div>
+                                                        <div class="control-group">
+                                                            <label for="product_options" class="control-label">Color</label>
+                                                            <div class="controls">
+                                                                <select id="product_options" name="options[color]" class="span12">
+                                                                    <option value="Brown">Brown</option>
+                                                                    <option value="Black" selected="selected">Black</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>                                                        
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="add-to-cart">                                           	
-                                                <button class="btn btn-primary btn-large" onclick="$('#added').modal('show')">
+                                            <div class="add-to-cart">  
+                                            	<input type="hidden"  name="id" value="<?php echo $product['id']; ?>" /> 
+                                            	<input type="hidden"  name="name" value="<?php echo $product['title']; ?>" /> 
+                                            	<input type="hidden"  name="qty" value="1" /> 
+                                            	<input type="hidden"  name="price" value="<?php echo $product['price']; ?>" />                                        	
+                                                <button class="btn btn-primary btn-large addToCart">
                                                     <i class="icon-plus"></i> &nbsp; Add to cart
                                                 </button>                                               
                                             </div>
                                             
-                                        {{ Form::close() }}					
+                                        {{ Form::close() }}	
+                                        				
                                     </div>
                                     <!-- End id="product" -->
                                     
@@ -139,8 +154,7 @@
 		                        <div class="modal-header">
 		                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		                            <div class="hgroup title">
-		                                <h3>You're one step closer to owning this product!</h3>
-		                                <h5>"Chaser Overalls" has been added to your cart</h5>
+		                                <h5>"<?php echo $product['title']; ?>" has been added to your cart</h5>
 		                            </div>
 		                        </div>
 		                        <div class="modal-footer">	

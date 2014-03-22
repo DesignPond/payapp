@@ -19,7 +19,9 @@ Route::get('hello', function()
 	return Cart::content();
 });
 
-View::share('cartTotalCount', Cart::count() );
+
+View::share('cartTotalCount',  Cart::count() );
+View::share('cartTotalPrice',  Cart::total() );
 
 Route::get('/', array( 'uses' => 'ShopController@index' ));
 
@@ -30,8 +32,10 @@ Route::resource('products', 'ProductController');
 
 // Cart
 Route::get('cart/checkout',array( 'uses' => 'CartController@checkout' ));
+Route::post('cart/addToCart',  array( 'uses' => 'CartController@addToCart' ));
+Route::post('cart/applyCouponCode',  array( 'uses' => 'CartController@applyCouponCode' ));
 Route::get('cart/update',  array( 'uses' => 'CartController@update' ));
-Route::get('cart/delete/{row}',  array( 'uses' => 'CartController@delete' ));
+Route::get('cart/delete/{row}', array( 'uses' => 'CartController@delete' ));
 Route::resource('cart', 'CartController');
 
 // Offers

@@ -75,6 +75,32 @@
 	                                            @endforeach
                                             @endif
                                             
+                                            @if(Session::has('coupon'))
+											<tr>
+												<td><?php 
+												
+														$coupon = \Session::get('coupon'); 
+														
+														if( in_array( $coupon , $coupons ) )
+														{ 	
+															$values = array_flip($coupons);
+															
+															echo '<strong>Applied coupon '.$values[$coupon].' </strong> <br/>';
+															echo 'value ';
+															echo $coupon * 100 .'%';  
+															
+														} 
+														
+													?>
+												</td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+											</tr>
+											@endif
+                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -112,32 +138,16 @@
 
                             <div class="box-content">
                                 <div class="row-fluid">
-
-                                    <div class="span4">
+                                
+                                    <div class="span6">
                                         <label for="country">Country</label>
                                         <select class="span12" id="country" name="country">
-                                            <option value="3" >Australia</option>
-                                            <option value="2" >Canada</option>
-                                            <option value="17" selected="selected">United Kingdom</option>
-                                            <option value="1" >United States</option>
+                                        	<option value="1" selected="selected">Switzerland</option>
+                                            <option value="2">Rest of the world</option>
                                         </select>
                                     </div>
-
-                                    <div class="span4">
-                                        <label for="state">State</label>
-                                        <div id="shipping_states">
-                                            <select class="span12" id="state" name="state">
-                                                
-                                            </select>				
-                                        </div>
-                                    </div>
-
-                                    <div class="span4">
-                                        <label>ZIP</label>
-                                        <input class="span12 zip" type="text" name="zip" value=""/>
-                                    </div>
-
                                 </div>
+                                
                             </div>
 
                             <div class="box-footer">
@@ -159,27 +169,24 @@
 
                         <div class="modal-body">
                             <div id="shipping_options">
-                                <table class="table table-striped table-bordered">                                         
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>Price</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Free shipping</td>
-                                        <td>Delivered to your letterbox within 7-14 working days</td>
-                                        <td>£0.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Standard</td>
-                                        <td>Delivered to your letterbox within 5 working days</td>
-                                        <td>£4.95</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Speedy</td>
-                                        <td>Delivered to your letterbox within 3 working days</td>
-                                        <td>£8.95</td>
-                                    </tr>                                                
+                                <table class="table table-striped table-bordered">   
+                                	@if(!empty($shipping))	
+                              	                                   
+	                                    <tr>
+	                                        <th>Name</th>
+	                                        <th>Description</th>
+	                                        <th>Price</th>
+	                                    </tr>
+	                                  	<?php foreach($shipping[1] as $id => $ship){ ?>  
+	                                     	
+	                                     	<tr id="ship" data-ship="<?php echo $id; ?>">
+	                                     		<td><?php echo $ship['name']; ?></td>
+	                                     		<td><?php echo $ship['description']; ?></td>
+	                                     		<td><?php echo $ship['price']; ?></td>
+	                                     	</tr>
+
+	                                    <?php } ?>
+                                    @endif                                               
                                 </table>
                                 
                             </div>
@@ -208,8 +215,8 @@
                             </div>
 
                             <ul class="price-list">
-                                <li>Subtotal: <strong>£247.98</strong></li>
-                                <li class="important">Total: <strong>£247.98</strong></li>
+                                <li>Subtotal: <strong>CHF <?php echo ( !empty($cartTotalPrice) ? $cartTotalPrice : 0 ); ?></strong></li>
+                                <li class="important">Total: <strong>CHF <?php echo ( !empty($subtotal) ? $subtotal : 0 ); ?></strong></li>
                             </ul>
                         </div>
                     </div>
@@ -223,18 +230,18 @@
                                 <h5>Enter your coupon here to redeem</h5>
                             </div>
 
-                            <form enctype="multipart/form-data" action="#" method="post" onsubmit="return false;">
+                             {{ Form::open(array('url' => 'cart/applyCouponCode', 'method' => 'post' , 'class' => 'couponCodeForm' )) }}
                                 
                                 <label for="coupon_code">Coupon code</label>
                                 <div class="input-append">
+                                
                                     <input id="coupon_code" value="" type="text" name="coupon" />
-
-                                    <button type="submit" class="btn" value="Apply" name="set_coupon_code" >
-                                        <i class="icon-ok"></i>
-                                    </button>
+                                    
+                                    <button id="applyCouponCode" type="submit" class="btn" value="Apply" name="set_coupon_code" ><i class="icon-ok"></i></button>
                                 </div>
 
-                            </form>				
+                            {{ Form::close() }}	
+                            				
                         </div>
                     </div>
                     <!-- End class="coupon" -->

@@ -66,8 +66,7 @@ $(document).ready(function() {
 	
 	/*
 	 * Common functions
-	*/
-	
+	*/	
 		 
 	$('body').on('click','.deleteAction',function(){
 		
@@ -80,5 +79,39 @@ $(document).ready(function() {
 	    }
 	    return false;	
 	});
+	
+	/*
+	 * Cart functions
+	*/
+	
+	var base_url = location.protocol + "//" + location.host+"/";
+	
+	// Add to cart
+	$('body').on('click','.addToCart', function(event){		
+		// Prevent form submit
+		event.preventDefault();		
+		// Serialize form data
+		var data = $(".productToCart").serialize();			   
+		// Post the infos
+		$.ajax({
+			 type     : 'post',
+			 dataType : "json",
+			 data     : { data : data },
+			 success  : function(result) 
+			 {			 	
+				// The inscription is deleted, we refresh the inscription div with new infos
+				if(result.result == true){ 				
+					// When product added to cart show modal
+					$('#added').modal('show');				 	 	               
+	            }
+	            else
+	            {  
+	                alert('problem');  // Something went wrong alert the debbuging infos
+	            }				
+			 },
+			 url: base_url + 'cart/addToCart'
+		});		
+	});	
+	
   
 });	

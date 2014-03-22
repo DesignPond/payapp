@@ -18,9 +18,21 @@ class CartController extends \BaseController {
 	 */
 	public function index()
 	{
-		$cart = $this->cart->get();
+		$cart     = $this->cart->get();		
+		$subtotal = $this->cart->subtotal();
 		
-		return View::make('cart/index')->with( array( 'cart' => $cart ) );
+		$coupons  = array( 'ISVALID' => '0.1' , '2014' => '0.2' );
+		
+		$shipping = array(
+			1 => array( 
+					array('name' => 'PostPac Priority' ,'description' => 'Delivered to your letterbox within 1 working day' , 'price' => 'CHF 9' )
+				),
+			2 => array( 
+					array('name' => 'MiniPac International Priority' ,'description' => 'Delivered to your letterbox within 10 working day' , 'price' => 'CHF 50' )
+			    )
+		);
+		
+		return View::make('cart/index')->with( array( 'cart' => $cart , 'subtotal' => $subtotal , 'coupons' => $coupons , 'shipping' => $shipping ) );
 	}
 
 	/**
@@ -39,12 +51,44 @@ class CartController extends \BaseController {
 	 * @return Response
 	 */
 	public function store()
-	{
-	
-		$this->cart->update( Input::all() );
-		
+	{	
+		return $this->cart->update( Input::all() );		
 	}
 
+	/**
+	 * Add to cart
+	 *
+	 * @return Response
+	 */
+	public function addToCart()
+	{
+		$string  = $_POST['data'];		
+		$product = $this->cart->prepProduct($string);
+		
+		if( $this->cart->add( $product ) )
+		{
+			echo json_encode(array( 'result' => true ));
+		}		
+	}
+
+	/**
+	 * Apply coupon code
+	 *
+	 * @return Response
+	 */
+	public function applyCouponCode()
+	{
+		$coupon = Input::get('coupon');
+		
+		if( $this->cart->couponIsValid($coupon) )
+		{					
+			return Redirect::to('cart')->with(array( 'status' => 'success', 'message' => 'Coupon applied!' ));
+		}
+		
+		return Redirect::to('cart')->with(array( 'status' => 'error' ,'message' => 'Coupon not valid' ));
+	}	
+
+	
 	/**
 	 * Display the specified resource.
 	 *
