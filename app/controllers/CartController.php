@@ -115,11 +115,6 @@ class CartController extends \BaseController {
 	 */
 	public function update()
 	{
-		// test if is checkout
-		if( Input::get('checkout') )
-		{
-			return Redirect::to('cart/checkout');
-		}
 		
 		// else update the cart
 		$this->cart->update( Input::all() );

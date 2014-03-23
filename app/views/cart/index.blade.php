@@ -117,9 +117,9 @@
                                         <i class="icon-undo"></i> &nbsp; Update cart
                                     </button>
 
-                                    <button type="submit" name="checkout" value="1" class="btn btn-primary btn-small mm20">
+                                    <a href="<?php echo url('checkout'); ?>" class="btn btn-primary btn-small mm20">
                                         Proceed to checkout &nbsp; <i class="icon-chevron-right"></i>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         {{ Form::close() }}		
@@ -193,8 +193,7 @@
 
                         <div class="modal-footer">
                             <div class="pull-right">
-                                <a href="checkout.html" class="btn btn-primary btn-small">
-                                    Proceed to checkout &nbsp; <i class="icon-chevron-right"></i>
+                                <a href="<?php echo url('checkout'); ?>" class="btn btn-primary btn-small"> Proceed to checkout &nbsp; <i class="icon-chevron-right"></i>
                                 </a>
                             </div>
                         </div>

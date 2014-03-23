@@ -29,6 +29,8 @@ Route::get('/', array( 'uses' => 'ShopController@index' ));
 // Products
 Route::resource('products', 'ProductController');
 
+// Checkout
+Route::resource('checkout', 'CheckoutController');
 
 // Cart
 Route::get('cart/checkout',array( 'uses' => 'CartController@checkout' ));
