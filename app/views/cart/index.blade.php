@@ -87,8 +87,7 @@
 															
 															echo '<strong>Applied coupon '.$values[$coupon].' </strong> <br/>';
 															echo 'value ';
-															echo $coupon * 100 .'%';  
-															
+															echo $coupon * 100 .'%';  															
 														} 
 														
 													?>
@@ -169,7 +168,7 @@
 
                         <div class="modal-body">
                             <div id="shipping_options">
-                                <table class="table table-striped table-bordered">   
+                                <table id="shipping_table" class="table table-striped table-bordered">   
                                 	@if(!empty($shipping))	
                               	                                   
 	                                    <tr>
@@ -177,9 +176,9 @@
 	                                        <th>Description</th>
 	                                        <th>Price</th>
 	                                    </tr>
-	                                  	<?php foreach($shipping[1] as $id => $ship){ ?>  
+	                                  	<?php foreach($shipping as $id => $ship){ ?>  
 	                                     	
-	                                     	<tr id="ship" data-ship="<?php echo $id; ?>">
+	                                     	<tr style="display:none;" class="ship" data-ship="<?php echo $id; ?>">
 	                                     		<td><?php echo $ship['name']; ?></td>
 	                                     		<td><?php echo $ship['description']; ?></td>
 	                                     		<td><?php echo $ship['price']; ?></td>

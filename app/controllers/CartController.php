@@ -24,12 +24,8 @@ class CartController extends \BaseController {
 		$coupons  = array( 'ISVALID' => '0.1' , '2014' => '0.2' );
 		
 		$shipping = array(
-			1 => array( 
-					array('name' => 'PostPac Priority' ,'description' => 'Delivered to your letterbox within 1 working day' , 'price' => 'CHF 9' )
-				),
-			2 => array( 
-					array('name' => 'MiniPac International Priority' ,'description' => 'Delivered to your letterbox within 10 working day' , 'price' => 'CHF 50' )
-			    )
+			1 => array( 'name' => 'PostPac Priority' ,'description' => 'Delivered to your letterbox within 1 working day' , 'price' => 'CHF 9' ),
+			2 => array( 'name' => 'MiniPac International Priority' ,'description' => 'Delivered to your letterbox within 10 working day' , 'price' => 'CHF 50' )
 		);
 		
 		return View::make('cart/index')->with( array( 'cart' => $cart , 'subtotal' => $subtotal , 'coupons' => $coupons , 'shipping' => $shipping ) );

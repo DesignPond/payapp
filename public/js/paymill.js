@@ -113,5 +113,33 @@ $(document).ready(function() {
 		});		
 	});	
 	
+	
+	function shippingCost(name){
+		
+		var shipping = name.find(":selected").val();
+		
+		var table    = $('#shipping_table tr.ship');
+		
+		table.hide();
+		
+		table.each(function() {
+		
+			var id = $( this ).data( "ship" );
+			
+			if( id == shipping )
+			{
+				$( this ).show();
+			}
+		});		
+	}
+	
+	shippingCost( $(this) );
+	
+	$('body').on('change','#country', function(event){	
+	
+		shippingCost( $(this) );
+		
+	});	
+	
   
 });	
