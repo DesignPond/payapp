@@ -181,11 +181,11 @@
 			           		<div class="span12">    
 			           					
 								@if($errors->has())				
-									<ul>
+									<div class="alert alert-dismissable alert-danger">
 									    @foreach($errors->all() as $message)						
-									    <li>{{ $message }}</li>						
+									   		{{ $message }}<br/>		
 									    @endforeach
-									</ul>						
+									</div>						
 								@endif
 								
 								@if(Session::has('status'))

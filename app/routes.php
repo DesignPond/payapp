@@ -13,6 +13,14 @@
 
 //Cart::add('234', 'Other product 4534', 1, 120.00, array('size' => 'M'));
 
+Route::filter('cartNotEmpty', function()
+{
+    if ( Cart::count() == 0)
+    {
+        return Redirect::to('/');
+    }
+});
+
 
 Route::get('hello', function()
 {
@@ -25,11 +33,15 @@ View::share('cartTotalPrice',  Cart::total() );
 
 Route::get('/', array( 'uses' => 'ShopController@index' ));
 
+// Login
+Route::resource('login', 'LoginController');
 
 // Products
 Route::resource('products', 'ProductController');
 
 // Checkout
+Route::get('checkout/billing', array( 'uses' => 'CheckoutController@billing' ));
+Route::get('checkout/shipping', array( 'uses' => 'CheckoutController@shipping' ));
 Route::resource('checkout', 'CheckoutController');
 
 // Cart

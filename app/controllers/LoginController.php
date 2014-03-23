@@ -1,12 +1,9 @@
 <?php
 
-class CheckoutController extends \BaseController {
+use Shop\Service\Validation\UserValidation as UserValidation;
 
-    public function __construct()
-    {
-        $this->beforeFilter('cartNotEmpty');
-    }
-    
+class LoginController extends \BaseController {
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -14,12 +11,7 @@ class CheckoutController extends \BaseController {
 	 */
 	public function index()
 	{
-		if (Auth::check())
-		{
-		   return Redirect::to('checkout/billing');
-		}
-		
-		return View::make('checkout.index');
+		//
 	}
 
 	/**
@@ -27,16 +19,9 @@ class CheckoutController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function billing()
-	{	
-		if (Auth::check())
-		{
-		   $id = Auth::user()->id;
-		   
-		   return View::make('checkout.billing')->with( array('user' => $user) );
-		}
-		
-		return View::make('checkout.billing');
+	public function create()
+	{
+		//
 	}
 
 	/**
@@ -44,9 +29,22 @@ class CheckoutController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function shipping()
+	public function store()
 	{
-		return View::make('checkout.shipping');
+		// Init validator
+		$userValidation = UserValidation::make( Input::all() );
+		
+		if ($userValidation->passes()) 
+		{
+			if (Auth::attempt(array('email' => Input::get('email') , 'password' => Input::get('password') )))
+			{
+		   		return Redirect::to('checkout');
+			}
+			
+			return Redirect::back()->with( array('status' => 'error' , 'message' => 'Login failed') )->withInput( Input::all() ); 
+		}
+		
+		return Redirect::back()->withErrors( $userValidation->errors() )->withInput( Input::all() ); 
 	}
 
 	/**

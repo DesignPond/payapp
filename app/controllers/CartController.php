@@ -28,7 +28,7 @@ class CartController extends \BaseController {
 			2 => array( 'name' => 'MiniPac International Priority' ,'description' => 'Delivered to your letterbox within 10 working day' , 'price' => 'CHF 50' )
 		);
 		
-		return View::make('cart/index')->with( array( 'cart' => $cart , 'subtotal' => $subtotal , 'coupons' => $coupons , 'shipping' => $shipping ) );
+		return View::make('cart.index')->with( array( 'cart' => $cart , 'subtotal' => $subtotal , 'coupons' => $coupons , 'shipping' => $shipping ) );
 	}
 
 	/**

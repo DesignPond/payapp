@@ -18,8 +18,8 @@
                         <!-- Login -->
 						<div class="login">
 						    <div class="box">
-						        <form onsubmit="return false;" enctype="multipart/form-data" action="#" method="post">
-						
+								{{ Form::open(array('url' => 'login', 'method' => 'post')) }}   
+								
 						            <div class="hgroup title">
 						                <h3>Customer login</h3>
 						                <h5>Please login using your existing account</h5>
@@ -57,7 +57,7 @@
 						                    </a>
 						                </div>
 						            </div>		           
-						        </form>		
+						       {{ Form::close() }}		
 						    </div>
 						</div>
 						<!-- End class="login" -->                           
