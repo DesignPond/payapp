@@ -1,10 +1,16 @@
 <?php
 
+use Shop\Repo\User\UserInterface;
+
 class CheckoutController extends \BaseController {
 
-    public function __construct()
+	protected $user;
+
+    public function __construct( UserInterface $user )
     {
         $this->beforeFilter('cartNotEmpty');
+        
+        $this->user = $user;
     }
     
 	/**
@@ -31,7 +37,9 @@ class CheckoutController extends \BaseController {
 	{	
 		if (Auth::check())
 		{
-		   $id = Auth::user()->id;
+		   $id   = Auth::user()->id;
+		   
+		   $user = $this->user->find($id);
 		   
 		   return View::make('checkout.billing')->with( array('user' => $user) );
 		}

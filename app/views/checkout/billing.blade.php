@@ -18,6 +18,12 @@
                     <div class="row">
                         <div class="span9">
                             <div class="box">
+                            
+<?php
+echo '<pre>';
+print_r($user);
+echo '</pre>';
+?>
                                 
                                 <!-- Checkout progress -->
                                 <div id="checkout-progress">
