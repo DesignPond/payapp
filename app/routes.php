@@ -55,16 +55,13 @@ Route::resource('cart', 'CartController');
 // Offers
 Route::resource('offers', 'OfferController');
 
-
 // Subscription
 Route::resource('subscriptions', 'SubscriptionController');
-
 
 // Transactions
 Route::post('paymill/transaction', 'PaymillController@transaction');
 Route::post('paymill/transactionClient', 'PaymillController@transactionClient');
 Route::resource('paymill', 'PaymillController');
-
 
 // Clients
 Route::get('clients/{client}/transaction', 'ClientController@transaction');

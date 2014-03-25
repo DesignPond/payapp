@@ -24,17 +24,17 @@
                                 <!-- Checkout progress -->
                                 <div id="checkout-progress">
                                     <ul class="nav nav-tabs">
-                                        <li class="active">
+                                        <li>
                                             <a href="<?php echo url('checkout/billing'); ?>">
                                                 <i class="icon-map-marker icon-large"></i>
                                                 <span>Billing address</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <div>
+                                        <li class="active">
+                                            <a href="<?php echo url('checkout/shipping'); ?>">
                                                 <i class="icon-envelope icon-large"></i>
                                                 <span>Shipping address</span>
-                                            </div>
+                                            </a>
                                         </li>
                                         <li>
                                             <div>
@@ -60,9 +60,19 @@
                                 
                                 <!-- Checkout content -->
                                 <div id="checkout-content">
+                                
                                     <div class="box-header">
-                                        <h3>Billing address</h3>
-                                        <h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>
+                                        <div class="row-fluid">
+                                            <div class="span8">
+                                                <h3>Shipping address</h3>
+                                                <h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>
+                                            </div>
+                                            <div class="span4">
+                                                <button class="btn btn-secondary btn-mini pull-right" onclick="return false;">
+                                                    <i class="icon-copy"></i> &nbsp; Copy billing address
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="box-content">
@@ -144,11 +154,11 @@
 
                                     <div class="box-footer">
                                         <div class="pull-left">
-                                            <a href="<?php echo url('cart'); ?>" class="btn btn-small"><i class="icon-chevron-left"></i> &nbsp; Back to cart</a>
+                                            <a href="<?php echo url('checkout/billing'); ?>" class="btn btn-small"><i class="icon-chevron-left"></i> &nbsp; Billing address</a>
                                         </div>
 
                                         <div class="pull-right">                                                    
-                                            <a href="<?php echo url('checkout/shipping'); ?>" class="btn btn-primary">Shipping address &nbsp; <i class="icon-chevron-right"></i></a>
+                                            <a href="<?php echo url('checkout/method'); ?>" class="btn btn-primary">Shipping method &nbsp; <i class="icon-chevron-right"></i></a>
                                         </div>
                                     </div>					
                                 </div>	

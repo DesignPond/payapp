@@ -11,6 +11,8 @@ class CheckoutController extends \BaseController {
         $this->beforeFilter('cartNotEmpty');
         
         $this->user = $user;
+        
+        View::share('countries',  \Countries::all()->lists('country_name','id') );
     }
     
 	/**
@@ -54,6 +56,15 @@ class CheckoutController extends \BaseController {
 	 */
 	public function shipping()
 	{
+		if (Auth::check())
+		{
+		   $id   = Auth::user()->id;
+		   
+		   $user = $this->user->find($id);
+		   
+		   return View::make('checkout.shipping')->with( array('user' => $user) );
+		}
+		
 		return View::make('checkout.shipping');
 	}
 
