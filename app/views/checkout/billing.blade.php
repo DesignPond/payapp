@@ -15,7 +15,7 @@
         <section class="checkout">
 
             <div class="container">
-                <form enctype="multipart/form-data" action="shipping.html" method="post">
+                {{ Form::open(array('url' => 'checkout/shipping', 'method' => 'post')) }} 
                    
                     <div class="row">
                         <div class="span9">
@@ -24,39 +24,16 @@
                                 <!-- Checkout progress -->
                                 <div id="checkout-progress">
                                     <ul class="nav nav-tabs">
-                                        <li class="active">
-                                            <a href="<?php echo url('checkout/billing'); ?>">
-                                                <i class="icon-map-marker icon-large"></i>
-                                                <span>Billing address</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <div>
-                                                <i class="icon-envelope icon-large"></i>
-                                                <span>Shipping address</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div>
-                                                <i class="icon-truck icon-large"></i>
-                                                <span>Shipping method</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div>
-                                                <i class="icon-money icon-large"></i>
-                                                <span>Payment method</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div>
-                                                <i class="icon-search icon-large"></i>
-                                                <span>Order review</span>
-                                            </div>
-                                        </li>
+                                        <li class="active"><a href="<?php echo url('checkout/billing'); ?>"><i class="icon-map-marker icon-large"></i><span>Billing address</span></a></li>
+                                        <li><div><i class="icon-envelope icon-large"></i><span>Shipping address</span></div></li>
+                                        <li><div><i class="icon-truck icon-large"></i><span>Shipping method</span></div></li>
+                                        <li><div><i class="icon-money icon-large"></i><span>Payment method</span></div></li>
+                                        <li><div><i class="icon-search icon-large"></i><span>Order review</span></div></li>
                                     </ul>					
                                 </div>
                                 <!-- End id="checkout-progress" -->
+                                
+                                 <?php if (Session::has('user.billing')) { $billing = Session::get('user.billing'); }  ?>
                                 
                                 <!-- Checkout content -->
                                 <div id="checkout-content">
@@ -71,25 +48,25 @@
                                                 <div class="control-group">
                                                     <label for="first_name" class="control-label">First name</label>
                                                     <div class="controls">
-                                                        <input class="span12" type="text" value="<?php echo $user->first_name; ?>" name="first_name" id="first_name" />
+                                                        <input class="span12" type="text" value="<?php echo $custom->ifExist($billing[0]['first_name']); ?>" name="first_name" id="first_name" />
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label for="last_name" class="control-label">Last name</label>
                                                     <div class="controls">
-                                                        <input class="span12" type="text" value="<?php echo $user->last_name; ?>" name="last_name" id="last_name" />
+                                                        <input class="span12" type="text" value="<?php echo $custom->ifExist($billing[0]['last_name']); ?>" name="last_name" id="last_name" />
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label for="email" class="control-label">Email</label>
                                                     <div class="controls">
-                                                        <input class="span12" type="text" value="<?php echo $user->email; ?>" name="email" id="email" />
+                                                        <input class="span12" type="text" value="<?php echo $custom->ifExist($billing[0]['email']); ?>" name="email" id="email" />
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label for="phone" class="control-label">Phone</label>
                                                     <div class="controls">
-                                                        <input class="span12" type="text" value="<?php echo $user->address->phone; ?>" name="phone" id="phone" />
+                                                        <input class="span12" type="text" value="<?php echo $custom->ifExist($billing[0]['phone']); ?>" name="phone" id="phone" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,13 +75,13 @@
                                                 <div class="control-group">
                                                     <label for="company" class="control-label">Company</label>
                                                     <div class="controls">
-                                                        <input class="span12" type="text" value="<?php echo $user->address->company; ?>" name="company" id="company" />
+                                                        <input class="span12" type="text" value="<?php echo $custom->ifExist($billing[0]['company']); ?>" name="company" id="company" />
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label for="street_address" class="control-label">Street address</label>
                                                     <div class="controls">
-                                                        <input class="span12" type="text" value="<?php echo $user->address->address; ?>" name="street_address" id="street_address" />
+                                                        <input class="span12" type="text" value="<?php echo $custom->ifExist($billing[0]['street_address']); ?>" name="street_address" id="street_address" />
                                                     </div>
                                                 </div>
 
@@ -113,7 +90,7 @@
                                                         <div class="control-group">
                                                             <label for="city" class="control-label">Town / City</label>
                                                             <div class="controls">
-                                                                <input class="span12" type="text" value="<?php echo $user->address->city; ?>" name="city" id="city" />
+                                                                <input class="span12" type="text" value="<?php echo $custom->ifExist($billing[0]['city']); ?>" name="city" id="city" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -121,7 +98,7 @@
                                                         <div class="control-group">
                                                             <label for="zip" class="control-label">Zip / Postcode</label>
                                                             <div class="controls">
-                                                                <input class="span12" type="text" value="<?php echo $user->address->zip; ?>" name="zip" id="zip" />
+                                                                <input class="span12" type="text" value="<?php echo $custom->ifExist($billing[0]['zip']); ?>" name="zip" id="zip" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -132,7 +109,7 @@
                                                         <div class="control-group">
                                                             <label for="country" class="control-label">Country</label>
                                                             <div class="controls">
-                                                                {{ Form::select('country', $countries , $user->address->country , array('class' => 'span12') ) }}
+                                                                {{ Form::select('country', $countries , $custom->ifExist($billing[0]['country']) , array('class' => 'span12') ) }}
                                                             </div>
                                                         </div>
                                                     </div> 
@@ -148,7 +125,7 @@
                                         </div>
 
                                         <div class="pull-right">                                                    
-                                            <a href="<?php echo url('checkout/shipping'); ?>" class="btn btn-primary">Shipping address &nbsp; <i class="icon-chevron-right"></i></a>
+                                            <button type="submit" class="btn btn-primary">Shipping address &nbsp; <i class="icon-chevron-right"></i></button>
                                         </div>
                                     </div>					
                                 </div>	
@@ -166,11 +143,11 @@
 							            <h3>Order total</h3>
 							            <h5>Shipping costs and taxes will be calculated during checkout</h5>
 							        </div>
-							        <ul class="price-list">
-							            <li>Subtotal: <strong>£247.98</strong></li>
-							            <li>Shipping: <strong>£0.00</strong></li>
-							            <li>Tax: <strong>£0.00</strong></li>
-							            <li class="important">Total: <strong>£247.98</strong></li>
+									<ul class="price-list">
+							            <li>Subtotal: <strong>CHF <?php echo ( !empty($cartTotalPrice) ? $cartTotalPrice : 0 ); ?></strong></li>
+                                
+							            <li>Shipping: <strong>CHF 0.00</strong></li>
+							            <li class="important">Total: <strong>CHF <?php echo ( !empty($subtotal) ? $subtotal : 0 ); ?></strong></li>
 							        </ul>
 							    </div>
 							    <!-- End id="checkout-totals" -->
@@ -178,7 +155,7 @@
 						</div>
  
                     </div>
-                </form>
+                 {{ Form::close() }}	
             </div>	
         </section>
         <!-- End class="checkout" -->

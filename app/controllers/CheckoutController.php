@@ -2,17 +2,25 @@
 
 use Shop\Repo\User\UserInterface;
 
+use Shop\Repo\Cart\CartInterface;
+
 class CheckoutController extends \BaseController {
 
 	protected $user;
+	
+	protected $cart;
 
-    public function __construct( UserInterface $user )
+    public function __construct( UserInterface $user , CartInterface $cart )
     {
         $this->beforeFilter('cartNotEmpty');
         
         $this->user = $user;
         
+		$this->cart = $cart;
+        
         View::share('countries',  \Countries::all()->lists('country_name','id') );
+		
+		View::share('subtotal', $this->cart ->subtotal() );
     }
     
 	/**
@@ -43,7 +51,7 @@ class CheckoutController extends \BaseController {
 		   
 		   $user = $this->user->find($id);
 		   
-		   return View::make('checkout.billing')->with( array('user' => $user) );
+		   return View::make('checkout.user.billing')->with( array('user' => $user) );
 		}
 		
 		return View::make('checkout.billing');
@@ -62,12 +70,71 @@ class CheckoutController extends \BaseController {
 		   
 		   $user = $this->user->find($id);
 		   
-		   return View::make('checkout.shipping')->with( array('user' => $user) );
+		   return View::make('checkout.user.shipping')->with( array('user' => $user) );
+		}
+		
+		if(!empty($_POST) && !Session::has('user.billing') ){
+			// put client billing info in session
+			Session::push('user.billing', Input::all() );			
 		}
 		
 		return View::make('checkout.shipping');
 	}
+	
+	public function copyBilling(){
+	
+		if( Session::has('user.billing') )
+		{
+			// put client billing info as shipping infos in session
+			$billing = Session::get('user.billing');
+			Session::push('user.shipping', $billing[0] );		
+		}
+		
+		return Redirect::to('checkout/shipping');
+	}
+	
+	public function methodShipping(){
+	
+		$shipping = array(
+			1 => array( 'name' => 'PostPac Priority' ,'description' => 'Delivered to your letterbox within 1 working day' , 'price' => 'CHF 9' ),
+			2 => array( 'name' => 'MiniPac International Priority' ,'description' => 'Delivered to your letterbox within 10 working day' , 'price' => 'CHF 50' )
+		);
+	
+		if(!empty($_POST)){
+		
+			Session::forget('user.shipping');
+			// put client billing info in session
+			Session::push('user.shipping', Input::all() );			
+		}
+		
+		return View::make('checkout.method')->with( array('shipping' => $shipping) );
+	}
+	
+	public function methodPayment(){
+		
+		$shippingOption = Input::get('shipping_option');
+		
+		if(!empty($shippingOption))
+		{
+			
+			Session::put('shipping_option', $shippingOption );			
+		}
+		
+		return View::make('checkout.payement');
+	}	
 
+	public function reviewOrder(){
+						
+		$payementOption = Input::get('payement_option');
+		
+		if(!empty($payementOption))
+		{
+			
+			Session::put('payement_option', $payementOption );			
+		}
+		
+		return View::make('checkout.review');
+	}	
 	/**
 	 * Display the specified resource.
 	 *

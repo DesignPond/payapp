@@ -9,6 +9,8 @@ class CartController extends \BaseController {
 	public function __construct( CartInterface $cart ){
 		
 		$this->cart    = $cart;
+		
+		View::share('subtotal', $this->cart ->subtotal() );
 	}
 
 	/**

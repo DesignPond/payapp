@@ -42,6 +42,15 @@ Route::resource('products', 'ProductController');
 // Checkout
 Route::get('checkout/billing', array( 'uses' => 'CheckoutController@billing' ));
 Route::get('checkout/shipping', array( 'uses' => 'CheckoutController@shipping' ));
+Route::get('checkout/copyBilling', array( 'uses' => 'CheckoutController@copyBilling' ));
+Route::get('checkout/methodShipping', array( 'uses' => 'CheckoutController@methodShipping' ));
+Route::get('checkout/methodPayment', array( 'uses' => 'CheckoutController@methodPayment' ));
+Route::get('checkout/reviewOrder', array( 'uses' => 'CheckoutController@reviewOrder' ));
+
+Route::post('checkout/reviewOrder', array( 'uses' => 'CheckoutController@reviewOrder' ));
+Route::post('checkout/methodPayment', array( 'uses' => 'CheckoutController@methodPayment' ));
+Route::post('checkout/methodShipping', array( 'uses' => 'CheckoutController@methodShipping' ));
+Route::post('checkout/shipping', array( 'uses' => 'CheckoutController@shipping' ));
 Route::resource('checkout', 'CheckoutController');
 
 // Cart

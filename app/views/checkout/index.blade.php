@@ -94,7 +94,7 @@
 
                                 <div class="buttons">
                                     <div class="pull-left">
-                                        <a class="btn btn-small" href="checkout.html">
+                                        <a class="btn btn-small" href="<?php echo url('checkout/billing'); ?>">
                                             Checkout as guest &nbsp; <i class="icon-chevron-right"></i>
                                         </a>
                                     </div>
