@@ -111,21 +111,7 @@
 
                         <div class="span3">                                    
                             <div class="box">
-                            
-							    <!-- Order totals -->
-							    <div id="checkout-totals">
-							        <div class="hgroup title">
-							            <h3>Order total</h3>
-							            <h5>Shipping costs and taxes will be calculated during checkout</h5>
-							        </div>
-							        <ul class="price-list">
-							            <li>Subtotal: <strong>CHF <?php echo ( !empty($cartTotalPrice) ? $cartTotalPrice : 0 ); ?></strong></li>
-                                
-							            <li>Shipping: <strong>CHF 0.00</strong></li>
-							            <li class="important">Total: <strong>CHF <?php echo ( !empty($subtotal) ? $subtotal : 0 ); ?></strong></li>
-							        </ul>
-							    </div>
-							    <!-- End id="checkout-totals" -->
+                            	@include('checkout.includes.total')	
 							</div>                               
 						</div>
  

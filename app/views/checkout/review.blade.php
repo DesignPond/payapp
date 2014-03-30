@@ -14,8 +14,7 @@
         <!-- Checkout / Billing Address -->
         <section class="checkout">
 
-
-            <div class="container">
+           <div class="container">
                 <form enctype="multipart/form-data" action="#" method="post">
                    
                     <div class="row">
@@ -33,7 +32,6 @@
                                     </ul>					
                                 </div>
                                 <!-- End id="checkout-progress" -->
-                                
                                 <!-- Checkout content -->
                                 <div id="checkout-content">
                                     <div class="box-header">                                                                                                    
@@ -43,103 +41,65 @@
                                                                         
                                     <div class="box-content">
                                         <div class="cart-items">
-                                            <table class="styled-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="col_product text-left">Product</th>
-                                                        <th class="col_remove text-right">&nbsp;</th>
-                                                        <th class="col_qty text-right">Qty</th>
-                                                        <th class="col_single text-right">Single</th>
-                                                        <th class="col_discount text-right">Discount</th>
-                                                        <th class="col_total text-right">Total</th>
-                                                    </tr>
-                                                </thead>
+                                           <table class="styled-table">
+	                                         <thead>
+	                                            <tr>
+	                                                <th class="col_product text-left">Product</th>
+	                                                <th class="col_remove text-right">&nbsp;</th>
+	                                                <th class="col_qty text-right">Qty</th>
+	                                                <th class="col_single text-right">Single</th>
+	                                                <th class="col_discount text-right">Discount</th>
+	                                                <th class="col_total text-right">Total</th>
+	                                            </tr>
+	                                         </thead>
+	
+	                                         <tbody>	
+	                                        								
+	                                            @if( !$cart->isEmpty() )
+		                                            @foreach($cart as $item)
+		                                            
+		                                            <tr>
+		                                                <td data-title="Product" class="col_product text-left">
+		                                                
+		                                                    <div class="image visible-desktop">
+		                                                        <a href="product.html"><img src="img/thumbnails/db_file_img_17_60xauto.jpg" alt="<?php echo $item->name; ?>"></a>
+		                                                    </div>
+		                                                    
+		                                                    <h5><a href="product.html"><?php echo $item->name; ?></a></h5>                                                    
+	
+															@if( !$item->options->isEmpty() )
+															<?php $items = $item->options->toArray(); ?>
+		                                                    <ul class="options">
+		                                                    	@foreach( $items as $type => $option )
+		                                                        <li><?php echo $type; ?> : <?php echo $option; ?></li>
+		                                                        @endforeach
+		                                                    </ul>
+		                                                    @endif
+		                                                    
+		                                                </td>
+		                                                <td data-title="Remove" class="col_remove text-right">
+		                                                	<a href="<?php echo url('cart/delete/'.$item->rowid); ?>"><i class="icon-trash icon-large"></i></a>
+		                                                </td>	
+		                                                <td data-title="Qty" class="col_qty text-right">	                                                	
+		                                                	<input type="hidden" name="rowid[]" value="<?php echo $item->rowid; ?>" />
+		                                                	<input type="text" name="item_quantity[]" value="<?php echo $item->qty; ?>" />                                           	
+		                                                </td>
+		                                                <td data-title="Single" class="col_single text-right"><span class="single-price">CHF <?php echo $item->price; ?></span></td>	
+		                                                <td data-title="Discount" class="col_discount text-right"><span class="discount">CHF 0.00</span></td>	
+		                                                <td data-title="Total" class="col_total text-right"><span class="total-price">CHF <?php echo $item->subtotal; ?></span></td>
+		                                            </tr>
+		                                            
+		                                            @endforeach
+	                                            @endif
 
-                                                <tbody>									
-                                                    <tr>
-                                                        <td class="col_product text-left">
-                                                            <div class="image visible-desktop">
-                                                                <a href="product.html">
-                                                                    <img src="img/thumbnails/db_file_img_230_60xauto.jpg" alt="Helen Romper">
-                                                                </a>
-                                                            </div>
-
-                                                            <h5>
-                                                                <a href="product.html">Helen Romper</a>
-                                                            </h5>
-
-                                                        </td>
-
-                                                        <td class="col_remove text-right">
-                                                            <a href="#">
-                                                                <i class="icon-trash icon-large"></i>
-                                                            </a>
-                                                        </td>
-
-                                                        <td class="col_qty text-right">
-                                                            <span class="quantity">2</span>
-                                                        </td>
-
-                                                        <td class="col_single text-right">
-                                                            <span class="single-price">£43.99</span>
-                                                        </td>
-
-                                                        <td class="col_discount text-right">
-                                                            <span class="discount">£0.00</span>
-                                                        </td>
-
-                                                        <td class="col_total text-right">
-                                                            <span class="total-price">£87.98</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col_product text-left">
-                                                            <div class="image visible-desktop">
-                                                                <a href="product.html">
-                                                                    <img src="img/thumbnails/db_file_img_17_60xauto.jpg" alt="1300 in Grey">
-                                                                </a>
-                                                            </div>
-
-                                                            <h5>
-                                                                <a href="product.html">1300 in Grey</a>
-                                                            </h5>
-
-                                                            <ul class="options">
-                                                                <li>Size: UK 9</li>
-                                                                <li>Color: Gray</li>
-                                                            </ul>
-                                                        </td>
-
-                                                        <td class="col_remove text-right">
-                                                            <a href="#">
-                                                                <i class="icon-trash icon-large"></i>
-                                                            </a>
-                                                        </td>
-
-                                                        <td class="col_qty text-right">                                                                    
-                                                            <span class="quantity">1</span>
-                                                        </td>
-
-                                                        <td class="col_single text-right">
-                                                            <span class="single-price">£160.00</span>
-                                                        </td>
-
-                                                        <td class="col_discount text-right">
-                                                            <span class="discount">£0.00</span>
-                                                        </td>
-
-                                                        <td class="col_total text-right">
-                                                            <span class="total-price">£160.00</span>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+	                                          </tbody>
+	                                       </table>
                                         </div>
                                     </div>
  
                                     <div class="box-footer">
                                         <div class="pull-left">
-                                            <a href="payment-method.html" class="btn btn-small">
+                                            <a href="<?php echo url('checkout/methodShipping'); ?>" class="btn btn-small">
                                                 <i class="icon-chevron-left"></i> &nbsp; Payment method
                                             </a>
                                         </div>
@@ -158,20 +118,7 @@
 
                         <div class="span3">                                    
                             <div class="box">
-							    <!-- Order totals -->
-							    <div id="checkout-totals">
-							        <div class="hgroup title">
-							            <h3>Order total</h3>
-							            <h5>Shipping costs and taxes will be calculated during checkout</h5>
-							        </div>
-							        <ul class="price-list">
-							            <li>Subtotal: <strong>£247.98</strong></li>
-							            <li>Shipping: <strong>£0.00</strong></li>
-							            <li>Tax: <strong>£0.00</strong></li>
-							            <li class="important">Total: <strong>£247.98</strong></li>
-							        </ul>
-							    </div>
-							    <!-- End id="checkout-totals" -->
+                            	@include('checkout.includes.total')							    
 							</div>                                
 						</div>
                     </div>

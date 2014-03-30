@@ -21,13 +21,6 @@ Route::filter('cartNotEmpty', function()
     }
 });
 
-
-Route::get('hello', function()
-{
-	return Cart::content();
-});
-
-
 View::share('cartTotalCount',  Cart::count() );
 View::share('cartTotalPrice',  Cart::total() );
 

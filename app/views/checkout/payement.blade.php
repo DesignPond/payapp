@@ -74,20 +74,7 @@
 
                         <div class="span3">                                    
                             <div class="box">
-							    <!-- Order totals -->
-							    <div id="checkout-totals">
-							        <div class="hgroup title">
-							            <h3>Order total</h3>
-							            <h5>Shipping costs and taxes will be calculated during checkout</h5>
-							        </div>
-							        <ul class="price-list">
-							            <li>Subtotal: <strong>£247.98</strong></li>
-							            <li>Shipping: <strong>£0.00</strong></li>
-							            <li>Tax: <strong>£0.00</strong></li>
-							            <li class="important">Total: <strong>£247.98</strong></li>
-							        </ul>
-							    </div>
-							    <!-- End id="checkout-totals" -->
+							      @include('checkout.includes.total')	
 							</div>                                
 						</div>
                     </div>

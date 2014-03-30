@@ -18,9 +18,63 @@ class CheckoutController extends \BaseController {
         
 		$this->cart = $cart;
         
+        // trick from db
         View::share('countries',  \Countries::all()->lists('country_name','id') );
 		
-		View::share('subtotal', $this->cart ->subtotal() );
+		$shipping = array(
+			1 => array( 'name' => 'PostPac Priority' ,'description' => 'Delivered to your letterbox within 1 working day' , 'price' => '9' ),
+			2 => array( 'name' => 'MiniPac International Priority' ,'description' => 'Delivered to your letterbox within 10 working day' , 'price' => '50' )
+		);
+		
+		// trick from db
+		View::share('shipping', $shipping );
+		
+		// trick from db
+		$coupons  = array( 'ISVALID' => '0.1' , '2014' => '0.2' );
+		
+		View::share('coupons', $coupons );
+		
+		
+		/* 
+		 *	Cart subtotal products * qty : $cartSubTotal
+		 *	Cart total value after coupon and delivery costs: $cartTotal
+		 *	Coupon name and value $namecoupon , $valuecoupon
+		 *  Shipping costs: $shippingPrice		 
+		*/ 
+		
+		// Total of cart
+		$cartSubTotal = \Cart::total();
+		$cartTotal    = \Cart::total();
+        
+        if(Session::has('coupon')){
+				
+			$coupon = \Session::get('coupon'); 
+			
+			if( in_array( $coupon , $coupons ) )
+			{ 	
+				$values = array_flip($coupons);
+				$value       = $coupon;
+				$valuecoupon = $coupon * 100;
+				$namecoupon  = $values[$coupon];														
+			} 
+			
+			// calculation apply coupon
+			$cartTotal = $cartTotal - ($cartTotal * $value);								
+		}
+		
+		if(Session::has('shipping_option'))
+		{
+		 	$shipping_option = \Session::get('shipping_option'); 
+        	$shippingPrice   = $shipping[$shipping_option]['price'];
+        	
+        	$cartTotal = $cartTotal + $shippingPrice;
+        }
+		
+		View::share('cartSubTotal' , $cartSubTotal );
+		View::share('cartTotal'    , $cartTotal );
+		View::share('shippingPrice', $shippingPrice );
+		View::share('namecoupon'   , $namecoupon );
+		View::share('valuecoupon'  , $valuecoupon );
     }
     
 	/**
@@ -107,7 +161,7 @@ class CheckoutController extends \BaseController {
 			Session::push('user.shipping', Input::all() );			
 		}
 		
-		return View::make('checkout.method')->with( array('shipping' => $shipping) );
+		return View::make('checkout.method');
 	}
 	
 	public function methodPayment(){
@@ -133,7 +187,11 @@ class CheckoutController extends \BaseController {
 			Session::put('payement_option', $payementOption );			
 		}
 		
-		return View::make('checkout.review');
+		$data     = Session::all();
+		$cart     = $this->cart->get();	
+		$coupons  = array( 'ISVALID' => '0.1' , '2014' => '0.2' );
+		
+		return View::make('checkout.review')->with( array('cart' => $cart , 'data' => $data) );
 	}	
 	/**
 	 * Display the specified resource.

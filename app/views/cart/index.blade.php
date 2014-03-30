@@ -77,7 +77,7 @@
                                             
                                             @if(Session::has('coupon'))
 											<tr>
-												<td><?php 
+												<td colspan="6"><?php 
 												
 														$coupon = \Session::get('coupon'); 
 														
@@ -92,11 +92,6 @@
 														
 													?>
 												</td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
 											</tr>
 											@endif
                                             

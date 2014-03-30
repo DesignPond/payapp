@@ -9,8 +9,31 @@ class CartController extends \BaseController {
 	public function __construct( CartInterface $cart ){
 		
 		$this->cart    = $cart;
+
+		// !Shipping				
+		$shipping = array(
+			1 => array( 'name' => 'PostPac Priority' ,'description' => 'Delivered to your letterbox within 1 working day' , 'price' => '9' ),
+			2 => array( 'name' => 'MiniPac International Priority' ,'description' => 'Delivered to your letterbox within 10 working day' , 'price' => '50' )
+		);
 		
-		View::share('subtotal', $this->cart ->subtotal() );
+		View::share('shipping', $shipping );
+				
+		// Total of cart
+		$cartTotal = $this->cart ->subtotal();
+		
+		if(Session::has('shipping_option'))
+		{
+		 	$shipping_option = \Session::get('shipping_option'); 
+        	$shippingPrice   = $shipping[$shipping_option]['price'];
+        	
+        	$cartTotal = $cartTotal + $shippingPrice;
+        }
+		
+		View::share('subtotal', $cartTotal );
+						
+		$coupons  = array( 'ISVALID' => '0.1' , '2014' => '0.2' );
+		
+		View::share('coupons', $coupons );
 	}
 
 	/**
@@ -21,16 +44,8 @@ class CartController extends \BaseController {
 	public function index()
 	{
 		$cart     = $this->cart->get();		
-		$subtotal = $this->cart->subtotal();
 		
-		$coupons  = array( 'ISVALID' => '0.1' , '2014' => '0.2' );
-		
-		$shipping = array(
-			1 => array( 'name' => 'PostPac Priority' ,'description' => 'Delivered to your letterbox within 1 working day' , 'price' => 'CHF 9' ),
-			2 => array( 'name' => 'MiniPac International Priority' ,'description' => 'Delivered to your letterbox within 10 working day' , 'price' => 'CHF 50' )
-		);
-		
-		return View::make('cart.index')->with( array( 'cart' => $cart , 'subtotal' => $subtotal , 'coupons' => $coupons , 'shipping' => $shipping ) );
+		return View::make('cart.index')->with( array( 'cart' => $cart ) );
 	}
 
 	/**
