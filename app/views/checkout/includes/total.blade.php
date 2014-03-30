@@ -14,7 +14,7 @@
 		</li>
 		@endif
 		
-        <li>Shipping: <strong><?php echo ( !empty($shippingPrice) ? $shippingPrice : 0 ); ?></strong></li>
+        <li>Shipping: <strong>CHF <?php echo ( !empty($shippingPrice) ? $shippingPrice : 0 ); ?></strong></li>
         <li class="important">Total: <strong>CHF <?php echo ( !empty($cartTotal) ? $cartTotal : 0 ); ?></strong></li>
     </ul>
 </div>

@@ -99,7 +99,7 @@
  
                                     <div class="box-footer">
                                         <div class="pull-left">
-                                            <a href="<?php echo url('checkout/methodShipping'); ?>" class="btn btn-small">
+                                            <a href="<?php echo url('checkout/methodPayment'); ?>" class="btn btn-small">
                                                 <i class="icon-chevron-left"></i> &nbsp; Payment method
                                             </a>
                                         </div>

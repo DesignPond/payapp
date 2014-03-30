@@ -34,7 +34,6 @@ class CheckoutController extends \BaseController {
 		
 		View::share('coupons', $coupons );
 		
-		
 		/* 
 		 *	Cart subtotal products * qty : $cartSubTotal
 		 *	Cart total value after coupon and delivery costs: $cartTotal
@@ -43,28 +42,28 @@ class CheckoutController extends \BaseController {
 		*/ 
 		
 		// Total of cart
-		$cartSubTotal = \Cart::total();
-		$cartTotal    = \Cart::total();
+		$cartSubTotal = $this->cart->subtotal();
+		$cartTotal    = $this->cart->total();
+		
+		$shippingPrice = NULL;
+		$namecoupon    = NULL;
+		$valuecoupon   = NULL;
         
-        if(Session::has('coupon')){
-				
-			$coupon = \Session::get('coupon'); 
+        if(Session::has('coupon'))
+        {        				
+			$coupon = Session::get('coupon'); 
 			
 			if( in_array( $coupon , $coupons ) )
 			{ 	
-				$values = array_flip($coupons);
-				$value       = $coupon;
+				$values      = array_flip($coupons);
 				$valuecoupon = $coupon * 100;
 				$namecoupon  = $values[$coupon];														
-			} 
-			
-			// calculation apply coupon
-			$cartTotal = $cartTotal - ($cartTotal * $value);								
+			} 							
 		}
 		
 		if(Session::has('shipping_option'))
 		{
-		 	$shipping_option = \Session::get('shipping_option'); 
+		 	$shipping_option = Session::get('shipping_option'); 
         	$shippingPrice   = $shipping[$shipping_option]['price'];
         	
         	$cartTotal = $cartTotal + $shippingPrice;
@@ -165,14 +164,27 @@ class CheckoutController extends \BaseController {
 	}
 	
 	public function methodPayment(){
-		
+				
 		$shippingOption = Input::get('shipping_option');
 		
-		if(!empty($shippingOption))
-		{
-			
-			Session::put('shipping_option', $shippingOption );			
+		if( !Session::has('shipping_option') )
+		{	
+			if( empty($shippingOption) )
+			{
+				return Redirect::to('checkout/methodShipping')->with( array('status' => 'error' ,'message' => 'Please choose a shipping method') );	
+			}
+			else
+			{
+				Session::forget('shipping_option');
+				Session::put('shipping_option', $shippingOption );	
+			}							
 		}
+		
+		if($shippingOption)
+		{
+			Session::forget('shipping_option');
+			Session::put('shipping_option', $shippingOption );	
+		}				
 		
 		return View::make('checkout.payement');
 	}	
@@ -180,18 +192,28 @@ class CheckoutController extends \BaseController {
 	public function reviewOrder(){
 						
 		$payementOption = Input::get('payement_option');
-		
-		if(!empty($payementOption))
-		{
-			
-			Session::put('payement_option', $payementOption );			
+
+		if( !Session::has('payement_option') )
+		{	
+			if(empty($payementOption))
+			{			
+				return Redirect::to('checkout/methodPayment')->with( array('status' => 'error' ,'message' => 'Please choose a payment method') );					
+			}
+			else
+			{
+				Session::forget('payement_option');
+				Session::put('payement_option', $payementOption );	
+			}				
 		}
+		if($payementOption)
+		{
+			Session::forget('payement_option');
+			Session::put('payement_option', $payementOption );	
+		}							
+	
+		$cart = $this->cart->get();	
 		
-		$data     = Session::all();
-		$cart     = $this->cart->get();	
-		$coupons  = array( 'ISVALID' => '0.1' , '2014' => '0.2' );
-		
-		return View::make('checkout.review')->with( array('cart' => $cart , 'data' => $data) );
+		return View::make('checkout.review')->with( array('cart' => $cart ) );
 	}	
 	/**
 	 * Display the specified resource.

@@ -47,11 +47,19 @@ class CartWorker implements CartInterface {
 		 
 		 return true;		
 	}
+
+	/*
+	 * Calcul total 
+	*/	
+	public function subtotal(){
+			
+		return \Cart::total();	
+	}
 	
 	/*
 	 * Calcul subtotal with coupon if exist
 	*/	
-	public function subtotal(){
+	public function total(){
 			
 		$total  = \Cart::total();	
 		$coupon = \Session::get('coupon');

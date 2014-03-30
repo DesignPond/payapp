@@ -2,7 +2,16 @@
 
 @section('content')
 
-	<?php  $custom = new Custom; ?>
+<?php  $custom = new Custom; ?>
+	
+<?php
+		$shippingOption = 0;
+		
+		if( Session::has('shipping_option') )
+		{ 
+			$shippingOption = Session::get('shipping_option'); 
+		}
+?>
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- Main Content -->
@@ -56,7 +65,7 @@
                                                             <div class="price">
                                                                 <strong>CHF <?php echo $method['price']; ?></strong>
                                                             </div>
-                                                            <input type="radio" value="<?php echo $id; ?>" name="shipping_option" id="option1">
+                                                            <input type="radio" <?php if($shippingOption == $id){ echo 'checked'; } ?> value="<?php echo $id; ?>" name="shipping_option" id="option1">
                                                         </div>			
                                                     </div>
                                                 </div>

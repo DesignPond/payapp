@@ -12,22 +12,14 @@ class CartController extends \BaseController {
 
 		// !Shipping				
 		$shipping = array(
-			1 => array( 'name' => 'PostPac Priority' ,'description' => 'Delivered to your letterbox within 1 working day' , 'price' => '9' ),
-			2 => array( 'name' => 'MiniPac International Priority' ,'description' => 'Delivered to your letterbox within 10 working day' , 'price' => '50' )
+			1 => array( 'name' => 'PostPac Priority' ,'description' => 'Delivered to your letterbox within 1 working day' , 'price' => 'CHF 9' ),
+			2 => array( 'name' => 'MiniPac International Priority' ,'description' => 'Delivered to your letterbox within 10 working day' , 'price' => 'CHF 50' )
 		);
 		
 		View::share('shipping', $shipping );
 				
 		// Total of cart
 		$cartTotal = $this->cart ->subtotal();
-		
-		if(Session::has('shipping_option'))
-		{
-		 	$shipping_option = \Session::get('shipping_option'); 
-        	$shippingPrice   = $shipping[$shipping_option]['price'];
-        	
-        	$cartTotal = $cartTotal + $shippingPrice;
-        }
 		
 		View::share('subtotal', $cartTotal );
 						

@@ -8,6 +8,7 @@ interface CartInterface {
 	public function delete($row);
 	
 	// coupon utils
+	public function total();
 	public function subtotal();
 	public function couponIsValid($coupon);
 	

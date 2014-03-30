@@ -44,6 +44,7 @@ Route::post('checkout/reviewOrder', array( 'uses' => 'CheckoutController@reviewO
 Route::post('checkout/methodPayment', array( 'uses' => 'CheckoutController@methodPayment' ));
 Route::post('checkout/methodShipping', array( 'uses' => 'CheckoutController@methodShipping' ));
 Route::post('checkout/shipping', array( 'uses' => 'CheckoutController@shipping' ));
+
 Route::resource('checkout', 'CheckoutController');
 
 // Cart

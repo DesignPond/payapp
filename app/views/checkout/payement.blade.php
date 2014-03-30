@@ -3,6 +3,17 @@
 @section('content')
 
 	<?php  $custom = new Custom; ?>
+	
+	<?php
+	
+		$paymentOption = 0;
+		
+		if( Session::has('payement_option') )
+		{ 
+			$paymentOption = Session::get('payement_option'); 
+		}
+		
+	?>
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<!-- Main Content -->
@@ -51,7 +62,7 @@
                                                             <h5>Paymill makes it easy for developers to accept credit cards on the web.</h5>
                                                         </div>
                                                         <div class="box-content highlight">                                                                    
-                                                            <input type="radio" value="1" name="payement_option" id="option1">
+                                                            <input type="radio" <?php if($paymentOption == 1){ echo 'checked'; } ?> value="1" name="payement_option" id="option1">
                                                         </div>			
                                                     </div>
                                                 </div>                                                        
@@ -60,7 +71,7 @@
                                     </div>
       
                                     <div class="box-footer">
-                                        <div class="pull-left"><a href="<?php echo url('checkout/methodPayment'); ?>" class="btn btn-small"><i class="icon-chevron-left"></i> &nbsp; Shipping method</a></div>
+                                        <div class="pull-left"><a href="<?php echo url('checkout/methodShipping'); ?>" class="btn btn-small"><i class="icon-chevron-left"></i> &nbsp; Shipping method</a></div>
 
                                         <div class="pull-right">                                                    
                                             <button type="submit" class="btn btn-primary">Order review &nbsp; <i class="icon-chevron-right"></i></button>

@@ -73,6 +73,8 @@
 	                                            </tr>
 	                                            
 	                                            @endforeach
+	                                        @else
+	                                        <tr><td colspan="7">Your cart is empty. Go Shopping!</td></tr>
                                             @endif
                                             
                                             @if(Session::has('coupon'))
@@ -106,16 +108,12 @@
                                         <i class="icon-chevron-left"></i> &nbsp; Continue shopping
                                     </a>			
                                 </div>
-
+								@if($subtotal > 0)
                                 <div class="pull-right">
-                                    <button type="submit" class="btn btn-small mm20">
-                                        <i class="icon-undo"></i> &nbsp; Update cart
-                                    </button>
-
-                                    <a href="<?php echo url('checkout'); ?>" class="btn btn-primary btn-small mm20">
-                                        Proceed to checkout &nbsp; <i class="icon-chevron-right"></i>
-                                    </a>
+                                    <button type="submit" class="btn btn-small mm20"><i class="icon-undo"></i> &nbsp; Update cart </button>								
+                                   	 <a href="<?php echo url('checkout'); ?>" class="btn btn-primary btn-small mm20">Proceed to checkout &nbsp; <i class="icon-chevron-right"></i></a>                                  
                                 </div>
+                                @endif
                             </div>
                         {{ Form::close() }}		
                     </div>
