@@ -43,7 +43,7 @@ class CheckoutController extends \BaseController {
 		
 		// Total of cart
 		$cartSubTotal = $this->cart->subtotal();
-		$cartTotal    = $this->cart->total();
+		$cartTotal    = $this->cart->total($shipping);
 		
 		$shippingPrice = NULL;
 		$namecoupon    = NULL;
@@ -60,20 +60,13 @@ class CheckoutController extends \BaseController {
 				$namecoupon  = $values[$coupon];														
 			} 							
 		}
+
+		View::share('cartSubTotal' , $cartSubTotal);
+		View::share('cartTotal'    , $cartTotal);
+		View::share('shippingPrice', $shippingPrice);
+		View::share('namecoupon'   , $namecoupon);
+		View::share('valuecoupon'  , $valuecoupon);
 		
-		if(Session::has('shipping_option'))
-		{
-		 	$shipping_option = Session::get('shipping_option'); 
-        	$shippingPrice   = $shipping[$shipping_option]['price'];
-        	
-        	$cartTotal = $cartTotal + $shippingPrice;
-        }
-		
-		View::share('cartSubTotal' , $cartSubTotal );
-		View::share('cartTotal'    , $cartTotal );
-		View::share('shippingPrice', $shippingPrice );
-		View::share('namecoupon'   , $namecoupon );
-		View::share('valuecoupon'  , $valuecoupon );
     }
     
 	/**

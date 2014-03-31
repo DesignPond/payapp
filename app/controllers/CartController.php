@@ -19,7 +19,7 @@ class CartController extends \BaseController {
 		View::share('shipping', $shipping );
 				
 		// Total of cart
-		$cartTotal = $this->cart ->subtotal();
+		$cartTotal = $this->cart->total($shipping);
 		
 		View::share('subtotal', $cartTotal );
 						
