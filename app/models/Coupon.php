@@ -1,6 +1,6 @@
 <?php
 
-class Shipping extends \Eloquent {
+class Coupon extends \Eloquent {
 	protected $fillable = [];
 	public $timestamps  = false;
 }

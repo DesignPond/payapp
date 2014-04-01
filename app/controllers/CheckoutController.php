@@ -4,35 +4,43 @@ use Shop\Repo\User\UserInterface;
 
 use Shop\Repo\Cart\CartInterface;
 
+use Shop\Repo\Coupon\CouponInterface;
+
+use Shop\Repo\Shipping\ShippingInterface;
+
 class CheckoutController extends \BaseController {
 
 	protected $user;
 	
 	protected $cart;
 
-    public function __construct( UserInterface $user , CartInterface $cart )
+	protected $coupon;
+	
+	protected $shipping;
+
+    public function __construct( UserInterface $user , CartInterface $cart , CouponInterface $coupon, ShippingInterface $shipping )
     {
         $this->beforeFilter('cartNotEmpty');
         
-        $this->user = $user;
+        $this->user   = $user;
         
-		$this->cart = $cart;
+		$this->cart   = $cart;
+		
+		$this->coupon = $coupon;
+		
+		$this->shipping = $shipping;		
         
         // trick from db
         View::share('countries',  \Countries::all()->lists('country_name','id') );
 		
-		$shipping = array(
-			1 => array( 'name' => 'PostPac Priority' ,'description' => 'Delivered to your letterbox within 1 working day' , 'price' => '9' ),
-			2 => array( 'name' => 'MiniPac International Priority' ,'description' => 'Delivered to your letterbox within 10 working day' , 'price' => '50' )
-		);
+		$shipping = $this->shipping->getAll()->toArray();
 		
 		// trick from db
 		View::share('shipping', $shipping );
+
+		$coupons = $this->coupon->getAll()->lists('name','value');
 		
-		// trick from db
-		$coupons  = array( 'ISVALID' => '0.1' , '2014' => '0.2' );
-		
-		View::share('coupons', $coupons );
+		View::share('coupons', $this->coupon->getAll() );
 		
 		/* 
 		 *	Cart subtotal products * qty : $cartSubTotal
