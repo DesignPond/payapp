@@ -26,6 +26,15 @@ View::share('cartTotalPrice',  Cart::total() );
 
 Route::get('/', array( 'uses' => 'ShopController@index' ));
 
+Route::get('test', function()
+{
+    $coupons = \Coupon::all()->lists('name','value');
+    
+    $coupon = Session::get('coupon'); 
+    
+    return $coupons;
+});
+
 // Login
 Route::resource('login', 'LoginController');
 

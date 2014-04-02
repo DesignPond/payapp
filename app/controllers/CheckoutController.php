@@ -22,23 +22,21 @@ class CheckoutController extends \BaseController {
     {
         $this->beforeFilter('cartNotEmpty');
         
-        $this->user   = $user;
+        $this->user     = $user;
         
-		$this->cart   = $cart;
+		$this->cart     = $cart;
 		
-		$this->coupon = $coupon;
+		$this->coupon   = $coupon;
 		
 		$this->shipping = $shipping;		
         
-        // trick from db
         View::share('countries',  \Countries::all()->lists('country_name','id') );
 		
 		$shipping = $this->shipping->getAll()->toArray();
-		
-		// trick from db
+
 		View::share('shipping', $shipping );
 
-		$coupons = $this->coupon->getAll()->lists('name','value');
+		$coupons = $this->coupon->getAll()->lists('value','name');
 		
 		View::share('coupons', $this->coupon->getAll() );
 		
@@ -65,7 +63,7 @@ class CheckoutController extends \BaseController {
 			{ 	
 				$values      = array_flip($coupons);
 				$valuecoupon = $coupon * 100;
-				$namecoupon  = $values[$coupon];														
+				//$namecoupon  = $coupons[$coupon];														
 			} 							
 		}
 

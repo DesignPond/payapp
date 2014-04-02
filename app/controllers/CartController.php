@@ -2,19 +2,27 @@
 
 use Shop\Repo\Cart\CartInterface;
 
+use Shop\Repo\Coupon\CouponInterface;
+
+use Shop\Repo\Shipping\ShippingInterface;
+
 class CartController extends \BaseController {
 
 	protected $cart;
 	
-	public function __construct( CartInterface $cart ){
+	protected $coupon;
+	
+	protected $shipping;
+	
+	public function __construct( CartInterface $cart , CouponInterface $coupon, ShippingInterface $shipping){
 		
-		$this->cart    = $cart;
+		$this->cart     = $cart;
+		
+		$this->coupon   = $coupon;
+		
+		$this->shipping = $shipping;
 
-		// !Shipping				
-		$shipping = array(
-			1 => array( 'name' => 'PostPac Priority' ,'description' => 'Delivered to your letterbox within 1 working day' , 'price' => 'CHF 9' ),
-			2 => array( 'name' => 'MiniPac International Priority' ,'description' => 'Delivered to your letterbox within 10 working day' , 'price' => 'CHF 50' )
-		);
+		$shipping = $this->shipping->getAll()->toArray();
 		
 		View::share('shipping', $shipping );
 				
@@ -22,8 +30,10 @@ class CartController extends \BaseController {
 		$cartTotal = $this->cart->total($shipping);
 		
 		View::share('subtotal', $cartTotal );
-						
-		$coupons  = array( 'ISVALID' => '0.1' , '2014' => '0.2' );
+
+		$coupons = $this->coupon->getAll()->lists('value','name');
+		
+		$coupons = array_flip($coupons);
 		
 		View::share('coupons', $coupons );
 	}
