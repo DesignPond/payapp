@@ -54,7 +54,7 @@
                                             <div class="row-fluid">
                                            
 											@if(!empty($shipping))
-												@foreach($shipping as $id => $method)
+												@foreach($shipping as $method)
                                                 <div class="span6">
                                                     <div class="box highlight">
                                                         <div class="hgroup title">
@@ -65,7 +65,7 @@
                                                             <div class="price">
                                                                 <strong>CHF <?php echo $method['price']; ?></strong>
                                                             </div>
-                                                            <input type="radio" <?php if($shippingOption == $id){ echo 'checked'; } ?> value="<?php echo $id; ?>" name="shipping_option" id="option1">
+                                                            <input type="radio" <?php if($shippingOption == $method['id']){ echo 'checked'; } ?> value="<?php echo $method['id']; ?>" name="shipping_option" id="option1">
                                                         </div>			
                                                     </div>
                                                 </div>

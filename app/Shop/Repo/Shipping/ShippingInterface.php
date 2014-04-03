@@ -4,6 +4,7 @@ interface ShippingInterface{
 	
 	public function getAll();
 	public function find($id);
+	public function getShippingPrice();
 
 }
 

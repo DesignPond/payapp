@@ -78,3 +78,19 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+/*
+|--------------------------------------------------------------------------
+| Cart filter for calculation
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::filter('cartNotEmpty', function()
+{
+    if ( Cart::count() == 0)
+    {
+        return Redirect::to('/');
+    }
+});
+

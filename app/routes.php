@@ -13,27 +13,10 @@
 
 //Cart::add('234', 'Other product 4534', 1, 120.00, array('size' => 'M'));
 
-Route::filter('cartNotEmpty', function()
-{
-    if ( Cart::count() == 0)
-    {
-        return Redirect::to('/');
-    }
-});
-
 View::share('cartTotalCount',  Cart::count() );
-View::share('cartTotalPrice',  Cart::total() );
 
 Route::get('/', array( 'uses' => 'ShopController@index' ));
 
-Route::get('test', function()
-{
-    $coupons = \Coupon::all()->lists('name','value');
-    
-    $coupon = Session::get('coupon'); 
-    
-    return $coupons;
-});
 
 // Login
 Route::resource('login', 'LoginController');

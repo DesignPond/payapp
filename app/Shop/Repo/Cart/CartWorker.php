@@ -59,23 +59,20 @@ class CartWorker implements CartInterface {
 	/*
 	 * Calcul subtotal with coupon if exist
 	*/	
-	public function total( $shipping ){
+	public function total( $shipping = NULL ){
 			
-		$total    = \Cart::total();	
-		$subtotal = \Cart::total();	
-		$coupon   = \Session::get('coupon');
+		(float)$total    = \Cart::total();	
+		(float)$subtotal = \Cart::total();	
+		(float)$coupon   = \Session::get('coupon');
 		
 		if( !empty($coupon) && $total != 0 )
 		{			
 			$subtotal = $total - ( $total * $coupon );			
 		}		
 	
-		if( \Session::has('shipping_option') && $total != 0 )
-		{
-		 	$shipping_option = Session::get('shipping_option'); 
-        	$shippingPrice   = $shipping[$shipping_option]['price'];
-        	
-        	$subtotal = $subtotal + $shippingPrice;
+		if( $shipping && $total != 0 )
+		{      	
+        	$subtotal = $subtotal + (float)$shipping;
         }
 		
 		return $subtotal;

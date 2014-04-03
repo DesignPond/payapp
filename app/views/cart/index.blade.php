@@ -206,8 +206,8 @@
                             </div>
 
                             <ul class="price-list">
-                                <li>Subtotal: <strong>CHF <?php echo ( !empty($cartTotalPrice) ? $cartTotalPrice : 0 ); ?></strong></li>
-                                <li class="important">Total: <strong>CHF <?php echo ( !empty($subtotal) ? $subtotal : 0 ); ?></strong></li>
+                                <li>Subtotal: <strong>CHF <?php echo ( !empty($subtotal) ? $subtotal : 0 ); ?></strong></li>
+                                <li class="important">Total: <strong>CHF <?php echo ( !empty($total) ? $total : 0 ); ?></strong></li>
                             </ul>
                         </div>
                     </div>

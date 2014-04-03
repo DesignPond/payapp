@@ -26,10 +26,15 @@ class CartController extends \BaseController {
 		
 		View::share('shipping', $shipping );
 				
+		// shipping total				
+		$shippingPrice = $this->shipping->getShippingPrice();
+
 		// Total of cart
-		$cartTotal = $this->cart->total($shipping);
+		$cartSubTotal  = $this->cart->subtotal();
+		$cartTotal     = $this->cart->total($shippingPrice);
 		
-		View::share('subtotal', $cartTotal );
+		View::share('subtotal', $cartSubTotal );
+		View::share('total', $cartTotal );
 
 		$coupons = $this->coupon->getAll()->lists('value','name');
 		

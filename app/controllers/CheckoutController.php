@@ -20,6 +20,7 @@ class CheckoutController extends \BaseController {
 
     public function __construct( UserInterface $user , CartInterface $cart , CouponInterface $coupon, ShippingInterface $shipping )
     {
+    	
         $this->beforeFilter('cartNotEmpty');
         
         $this->user     = $user;
@@ -39,7 +40,11 @@ class CheckoutController extends \BaseController {
 		$coupons = $this->coupon->getAll()->lists('value','name');
 		
 		View::share('coupons', $this->coupon->getAll() );
-		
+
+	    
+		$namecoupon    = NULL;
+		$valuecoupon   = NULL;
+				
 		/* 
 		 *	Cart subtotal products * qty : $cartSubTotal
 		 *	Cart total value after coupon and delivery costs: $cartTotal
@@ -47,24 +52,17 @@ class CheckoutController extends \BaseController {
 		 *  Shipping costs: $shippingPrice		 
 		*/ 
 		
+		// shipping total				
+		$shippingPrice = $this->shipping->getShippingPrice();
+
 		// Total of cart
-		$cartSubTotal = $this->cart->subtotal();
-		$cartTotal    = $this->cart->total($shipping);
-		
-		$shippingPrice = NULL;
-		$namecoupon    = NULL;
-		$valuecoupon   = NULL;
+		$cartSubTotal  = $this->cart->subtotal();
+		$cartTotal     = $this->cart->total($shippingPrice);
         
         if(Session::has('coupon'))
         {        				
-			$coupon = Session::get('coupon'); 
-			
-			if( in_array( $coupon , $coupons ) )
-			{ 	
-				$values      = array_flip($coupons);
-				$valuecoupon = $coupon * 100;
-				//$namecoupon  = $coupons[$coupon];														
-			} 							
+			$values      = array_flip($coupons);
+			$valuecoupon = Session::get('coupon') * 100;																			
 		}
 
 		View::share('cartSubTotal' , $cartSubTotal);
@@ -125,9 +123,14 @@ class CheckoutController extends \BaseController {
 		   return View::make('checkout.user.shipping')->with( array('user' => $user) );
 		}
 		
-		if(!empty($_POST) && !Session::has('user.billing') ){
+		if( !empty($_POST) && !Session::has('user.billing') ){
 			// put client billing info in session
 			Session::push('user.billing', Input::all() );			
+		}
+		
+		if(!Session::has('user.billing') )
+		{
+			return Redirect::to('checkout/billing')->with( array('status' => 'error' ,'message' => 'Please provide a billing address') );	
 		}
 		
 		return View::make('checkout.shipping');
@@ -146,12 +149,7 @@ class CheckoutController extends \BaseController {
 	}
 	
 	public function methodShipping(){
-	
-		$shipping = array(
-			1 => array( 'name' => 'PostPac Priority' ,'description' => 'Delivered to your letterbox within 1 working day' , 'price' => 'CHF 9' ),
-			2 => array( 'name' => 'MiniPac International Priority' ,'description' => 'Delivered to your letterbox within 10 working day' , 'price' => 'CHF 50' )
-		);
-	
+		
 		if(!empty($_POST)){
 		
 			Session::forget('user.shipping');
@@ -166,48 +164,45 @@ class CheckoutController extends \BaseController {
 				
 		$shippingOption = Input::get('shipping_option');
 		
-		if( !Session::has('shipping_option') )
+		if( !Session::has('shipping_option') && empty($shippingOption) )
+		{
+			return Redirect::to('checkout/methodShipping')->with( array('status' => 'error' ,'message' => 'Please choose a shipping method') );	
+		}	
+		
+		if(!empty($shippingOption))
 		{	
-			if( empty($shippingOption) )
-			{
-				return Redirect::to('checkout/methodShipping')->with( array('status' => 'error' ,'message' => 'Please choose a shipping method') );	
-			}
-			else
+			$option = Session::get('shipping_option');
+			
+			if($option != $shippingOption)
 			{
 				Session::forget('shipping_option');
-				Session::put('shipping_option', $shippingOption );	
-			}							
-		}
-		
-		if($shippingOption)
-		{
-			Session::forget('shipping_option');
-			Session::put('shipping_option', $shippingOption );	
-		}				
-		
+				Session::put('shipping_option', $shippingOption );
+			}	
+			
+			return Redirect::to('checkout/methodPayment');											
+		}	
+					
 		return View::make('checkout.payement');
 	}	
 
 	public function reviewOrder(){
 						
 		$payementOption = Input::get('payement_option');
-
-		if( !Session::has('payement_option') )
+		
+		if( !Session::has('payement_option') && empty($payementOption))
+		{			
+			return Redirect::to('checkout/methodPayment')->with( array('status' => 'error' ,'message' => 'Please choose a payment method') );					
+		}
+		
+		if(!empty($payementOption))
 		{	
-			if(empty($payementOption))
-			{			
-				return Redirect::to('checkout/methodPayment')->with( array('status' => 'error' ,'message' => 'Please choose a payment method') );					
-			}
-			else
+			$option = Session::get('payement_option');
+			
+			if($option != $payementOption)
 			{
 				Session::forget('payement_option');
 				Session::put('payement_option', $payementOption );	
-			}				
-		}
-		if($payementOption)
-		{
-			Session::forget('payement_option');
-			Session::put('payement_option', $payementOption );	
+			}												
 		}							
 	
 		$cart = $this->cart->get();	

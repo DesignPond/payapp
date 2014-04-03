@@ -51,7 +51,7 @@
                                         <h3>Payment method</h3>
                                         <h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>                                                    
                                     </div>
-           
+
                                     <div class="box-content">
                                         <div class="payment-methods">
                                             <div class="row-fluid">

@@ -21,6 +21,23 @@ class ShippingEloquent implements ShippingInterface{
 		
 		return $this->shipping->all();	
 	}
+	
+	/*
+	* Return all shippings
+	*/
+	public function getShippingPrice(){
+		
+		$shippingPrice = 0;
+	
+		if( \Session::has('shipping_option') )
+		{		
+			$id              = \Session::get('shipping_option');			
+			$shipping        = $this->shipping->findOrFail($id)->toArray();
+        	$shippingPrice   = $shipping['price'];
+        }
+        
+        return $shippingPrice;
+	}
 
 	/**
 	 * Return all shippings
