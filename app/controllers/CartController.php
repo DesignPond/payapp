@@ -50,7 +50,7 @@ class CartController extends \BaseController {
 	 */
 	public function index()
 	{
-		$cart     = $this->cart->get();		
+		$cart = $this->cart->get();		
 		
 		return View::make('cart.index')->with( array( 'cart' => $cart ) );
 	}
