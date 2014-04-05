@@ -3,9 +3,10 @@
 use Illuminate\Support\ServiceProvider;
 
 use User as U;
+use Address as A;
 use Product as P;
 use Order as O;
-use Order_articles as A;
+use Order_articles as OA;
 use Shipping as S;
 use Coupon as C;
 use DBCart as DBCart;
@@ -16,6 +17,7 @@ class ShopServiceProvider extends ServiceProvider {
     {     
     	$this->registerCartService();   
     	$this->registerUserService();
+    	$this->registerAddressService();
     	$this->registerProductService();	
     	$this->registerOrderService();	
     	$this->registerCouponService();	
@@ -37,7 +39,15 @@ class ShopServiceProvider extends ServiceProvider {
             return new \Shop\Repo\User\UserEloquent( new U );
         });       
     }    
-
+   
+    protected function registerAddressService(){
+    
+	    $this->app->bind('Shop\Repo\Address\AddressInterface', function()
+        {
+            return new \Shop\Repo\Address\AddressEloquent( new A );
+        });       
+    }  
+    
     protected function registerProductService(){
     
 	    $this->app->bind('Shop\Repo\Product\ProductInterface', function()
@@ -50,7 +60,7 @@ class ShopServiceProvider extends ServiceProvider {
     
 	    $this->app->bind('Shop\Repo\Order\OrderInterface', function()
         {
-            return new \Shop\Repo\Order\OrderEloquent( new O , new A );
+            return new \Shop\Repo\Order\OrderEloquent( new O , new OA );
         });       
     }   
         

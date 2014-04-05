@@ -2,7 +2,7 @@
 
 class DBCart extends \Eloquent {
 
-	protected $fillable = [];
+	protected $guarded = [];
 	
 	protected $table = 'dbcart';
 }

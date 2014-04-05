@@ -20,7 +20,8 @@ class AddressTableSeeder extends Seeder {
 	           'city'       => 'La Neuveville',
 	           'state'      => '6',
 	           'country'    => '205',
-	           'user_id'    => '1',	                     
+	           'user_id'    => '1',
+	           'type'       => 'billing',	  	                     
 	           'deleted'    => '0',
 	           'created_at' => date('Y-m-d G:i:s'),
 			   'updated_at' => date('Y-m-d G:i:s')        
@@ -37,7 +38,8 @@ class AddressTableSeeder extends Seeder {
 	           'city'       => 'Neuchâtel',
 	           'state'      => '11',
 	           'country'    => '205',
-	           'user_id'    => '2',	                     
+	           'user_id'    => '1',	 
+	           'type'       => 'shipping',	                     
 	           'deleted'    => '0',
 	           'created_at' => date('Y-m-d G:i:s'),
 			   'updated_at' => date('Y-m-d G:i:s')        

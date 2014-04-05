@@ -16,6 +16,8 @@ class CreateDbcartTable extends Migration {
 		{
 			$table->increments('id');
 			$table->text('cart_content');
+			$table->integer('user_id');
+			$table->enum('status', array('active','processed'))->default('active');
 			$table->timestamps();
 		});
 	}

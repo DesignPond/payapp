@@ -40,7 +40,6 @@ class CheckoutController extends \BaseController {
 		$coupons = $this->coupon->getAll()->lists('value','name');
 		
 		View::share('coupons', $this->coupon->getAll() );
-
 	    
 		$namecoupon    = NULL;
 		$valuecoupon   = NULL;
@@ -97,9 +96,8 @@ class CheckoutController extends \BaseController {
 	{	
 		if (Auth::check())
 		{
-		   $id   = Auth::user()->id;
-		   
-		   $user = $this->user->find($id);
+		   $id   = Auth::user()->id;		   
+		   $user = $this->user->find($id,'billing');
 		   
 		   return View::make('checkout.user.billing')->with( array('user' => $user) );
 		}
@@ -116,19 +114,20 @@ class CheckoutController extends \BaseController {
 	{
 		if (Auth::check())
 		{
-		   $id   = Auth::user()->id;
-		   
-		   $user = $this->user->find($id);
+		   $id   = Auth::user()->id;		   
+		   $user = $this->user->find($id,'shipping');
 		   
 		   return View::make('checkout.user.shipping')->with( array('user' => $user) );
 		}
 		
-		if( !empty($_POST) && !Session::has('user.billing') ){
+		if( !empty($_POST) && !Session::has('billing') ){
+		
 			// put client billing info in session
-			Session::push('user.billing', Input::all() );			
+			Session::put('billing', Input::all() );			
 		}
 		
-		if(!Session::has('user.billing') )
+		
+		if(!Session::has('billing') )
 		{
 			return Redirect::to('checkout/billing')->with( array('status' => 'error' ,'message' => 'Please provide a billing address') );	
 		}
@@ -138,23 +137,23 @@ class CheckoutController extends \BaseController {
 	
 	public function copyBilling(){
 	
-		if( Session::has('user.billing') )
+		if( Session::has('billing') )
 		{
 			// put client billing info as shipping infos in session
-			$billing = Session::get('user.billing');
-			Session::push('user.shipping', $billing[0] );		
+			$billing = Session::get('billing');
+			Session::put('shipping', $billing );		
 		}
 		
 		return Redirect::to('checkout/shipping');
 	}
 	
 	public function methodShipping(){
-		
+	
 		if(!empty($_POST)){
 		
-			Session::forget('user.shipping');
+			Session::forget('shipping');
 			// put client billing info in session
-			Session::push('user.shipping', Input::all() );			
+			Session::put('shipping', Input::all() );			
 		}
 		
 		return View::make('checkout.method');
@@ -203,8 +202,8 @@ class CheckoutController extends \BaseController {
 				Session::forget('payement_option');
 				Session::put('payement_option', $payementOption );	
 			}												
-		}							
-	
+		}	
+		
 		$cart = $this->cart->get();	
 		
 		return View::make('checkout.review')->with( array('cart' => $cart ) );

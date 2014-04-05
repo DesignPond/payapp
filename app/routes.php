@@ -15,8 +15,9 @@
 
 View::share('cartTotalCount',  Cart::count() );
 
-Route::get('/', array( 'uses' => 'ProductController@index' ));
+//Route::get('test',  array( 'uses' => 'CheckoutController@user' ));
 
+Route::get('/', array( 'uses' => 'ProductController@index' ));
 
 // Login
 Route::resource('login', 'LoginController');

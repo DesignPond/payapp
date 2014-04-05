@@ -79,19 +79,19 @@
                                             
                                             	<div class="row-fluid">
                                                     <p class="span4"><strong>First name</strong></p>
-													<p class="span8"><?php echo $user->first_name; ?></p>
+													<p class="span8"><?php echo $user->address->first()->first_name; ?></p>
 												</div>
                                             	<div class="row-fluid">
                                                     <p class="span4"><strong>Last name</strong></p>
-													<p class="span8"><?php echo $user->last_name; ?></p>
+													<p class="span8"><?php echo $user->address->first()->last_name; ?></p>
 												</div>
                                             	<div class="row-fluid">
                                                     <p class="span4"><strong>Email</strong></p>
-													<p class="span8"><?php echo $user->email; ?></p>
+													<p class="span8"><?php echo $user->address->first()->email; ?></p>
 												</div>
                                             	<div class="row-fluid">
                                                     <p class="span4"><strong>Phone</strong></p>
-													<p class="span8"><?php echo $user->address->phone; ?></p>
+													<p class="span8"><?php echo $user->address->first()->phone; ?></p>
 												</div>
 
                                             </div>
@@ -100,20 +100,20 @@
                                             
                                              	<div class="row-fluid">
                                                     <p class="span4"><strong>Company</strong></p>
-													<p class="span8"><?php echo $user->address->company; ?></p>
+													<p class="span8"><?php echo $user->address->first()->company; ?></p>
 												</div>
                                             	<div class="row-fluid">
                                                     <p class="span4"><strong>Address</strong></p>
-													<p class="span8"><?php echo $user->address->address; ?></p>
+													<p class="span8"><?php echo $user->address->first()->address; ?></p>
 												</div>
 												
 												<div class="row-fluid">
 		                                            <p class="span4"><strong>Zip / City</strong></p>
-													<p class="span8"><?php echo $user->address->zip; ?>, <?php echo $user->address->city; ?></p>                                                                                              
+													<p class="span8"><?php echo $user->address->first()->zip; ?>, <?php echo $user->address->first()->city; ?></p>                                                                                              
                                                 </div>                                              
 	                                           	<div class="row-fluid">
 	                                                <p class="span4"><strong>Country</strong></p>
-													<p class="span8"><?php echo $countries[$user->address->country]; ?></p>
+													<p class="span8"><?php echo $countries[$user->address->first()->country]; ?></p>
 												</div>                                                
                                                                                           
                                             </div>

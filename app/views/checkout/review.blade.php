@@ -20,7 +20,7 @@
                     <div class="row">
                         <div class="span9">
                             <div class="box">
-                                
+     
                                 <!-- Checkout progress -->
                                 <div id="checkout-progress">
                                     <ul class="nav nav-tabs">

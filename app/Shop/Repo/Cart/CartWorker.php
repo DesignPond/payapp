@@ -52,16 +52,30 @@ class CartWorker implements CartInterface {
 	*/		
 	public function delete($row){
 		
-		 \Cart::remove($row);
+		\Cart::remove($row);
 		 
-		 return true;		
+		return true;		
 	}
 	
 	/*
 	 * store the cart 
 	*/
-	public function store(){
+	public function store( $data ){
+	
+		$dbcart = $this->dbcart->create(array(
+			'cart_content' => $data['cart_content'],
+			'user_id'      => $data['user_id'],
+			'status'       => 'active',
+			'created_at'   => date('Y-m-d G:i:s'),
+			'updated_at'   => date('Y-m-d G:i:s')
+		));
 		
+		if( ! $dbcart )
+		{
+			return false;
+		}
+		
+		return true;	
 	}
 
 	/*

@@ -2,7 +2,9 @@
 
 interface UserInterface {
 	
-	public function find($id);
+	public function find( $id , $type = NULL );
+	
+	public function create(array $data);
 
 }
 
