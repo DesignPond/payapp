@@ -22,12 +22,13 @@ class CreateOrdersTable extends Migration {
 			$table->integer('coupon_id');
 			$table->integer('user_id');
 			$table->integer('shipping_id');
+			$table->integer('cart_id');
+			$table->enum('status', array('waiting','paid','error','cancelled'))->default('waiting');
 			$table->boolean('deleted');
 			
 			$table->timestamps();
 		});
 	}
-
 
 	/**
 	 * Reverse the migrations.

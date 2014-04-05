@@ -2,8 +2,17 @@
 
 use Shop\Repo\Cart\CartInterface;
 
+use DBCart as M;
+
 class CartWorker implements CartInterface {
 
+	protected $dbcart;
+
+	public function __construct(M $dbcart)
+	{
+		$this->dbcart = $dbcart;
+	}
+	
 	/*
 	 * Get cart infos
 	*/	
@@ -46,6 +55,13 @@ class CartWorker implements CartInterface {
 		 \Cart::remove($row);
 		 
 		 return true;		
+	}
+	
+	/*
+	 * store the cart 
+	*/
+	public function store(){
+		
 	}
 
 	/*

@@ -6,6 +6,7 @@ interface CartInterface {
 	public function add($array);
 	public function update($array);
 	public function delete($row);
+	public function store();
 	
 	// coupon utils
 	public function total($shipping);

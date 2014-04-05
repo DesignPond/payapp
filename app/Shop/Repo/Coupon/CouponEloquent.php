@@ -1,5 +1,7 @@
 <?php namespace Shop\Repo\Coupon;
 
+use Shop\Repo\Coupon\CouponInterface;
+
 use Coupon as M;
 
 class CouponEloquent implements CouponInterface{

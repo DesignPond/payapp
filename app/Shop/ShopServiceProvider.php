@@ -5,8 +5,10 @@ use Illuminate\Support\ServiceProvider;
 use User as U;
 use Product as P;
 use Order as O;
+use Order_articles as A;
 use Shipping as S;
 use Coupon as C;
+use DBCart as DBCart;
 
 class ShopServiceProvider extends ServiceProvider {
 
@@ -24,7 +26,7 @@ class ShopServiceProvider extends ServiceProvider {
     
 	    $this->app->bind('Shop\Repo\Cart\CartInterface', function()
         {
-            return new \Shop\Repo\Cart\CartWorker();
+            return new \Shop\Repo\Cart\CartWorker( new DBCart);
         });       
     }   
     
@@ -48,7 +50,7 @@ class ShopServiceProvider extends ServiceProvider {
     
 	    $this->app->bind('Shop\Repo\Order\OrderInterface', function()
         {
-            return new \Shop\Repo\Order\OrderEloquent( new O );
+            return new \Shop\Repo\Order\OrderEloquent( new O , new A );
         });       
     }   
         

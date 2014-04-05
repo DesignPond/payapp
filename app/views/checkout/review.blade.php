@@ -15,7 +15,7 @@
         <section class="checkout">
 
            <div class="container">
-                <form enctype="multipart/form-data" action="#" method="post">
+                {{ Form::open(array('url' => 'orders', 'method' => 'post')) }} 
                    
                     <div class="row">
                         <div class="span9">
@@ -105,9 +105,7 @@
                                         </div>
 
                                         <div class="pull-right">                                                    
-                                            <button type="submit" class="btn btn-primary">
-                                                Create order and pay &nbsp; <i class="icon-ok"></i>
-                                            </button>
+                                            <button type="submit" class="btn btn-primary">Create order and pay &nbsp; <i class="icon-ok"></i></button>
                                         </div>
                                     </div>					
                                 </div>	
@@ -122,7 +120,7 @@
 							</div>                                
 						</div>
                     </div>
-                </form>
+                {{ Form::close() }}
             </div>	
         </section>
         <!-- End class="checkout" -->

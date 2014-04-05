@@ -4,6 +4,9 @@ interface OrderInterface {
 	
 	public function getAll();
 
-
+	public function find($id);
+	
+	public function process($cart);
+	
 }
 
