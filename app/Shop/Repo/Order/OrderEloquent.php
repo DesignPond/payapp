@@ -2,7 +2,7 @@
 
 use Shop\Repo\Order\OrderInterface;
 
-class OrderWorker implements OrderInterface {
+class OrderEloquent implements OrderInterface {
 
 	/*
 	 * Get cart infos

@@ -23,10 +23,8 @@ class CouponEloquent implements CouponInterface{
 	}
 
 	/**
-	 * Return all coupons
-	 *
-	 * @return stdObject Collection of users
-	 */
+	 * Return a coupon
+	*/
 	public function find($id){
 				
 		return $this->coupon->findOrFail($id);														

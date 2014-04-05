@@ -1,7 +1,18 @@
 <?php
 
-class ProductController extends \BaseController {
+use Shop\Repo\Product\ProductInterface;
 
+class ProductController extends \BaseController {
+	
+	protected $product;
+	
+
+    public function __construct( ProductInterface $product )
+    {
+    
+    	$this->product = $product;
+    	
+    }	
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -9,7 +20,11 @@ class ProductController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+	
+		$products = $this->product->getAll()->toArray();
+		
+		return View::make('products/index')->with( array( 'products' => $products ) );
+		
 	}
 
 	/**
@@ -41,16 +56,9 @@ class ProductController extends \BaseController {
 	public function show($id)
 	{
 				
-		$products = array(
-			1 => array( 'id' => 1 , 'title' => 'Castle'   , 'price' => '120.00' , 'image' => 'fantasy.jpg'  ),
-			2 => array( 'id' => 2 , 'title' => 'Bioshock' , 'price' => '80.00'  , 'image' => 'bioshock.jpg' ),
-			3 => array( 'id' => 3 , 'title' => 'Portal 2' , 'price' => '100.00' , 'image' => 'portal2.jpg'  ),
-			4 => array( 'id' => 4 , 'title' => 'Fantasy'  , 'price' => '90.00'  , 'image' => 'fantasy2.jpg' )
-		);
+		$product = $this->product->find($id)->toArray();
 		
-		$product = $products[$id];
-		
-		return View::make('products/index')->with( array( 'product' => $product ) );
+		return View::make('products/show')->with( array( 'product' => $product ) );
 		
 	}
 

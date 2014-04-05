@@ -3,8 +3,10 @@
 use Illuminate\Support\ServiceProvider;
 
 use User as U;
-use Coupon as C;
+use Product as P;
+use Order as O;
 use Shipping as S;
+use Coupon as C;
 
 class ShopServiceProvider extends ServiceProvider {
 
@@ -12,6 +14,8 @@ class ShopServiceProvider extends ServiceProvider {
     {     
     	$this->registerCartService();   
     	$this->registerUserService();
+    	$this->registerProductService();	
+    	$this->registerOrderService();	
     	$this->registerCouponService();	
     	$this->registerShippingService();			
     }
@@ -31,7 +35,23 @@ class ShopServiceProvider extends ServiceProvider {
             return new \Shop\Repo\User\UserEloquent( new U );
         });       
     }    
+
+    protected function registerProductService(){
     
+	    $this->app->bind('Shop\Repo\Product\ProductInterface', function()
+        {
+            return new \Shop\Repo\Product\ProductEloquent( new P );
+        });       
+    }
+       
+    protected function registerOrderService(){
+    
+	    $this->app->bind('Shop\Repo\Order\OrderInterface', function()
+        {
+            return new \Shop\Repo\Order\OrderEloquent( new O );
+        });       
+    }   
+        
     protected function registerCouponService(){
     
 	    $this->app->bind('Shop\Repo\Coupon\CouponInterface', function()
