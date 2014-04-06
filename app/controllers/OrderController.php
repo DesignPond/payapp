@@ -1,12 +1,13 @@
 <?php
 
 use Shop\Repo\Cart\CartInterface;
-
 use Shop\Repo\Order\OrderInterface;
-
 use Shop\Repo\User\UserInterface;
-
 use Shop\Repo\Address\AddressInterface;
+use Shop\Repo\Shipping\ShippingInterface;
+
+use Shop\Service\Validation\AdresseValidator as AdresseValidator;
+use Shop\Service\Validation\UserValidation as UserValidation;
 
 class OrderController extends \BaseController {
 
@@ -14,18 +15,21 @@ class OrderController extends \BaseController {
 
 	protected $order;
 	
+	protected $shipping;
+	
 	protected $user;
 	
-	public function __construct( CartInterface $cart , OrderInterface $order , UserInterface $user , AddressInterface $address ){
+	public function __construct( CartInterface $cart , OrderInterface $order , ShippingInterface $shipping , UserInterface $user , AddressInterface $address ){
 		
 		$this->cart    = $cart;
 		
 		$this->order   = $order;
 		
+		$this->shipping = $shipping;
+				
 		$this->user    = $user;
 		
-		$this->address = $address;
-		
+		$this->address = $address;		
 	}
 	
 	/**
@@ -86,15 +90,14 @@ class OrderController extends \BaseController {
 			$shipping['type']    = 'shipping';
 			$shipping['user_id'] = $user->id;			
 			
-			$this->user->address($billing);
-			$this->user->address($shipping);
+			$this->address->create($billing);
+			$this->address->create($shipping);
 			
 			$transaction['user_id'] = $user->id;	
 		    $transaction['email']   = $billing['email']; // for transaction	
 		}
 		
 		// Store cart in db so we can still access it if the transaction doesn't go through					
-
 		$cart = $this->cart->get()->toArray();	
 		$cart = json_encode($cart);
 		
@@ -103,10 +106,32 @@ class OrderController extends \BaseController {
 			'user_id'      => $transaction['user_id'],
 		);
 		
-		$this->cart->store($data);
+		$dbcart = $this->cart->store($data);
+		
+		// shipping total				
+		$shippingPrice = $this->shipping->getShippingPrice();
+		$shipping      = \Session::get('shipping_option');
+		
+		// coupon
+		$coupon        = (Session::has('coupon') ? Session::get('coupon') : '' );
+		
+		// Total of cart
+		$cartSubTotal  = $this->cart->subtotal();
+		$cartTotal     = $this->cart->total($shippingPrice);
+		
+		$invoice_number = $this->order->makeNumber();
+		
+		$order = array(
+			'subtotal'       => $cartSubTotal,
+			'total'          => $cartTotal,
+			'invoice_number' => $invoice_number,
+			'coupon_id'      => $coupon,
+			'user_id'        => $transaction['user_id'],
+			'shipping_id'    => $shipping,
+		);
 			
 		echo '<pre>';
-		print_r($transaction);
+		print_r($order);
 		echo '</pre>';
 		
 	}

@@ -75,7 +75,7 @@ class CartWorker implements CartInterface {
 			return false;
 		}
 		
-		return true;	
+		return $dbcart;	
 	}
 
 	/*
@@ -108,22 +108,6 @@ class CartWorker implements CartInterface {
 		return $subtotal;
 		
 	}
-	
-	/**
-	 * Coupon code is valid
-	 */
-	public function couponIsValid($coupon)
-	{	
-		$coupons = array( 'ISVALID' => '0.1' , '2014' => '0.2' );
-	
-		if( array_key_exists($coupon, $coupons) )
-		{
-			\Session::put('coupon', $coupons[$coupon]);			
-			return true;			
-		}
-		
-		return false;
-	}	
 
 	/*
 	 * Prepare infos from form sent to add to cart

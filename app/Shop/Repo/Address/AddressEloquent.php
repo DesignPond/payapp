@@ -41,7 +41,7 @@ class AddressEloquent implements AddressInterface{
 			'country'    => $data['country'],
 			'type'       => $data['type'],
 			'user_id'    => $data['user_id'],
-			'deleted'    => $data['deleted'],
+			'deleted'    => 0,
 			'created_at' => date('Y-m-d G:i:s'),
 			'updated_at' => date('Y-m-d G:i:s')
 		));

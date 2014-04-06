@@ -23,6 +23,23 @@ class CouponEloquent implements CouponInterface{
 		
 		return $this->coupon->all();	
 	}
+			
+	/**
+	 * Coupon code is valid
+	 */
+	public function couponIsValid($coupon)
+	{		
+		$exist = $this->coupon->where('name','=',$coupon);
+	
+		if( $exist )
+		{
+			\Session::put('coupon', $coupon->id);
+						
+			return true;		
+		}
+		
+		return false;
+	}	
 
 	/**
 	 * Return a coupon

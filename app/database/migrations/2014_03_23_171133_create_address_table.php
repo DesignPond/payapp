@@ -16,16 +16,15 @@ class CreateAddressTable extends Migration {
 		{
 		
 			$table->increments('id');
-			$table->integer('title');
+			$table->enum('title', array('Mr','Mrs','Ms'));
 			$table->string('first_name');
 			$table->string('last_name');
-			$table->string('email');
-			$table->string('company');
-			$table->string('phone');
+			$table->string('email')->nullable();
+			$table->string('company')->nullable();
+			$table->string('phone')->nullable();
 			$table->text('address');
 			$table->string('zip');
 			$table->string('city');
-			$table->integer('state');
 			$table->integer('country');
 			$table->integer('user_id');
 			$table->boolean('deleted');

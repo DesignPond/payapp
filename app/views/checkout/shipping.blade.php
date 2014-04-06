@@ -15,13 +15,13 @@
         <section class="checkout">
 
             <div class="container">
-               {{ Form::open(array('url' => 'checkout/methodShipping', 'method' => 'post')) }} 
+               {{ Form::open(array('url' => 'checkout/methodShipping', 'method' => 'post', 'id' => 'formAddress')) }} 
 
                     <div class="row">
                         <div class="span9">
                             <div class="box">
                             
-                            <?php  if (Session::has('shipping')) { $shipping = Session::get('shipping'); }  ?>
+                            <?php  if (Session::has('shipping')) { $shipping = Session::get('shipping');}  ?>
                                 
                                 <!-- Checkout progress -->
                                 <div id="checkout-progress">
@@ -77,61 +77,60 @@
 
                                     <div class="box-content">
                                         <div class="row-fluid">
-                                            <div class="span6">
+                                            <div class="span6">                                         
+                                                <div class="control-group">
+                                                    <label for="country" class="control-label">Title</label>
+                                                    <div class="controls">
+                                                        {{ Form::select('title', array('Mr'=>'Mr','Mrs'=>'Mrs','Ms'=>'Ms') ,  $custom->ifExist($shipping['title']) , array('class' => 'span12') ) }}
+                                                    </div>
+                                                </div>                                            
                                                 <div class="control-group">
                                                     <label for="first_name" class="control-label">First name</label>
                                                     <div class="controls">
-                                                        <input class="span12" type="text" value="<?php echo $custom->ifExist($shipping['first_name']); ?>" name="first_name" id="first_name" />
+                                                        <input class="span12 required" type="text" value="<?php echo $custom->ifExist($shipping['first_name']); ?>" name="first_name" id="first_name" />
                                                     </div>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label for="last_name" class="control-label">Last name</label>
+												<div class="control-group">
+                                                    <label for="street_address" class="control-label">Address</label>
                                                     <div class="controls">
-                                                        <input class="span12" type="text" value="<?php echo $custom->ifExist($shipping['last_name']); ?>" name="last_name" id="last_name" />
-                                                    </div>
-                                                </div>
-                                                <div class="control-group">
-                                                    <label for="email" class="control-label">Email</label>
-                                                    <div class="controls">
-                                                        <input class="span12" type="text" value="<?php echo $custom->ifExist($shipping['email']); ?>" name="email" id="email" />
+                                                        <input class="span12 required" type="text" value="<?php echo $custom->ifExist($shipping['address']); ?>" name="address" id="address" />
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label for="phone" class="control-label">Phone</label>
                                                     <div class="controls">
-                                                        <input class="span12" type="text" value="<?php echo $custom->ifExist($shipping['phone']); ?>" name="phone" id="phone" />
+                                                        <input class="span12 required" type="text" value="<?php echo $custom->ifExist($shipping['phone']); ?>" name="phone" id="phone" />
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="span6">
                                                 <div class="control-group">
-                                                    <label for="company" class="control-label">Company</label>
+                                                    <label for="last_name" class="control-label">Company</label>
                                                     <div class="controls">
                                                         <input class="span12" type="text" value="<?php echo $custom->ifExist($shipping['company']); ?>" name="company" id="company" />
                                                     </div>
-                                                </div>
+                                                </div>                                          
                                                 <div class="control-group">
-                                                    <label for="street_address" class="control-label">Street address</label>
+                                                    <label for="last_name" class="control-label">Last name</label>
                                                     <div class="controls">
-                                                        <input class="span12" type="text" value="<?php echo $custom->ifExist($shipping['street_address']); ?>" name="street_address" id="street_address" />
+                                                        <input class="span12 required" type="text" value="<?php echo $custom->ifExist($shipping['last_name']); ?>" name="last_name" id="last_name" />
                                                     </div>
                                                 </div>
-
                                                 <div class="row-fluid">
-                                                    <div class="span6">
-                                                        <div class="control-group">
-                                                            <label for="city" class="control-label">Town / City</label>
-                                                            <div class="controls">
-                                                                <input class="span12" type="text" value="<?php echo $custom->ifExist($shipping['city']); ?>" name="city" id="city" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="span6">
                                                         <div class="control-group">
                                                             <label for="zip" class="control-label">Zip / Postcode</label>
                                                             <div class="controls">
-                                                                <input class="span12" type="text" value="<?php echo $custom->ifExist($shipping['zip']); ?>" name="zip" id="zip" />
+                                                                <input class="span12 required" type="text" value="<?php echo $custom->ifExist($shipping['zip']); ?>" name="zip" id="zip" />
+                                                            </div>
+                                                        </div>
+                                                    </div>                                               
+                                                    <div class="span6">
+                                                        <div class="control-group">
+                                                            <label for="city" class="control-label">Town / City</label>
+                                                            <div class="controls">
+                                                                <input class="span12 required" type="text" value="<?php echo $custom->ifExist($shipping['city']); ?>" name="city" id="city" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -142,7 +141,7 @@
                                                         <div class="control-group">
                                                             <label for="country" class="control-label">Country</label>
                                                             <div class="controls">
-                                                                {{ Form::select('country', $countries ,  $custom->ifExist($shipping['country']) , array('class' => 'span12') ) }}
+                                                                {{ Form::select('country', $countries , $custom->ifExist($shipping['country']) , array('class' => 'span12 required') ) }}
                                                             </div>
                                                         </div>
                                                     </div> 

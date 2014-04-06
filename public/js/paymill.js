@@ -141,5 +141,7 @@ $(document).ready(function() {
 		
 	});	
 	
+	$('#formAddress').parsley();
+	
   
 });	

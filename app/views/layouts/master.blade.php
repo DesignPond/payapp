@@ -16,6 +16,7 @@
 		<link href="<?php echo asset('css/bootstrap-responsive.css');?>" rel="stylesheet">
 		<link href="<?php echo asset('css/tfingi-megamenu/tfingi-megamenu-frontend.css');?>" rel="stylesheet">
 		<link href="<?php echo asset('css/color-schemes/turquoise.css');?>" rel="stylesheet">
+		<link href="<?php echo asset('css/main.css');?>" rel="stylesheet">
 		<link href="<?php echo asset('css/fonts/font-awesome.css');?>" rel="stylesheet">
 		
 		<!--
@@ -47,6 +48,7 @@
 		<script type="text/javascript" src="<?php echo asset('js/jquery.gmap3.js');?>"></script>
 		<script type="text/javascript" src="<?php echo asset('js/imagesloaded.js');?>"></script>
 		<script type="text/javascript" src="<?php echo asset('js/la_boutique.js');?>"></script>
+		<script type="text/javascript" src="<?php echo asset('js/parsley.js');?>"></script>
 		<script type="text/javascript" src="<?php echo asset('js/tfingi-megamenu/tfingi-megamenu-frontend.js');?>"></script>
 
 		<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->

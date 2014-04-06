@@ -9,7 +9,7 @@ class AddressTableSeeder extends Seeder {
 
 		$address = array(
 	        array(
-	           'title'      => '2',
+	           'title'      => 'Ms',
 	           'first_name' => 'Cindy',
 	           'last_name'  => 'Leschaud',
 	           'email'      => 'cindy.leschaud@gmail.com',
@@ -18,7 +18,6 @@ class AddressTableSeeder extends Seeder {
 	           'address'    => 'Ruelle de l\'hôtel de ville 3',
 	           'zip'        => '2520',
 	           'city'       => 'La Neuveville',
-	           'state'      => '6',
 	           'country'    => '205',
 	           'user_id'    => '1',
 	           'type'       => 'billing',	  	                     
@@ -27,7 +26,7 @@ class AddressTableSeeder extends Seeder {
 			   'updated_at' => date('Y-m-d G:i:s')        
 	        ),
 	        array(
-	           'title'      => '2',
+	           'title'      => 'Ms',
 	           'first_name' => 'Cindy',
 	           'last_name'  => 'Leschaud',
 	           'email'      => 'pruntrut@yahoo.fr',
@@ -36,7 +35,6 @@ class AddressTableSeeder extends Seeder {
 	           'address'    => 'Breguet 1',
 	           'zip'        => '2000',
 	           'city'       => 'Neuchâtel',
-	           'state'      => '11',
 	           'country'    => '205',
 	           'user_id'    => '1',	 
 	           'type'       => 'shipping',	                     

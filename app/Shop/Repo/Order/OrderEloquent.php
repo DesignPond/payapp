@@ -34,13 +34,20 @@ class OrderEloquent implements OrderInterface {
 	}
 	
 	/*
+	*  Make order number
+	*/
+	public function makeNumber(){
+	
+		return '001_fakeInvoiceNumber';
+	}
+	
+	/*
 	* create an order
 	*/	
 	public function process($cart){
 	
 		// Get the cart infos to process the order
 		
-
 		$order = $this->order->create(array(
 			'email'          => $data['subtotal'],
 			'total'          => $data['total'],
@@ -48,6 +55,7 @@ class OrderEloquent implements OrderInterface {
 			'coupon_id'      => $data['coupon_id'],
 			'user_id'        => $data['user_id'],
 			'shipping_id'    => $data['shipping_id'],
+			'cart_id'        => $data['cart_id'],
 			'status'         => $data['status'],
 			'deleted'        => 0
 		));

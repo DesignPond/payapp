@@ -76,18 +76,17 @@
                                         <div class="row-fluid">
                                         
                                             <div class="span6">
-                                            
+                                            	<div class="row-fluid">
+                                                    <p class="span4"><strong>Title</strong></p>
+													<p class="span8"><?php echo $user->address->first()->title; ?></p>
+                                                </div>                                              
                                             	<div class="row-fluid">
                                                     <p class="span4"><strong>First name</strong></p>
 													<p class="span8"><?php echo $user->address->first()->first_name; ?></p>
 												</div>
                                             	<div class="row-fluid">
-                                                    <p class="span4"><strong>Last name</strong></p>
-													<p class="span8"><?php echo $user->address->first()->last_name; ?></p>
-												</div>
-                                            	<div class="row-fluid">
-                                                    <p class="span4"><strong>Email</strong></p>
-													<p class="span8"><?php echo $user->address->first()->email; ?></p>
+                                                    <p class="span4"><strong>Address</strong></p>
+													<p class="span8"><?php echo $user->address->first()->address; ?></p>
 												</div>
                                             	<div class="row-fluid">
                                                     <p class="span4"><strong>Phone</strong></p>
@@ -97,15 +96,10 @@
                                             </div>
 
                                             <div class="span6">
-                                            
-                                             	<div class="row-fluid">
-                                                    <p class="span4"><strong>Company</strong></p>
-													<p class="span8"><?php echo $user->address->first()->company; ?></p>
-												</div>
                                             	<div class="row-fluid">
-                                                    <p class="span4"><strong>Address</strong></p>
-													<p class="span8"><?php echo $user->address->first()->address; ?></p>
-												</div>
+                                                    <p class="span4"><strong>Last name</strong></p>
+													<p class="span8"><?php echo $user->address->first()->last_name; ?></p>
+												</div>                                            
 												
 												<div class="row-fluid">
 		                                            <p class="span4"><strong>Zip / City</strong></p>

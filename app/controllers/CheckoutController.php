@@ -1,12 +1,12 @@
 <?php
 
 use Shop\Repo\User\UserInterface;
-
 use Shop\Repo\Cart\CartInterface;
-
 use Shop\Repo\Coupon\CouponInterface;
-
 use Shop\Repo\Shipping\ShippingInterface;
+
+use Shop\Service\Validation\AdresseValidator as AdresseValidator;
+use Shop\Service\Validation\UserValidation as UserValidation;
 
 class CheckoutController extends \BaseController {
 
@@ -120,16 +120,16 @@ class CheckoutController extends \BaseController {
 		   return View::make('checkout.user.shipping')->with( array('user' => $user) );
 		}
 		
-		if( !empty($_POST) && !Session::has('billing') ){
+		$adresseValidator = AdresseValidator::make(Input::all())->addContext('billing');
 		
-			// put client billing info in session
-			Session::put('billing', Input::all() );			
+		if ( !empty($_POST) && $adresseValidator->passes()) 
+		{
+		   Session::put('billing', Input::all() );	
 		}
 		
-		
-		if(!Session::has('billing') )
+		if(!Session::has('billing'))
 		{
-			return Redirect::to('checkout/billing')->with( array('status' => 'error' ,'message' => 'Please provide a billing address') );	
+			return Redirect::to('checkout/billing')->withErrors( $adresseValidator->errors() )->withInput( Input::all() ); 	
 		}
 		
 		return View::make('checkout.shipping');
@@ -148,12 +148,25 @@ class CheckoutController extends \BaseController {
 	}
 	
 	public function methodShipping(){
-	
-		if(!empty($_POST)){
 		
-			Session::forget('shipping');
-			// put client billing info in session
-			Session::put('shipping', Input::all() );			
+		if (Auth::check())
+		{
+		   $id   = Auth::user()->id;		   
+		   $user = $this->user->find($id,'shipping');
+		   
+		   return View::make('checkout.method');
+		}
+		
+		$adresseValidator = AdresseValidator::make(Input::all())->addContext('shipping');
+		
+		if ( !empty($_POST) && $adresseValidator->passes()) 
+		{
+		    Session::put('shipping', Input::all() );	
+		}
+		
+		if(!Session::has('shipping'))
+		{
+			return Redirect::to('checkout/shipping')->withErrors( $adresseValidator->errors() )->withInput( Input::all() ); 	
 		}
 		
 		return View::make('checkout.method');
@@ -165,7 +178,7 @@ class CheckoutController extends \BaseController {
 		
 		if( !Session::has('shipping_option') && empty($shippingOption) )
 		{
-			return Redirect::to('checkout/methodShipping')->with( array('status' => 'error' ,'message' => 'Please choose a shipping method') );	
+			return Redirect::to('checkout/methodShipping')->withErrors( $adresseValidator->errors() )->withInput( Input::all() ); 
 		}	
 		
 		if(!empty($shippingOption))
@@ -208,48 +221,6 @@ class CheckoutController extends \BaseController {
 		
 		return View::make('checkout.review')->with( array('cart' => $cart ) );
 	}	
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
 
 }
