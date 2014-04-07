@@ -6,7 +6,7 @@ interface OrderInterface {
 
 	public function find($id);
 	
-	public function process($cart);
+	public function process($data);
 
 	public function makeNumber();
 	

@@ -44,20 +44,17 @@ class OrderEloquent implements OrderInterface {
 	/*
 	* create an order
 	*/	
-	public function process($cart){
+	public function process($data){
 	
-		// Get the cart infos to process the order
-		
+		// Get the cart infos to process the order		
 		$order = $this->order->create(array(
-			'email'          => $data['subtotal'],
+			'subtotal'       => $data['subtotal'],
 			'total'          => $data['total'],
 			'invoice_number' => $data['invoice_number'],
 			'coupon_id'      => $data['coupon_id'],
 			'user_id'        => $data['user_id'],
 			'shipping_id'    => $data['shipping_id'],
-			'cart_id'        => $data['cart_id'],
-			'status'         => $data['status'],
-			'deleted'        => 0
+			'cart_id'        => $data['cart_id']
 		));
 		
 		if( ! $order )
@@ -65,7 +62,7 @@ class OrderEloquent implements OrderInterface {
 			return false;
 		}
 		
-		return true;
+		return $order;
 		
 	}
 	

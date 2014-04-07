@@ -10,7 +10,7 @@
 	               
 	<!-- Content section -->		
     <section class="main">
-        <?php print_r(Session::all()) ?>
+ 
         <!-- Checkout / Billing Address -->
         <section class="checkout">
 

@@ -178,7 +178,7 @@ class CheckoutController extends \BaseController {
 		
 		if( !Session::has('shipping_option') && empty($shippingOption) )
 		{
-			return Redirect::to('checkout/methodShipping')->withErrors( $adresseValidator->errors() )->withInput( Input::all() ); 
+			return Redirect::to('checkout/methodShipping')->with( array('status' => 'error' ,'message' => 'Please choose a shipping method') );	
 		}	
 		
 		if(!empty($shippingOption))

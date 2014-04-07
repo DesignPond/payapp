@@ -63,9 +63,14 @@ class OrderController extends \BaseController {
 		
 		$transaction = array();
 		
+		/* =============================
+		   User infos	
+		 ============================= */	
+		 	
 		// if user is logged in get id and infos
 		if (Auth::check())
 		{
+			// prepare transactions infos		
 		    $transaction['user_id'] = Auth::user()->id;	
 		    $transaction['email']   = Auth::user()->email; // for transaction		     
 		}
@@ -75,6 +80,7 @@ class OrderController extends \BaseController {
 			$billing  = Session::get('billing');
 			$shipping = Session::get('shipping');
 			
+			//Create new user
 			$new = array(
 				'first_name' => $billing['first_name'],
 				'last_name'  => $billing['last_name'],
@@ -90,13 +96,20 @@ class OrderController extends \BaseController {
 			$shipping['type']    = 'shipping';
 			$shipping['user_id'] = $user->id;			
 			
+			
+			// create the two address
 			$this->address->create($billing);
 			$this->address->create($shipping);
 			
+			// prepare transactions infos
 			$transaction['user_id'] = $user->id;	
 		    $transaction['email']   = $billing['email']; // for transaction	
 		}
 		
+		/* =============================
+		   Cart store
+		 ============================= */	
+		 
 		// Store cart in db so we can still access it if the transaction doesn't go through					
 		$cart = $this->cart->get()->toArray();	
 		$cart = json_encode($cart);
@@ -108,6 +121,10 @@ class OrderController extends \BaseController {
 		
 		$dbcart = $this->cart->store($data);
 		
+		/* =============================
+		   Prepare order
+		 ============================= */	
+		 
 		// shipping total				
 		$shippingPrice = $this->shipping->getShippingPrice();
 		$shipping      = \Session::get('shipping_option');
@@ -119,6 +136,7 @@ class OrderController extends \BaseController {
 		$cartSubTotal  = $this->cart->subtotal();
 		$cartTotal     = $this->cart->total($shippingPrice);
 		
+		// Create order 
 		$invoice_number = $this->order->makeNumber();
 		
 		$order = array(
@@ -128,10 +146,13 @@ class OrderController extends \BaseController {
 			'coupon_id'      => $coupon,
 			'user_id'        => $transaction['user_id'],
 			'shipping_id'    => $shipping,
+			'cart_id'        => $dbcart->id
 		);
+		
+		$newOrder = $this->order->process($order);
 			
 		echo '<pre>';
-		print_r($order);
+		print_r($newOrder);
 		echo '</pre>';
 		
 	}

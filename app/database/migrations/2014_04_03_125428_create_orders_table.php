@@ -24,7 +24,7 @@ class CreateOrdersTable extends Migration {
 			$table->integer('shipping_id');
 			$table->integer('cart_id');
 			$table->enum('status', array('waiting','paid','error','cancelled'))->default('waiting');
-			$table->boolean('deleted');
+			$table->boolean('deleted')->default(false);
 			
 			$table->timestamps();
 		});
