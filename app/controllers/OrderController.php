@@ -19,17 +19,22 @@ class OrderController extends \BaseController {
 	
 	protected $user;
 	
+	protected $transaction;
+	
 	public function __construct( CartInterface $cart , OrderInterface $order , ShippingInterface $shipping , UserInterface $user , AddressInterface $address ){
 		
-		$this->cart    = $cart;
+		$this->cart        = $cart;
 		
-		$this->order   = $order;
+		$this->order       = $order;
 		
-		$this->shipping = $shipping;
+		$this->shipping    = $shipping;
 				
-		$this->user    = $user;
+		$this->user        = $user;
 		
-		$this->address = $address;		
+		$this->address     = $address;	
+		
+		$this->transaction = '';			
+			
 	}
 	
 	/**
@@ -59,14 +64,82 @@ class OrderController extends \BaseController {
 	 */
 	public function store()
 	{
-		echo 'store order';
 		
-		$transaction = array();
-		
+		Log::info('Start order process');
 		/* =============================
 		   User infos	
 		 ============================= */	
 		 	
+		$user = $this->getUserInfo();
+		
+		Log::info('Get user infos');
+		/* =============================
+		   Cart store
+		 ============================= */	
+		 
+		$dbcart = $this->storeCart($user);
+
+		Log::info('Store cart in DB');		
+		/* =============================
+		   Prepare order
+		 ============================= */	
+
+		$order = $this->storeOrder($user,$dbcart); 
+
+		Log::info('Process order');	
+			
+		echo '<pre>';
+		print_r($order);
+		echo '</pre>';
+		
+	}
+
+	/**
+	 *  User infos	
+	 *
+	 * @return array
+	 */
+	public function storeOrder($user,$dbcart)
+	{		 
+		// shipping total				
+		$shippingPrice  = $this->shipping->getShippingPrice();
+		$shipping       = \Session::get('shipping_option');
+		
+		// coupon
+		$coupon         = (Session::has('coupon') ? Session::get('coupon') : '' );
+		
+		// Total of cart
+		$cartSubTotal   = $this->cart->subtotal();
+		$cartTotal      = $this->cart->total($shippingPrice);
+		
+		// Create order 
+		$invoice_number = $this->order->makeNumber();
+		
+		$order = array(
+			'subtotal'       => $cartSubTotal,
+			'total'          => $cartTotal,
+			'invoice_number' => $invoice_number,
+			'coupon_id'      => $coupon,
+			'user_id'        => $user['user_id'],
+			'shipping_id'    => $shipping,
+			'cart_id'        => $dbcart->id
+		);
+	
+				
+		$newOrder = $this->order->process($order);
+		
+		return $newOrder;
+			
+	}
+
+	/**
+	 *  User infos	
+	 *
+	 * @return array
+	 */
+	public function getUserInfo()
+	{
+		$transaction = array();
 		// if user is logged in get id and infos
 		if (Auth::check())
 		{
@@ -106,77 +179,28 @@ class OrderController extends \BaseController {
 		    $transaction['email']   = $billing['email']; // for transaction	
 		}
 		
-		/* =============================
-		   Cart store
-		 ============================= */	
-		 
+		return $transaction;
+	}
+
+	/**
+	 * Store cart
+	 *
+	 * @return Response
+	 */
+	public function storeCart($user)
+	{	 
 		// Store cart in db so we can still access it if the transaction doesn't go through					
 		$cart = $this->cart->get()->toArray();	
 		$cart = json_encode($cart);
 		
 		$data = array(
 			'cart_content' => $cart,
-			'user_id'      => $transaction['user_id'],
+			'user_id'      => $user['user_id'],
 		);
 		
 		$dbcart = $this->cart->store($data);
-		
-		/* =============================
-		   Prepare order
-		 ============================= */	
-		 
-		// shipping total				
-		$shippingPrice = $this->shipping->getShippingPrice();
-		$shipping      = \Session::get('shipping_option');
-		
-		// coupon
-		$coupon        = (Session::has('coupon') ? Session::get('coupon') : '' );
-		
-		// Total of cart
-		$cartSubTotal  = $this->cart->subtotal();
-		$cartTotal     = $this->cart->total($shippingPrice);
-		
-		// Create order 
-		$invoice_number = $this->order->makeNumber();
-		
-		$order = array(
-			'subtotal'       => $cartSubTotal,
-			'total'          => $cartTotal,
-			'invoice_number' => $invoice_number,
-			'coupon_id'      => $coupon,
-			'user_id'        => $transaction['user_id'],
-			'shipping_id'    => $shipping,
-			'cart_id'        => $dbcart->id
-		);
-		
-		$newOrder = $this->order->process($order);
 			
-		echo '<pre>';
-		print_r($newOrder);
-		echo '</pre>';
-		
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
+		return $dbcart;			
 	}
 
 	/**
