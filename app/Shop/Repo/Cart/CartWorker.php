@@ -20,6 +20,19 @@ class CartWorker implements CartInterface {
 		
 		return \Cart::content();
 	}
+	
+	public function totalCount(){
+	
+		return \Cart::count(); 
+	}
+	
+	/*
+	 * Get row id
+	*/
+	public function getRow($row){
+		
+		return \Cart::get($row);
+	}
 
 	/*
 	 * Add row in cart
@@ -55,6 +68,16 @@ class CartWorker implements CartInterface {
 		\Cart::remove($row);
 		 
 		return true;		
+	}
+	
+	/*
+	 * Destroy cart
+	*/
+	public function destroy(){
+		
+		\Cart::destroy();
+		
+		return true;
 	}
 	
 	/*
@@ -121,6 +144,28 @@ class CartWorker implements CartInterface {
 		
 		return $unserializedData;
 		
+	}
+	
+	/*
+	 * Get first row for testing
+	*/
+	
+	public function getFirstRow(){
+	
+		$cart = $this->get();
+		
+		if($cart)
+		{
+			foreach($cart as $row)
+			{				
+				$rowId = $row->rowid;
+				break;				
+			}
+			
+			return $rowId;
+		}
+		
+		return false;
 	}
 	
 }

@@ -29,11 +29,11 @@ class CouponEloquent implements CouponInterface{
 	 */
 	public function couponIsValid($coupon)
 	{		
-		$exist = $this->coupon->where('name','=',$coupon);
+		$exist = $this->coupon->where('name','=',$coupon)->get()->first();
 	
 		if( $exist )
 		{
-			\Session::put('coupon', $coupon->id);
+			\Session::put('coupon', $exist->value);
 						
 			return true;		
 		}

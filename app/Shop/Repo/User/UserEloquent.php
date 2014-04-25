@@ -17,7 +17,27 @@ class UserEloquent implements UserInterface{
 	}
 
 	/**
-	 * Return all infos of the user with insciption
+	 * Return current user id
+	 *
+	 * @return int
+	 */
+	public function getCurrentUserId()
+	{
+	    return Auth::user()->id;
+	}
+	
+	/**
+	 * Return current user email
+	 *
+	 * @return string
+	 */
+	public function getCurrentUserEmail()
+	{
+	    return Auth::user()->email;
+	}
+
+	/**
+	 * Return all infos of the user with address
 	 *
 	 * @return stdObject Collection of users
 	 */

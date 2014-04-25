@@ -12,8 +12,7 @@
 	},
 	"require-dev": {
 		"mockery/mockery": "dev-master",
-		"fzaninotto/faker": "dev-master",
-		"codeception/codeception": "1.8.*"
+		"fzaninotto/faker": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

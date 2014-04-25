@@ -72,10 +72,7 @@
 	                                                <td data-title="Total" class="col_total text-right"><span class="total-price">CHF <?php echo $item->subtotal; ?></span></td>
 	                                            </tr>
 	                                            
-	                                            @endforeach
-	                                        @else
-	                                        <tr><td colspan="7">Your cart is empty. Go Shopping!</td></tr>
-                                            @endif
+	                                        @endforeach
                                             
                                             @if(Session::has('coupon'))
 											<tr>
@@ -95,7 +92,11 @@
 													?>
 												</td>
 											</tr>
-											@endif
+											@endif	                                            
+	                                            
+	                                        @else
+	                                        <tr><td colspan="7">Your cart is empty. Go Shopping!</td></tr>
+                                            @endif
                                             
                                         </tbody>
                                     </table>
@@ -213,6 +214,7 @@
                     </div>
                     <!-- End class="cart-details" -->
                     
+                    @if( !$cart->isEmpty() )
                     <!-- Coupon -->
                     <div class="coupon">
                         <div class="box">
@@ -236,6 +238,7 @@
                         </div>
                     </div>
                     <!-- End class="coupon" -->
+                    @endif
                     
                 </div>
 

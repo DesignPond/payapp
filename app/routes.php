@@ -11,11 +11,16 @@
 |
 */
 
+
+Route::get('test', function()
+{
+    return Coupon::where('name','=','promo')->get()->first()->id;
+});
+
+
 //Cart::add('234', 'Other product 4534', 1, 120.00, array('size' => 'M'));
 
 View::share('cartTotalCount',  Cart::count() );
-
-//Route::get('test',  array( 'uses' => 'CheckoutController@user' ));
 
 Route::get('/', array( 'uses' => 'ProductController@index' ));
 

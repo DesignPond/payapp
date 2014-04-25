@@ -140,12 +140,13 @@ class OrderController extends \BaseController {
 	public function getUserInfo()
 	{
 		$transaction = array();
+		
 		// if user is logged in get id and infos
 		if (Auth::check())
 		{
 			// prepare transactions infos		
-		    $transaction['user_id'] = Auth::user()->id;	
-		    $transaction['email']   = Auth::user()->email; // for transaction		     
+		    $transaction['user_id'] = $this->user->getCurrentUserId();
+		    $transaction['email']   = $this->user->getCurrentUserEmail();	     
 		}
 		else
 		{
@@ -154,13 +155,12 @@ class OrderController extends \BaseController {
 			$shipping = Session::get('shipping');
 			
 			//Create new user
-			$new = array(
+
+			$user = $this->user->create(array(
 				'first_name' => $billing['first_name'],
 				'last_name'  => $billing['last_name'],
 				'email'      => $billing['email'],
-			);
-			
-			$user = $this->user->create($new);
+			));
 
 			// Billing
 			$billing['type']    = 'billing';
@@ -168,8 +168,7 @@ class OrderController extends \BaseController {
 			// Shipping
 			$shipping['type']    = 'shipping';
 			$shipping['user_id'] = $user->id;			
-			
-			
+						
 			// create the two address
 			$this->address->create($billing);
 			$this->address->create($shipping);

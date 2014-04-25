@@ -100,7 +100,7 @@ class CartController extends \BaseController {
 	{
 		$coupon = Input::get('coupon');
 		
-		if( $this->cart->couponIsValid($coupon) )
+		if( $this->coupon->couponIsValid($coupon) )
 		{					
 			return Redirect::to('cart')->with(array( 'status' => 'success', 'message' => 'Coupon applied!' ));
 		}
@@ -139,7 +139,6 @@ class CartController extends \BaseController {
 	 */
 	public function update()
 	{
-		
 		// else update the cart
 		$this->cart->update( Input::all() );
 		
