@@ -8,7 +8,7 @@ interface OrderInterface {
 	
 	public function process($data);
 
-	public function makeNumber();
+	public function newInvoiceNumber();
 	
 }
 

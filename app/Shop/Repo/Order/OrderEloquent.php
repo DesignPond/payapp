@@ -30,15 +30,53 @@ class OrderEloquent implements OrderInterface {
 	*/
 	public function find($id){
 				
-		return $this->order->findOrFail($id);														
+		return $this->order->where('id','=',$id)->with( array('user') )->get()->first();														
 	}
 	
 	/*
-	*  Make order number
-	*/
-	public function makeNumber(){
+	*  Get last invoice number
+	*/	
+	public function lastInvoiceNumber(){
 	
-		return '001_fakeInvoiceNumber';
+		$last = 0;
+		
+		// Last invoice number
+		$number = $this->order->orderBy('id', 'DESC')->take(1)->skip(0)->get();
+		
+		if(! $number->isEmpty()) 
+		{					
+			$last  = explode('_', $number);
+		}
+		
+		return $last;
+	}
+	
+	/*
+	*  Make invoice number
+	*/
+	public function makeInvoiceNumber($last){
+		
+		$new  = intval($last) + 1;
+					
+		$new  = str_pad($new, 4, '0', STR_PAD_LEFT);	
+		
+		return $new;
+	}
+		
+	/*
+	*  Return new invoice number
+	*/
+	public function newInvoiceNumber(){
+		
+		$last = $this->lastInvoiceNumber();
+		
+		$new  = $this->makeInvoiceNumber($last);
+		
+		$year = date('Y');
+					
+		$invoiceNumber  = $new.'_'.$year;	
+		
+		return $invoiceNumber;
 	}
 	
 	/*

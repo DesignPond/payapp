@@ -16,15 +16,15 @@ class CreateOrdersTable extends Migration {
 		{
 			$table->increments('id');
 			
-			$table->float('subtotal');
-			$table->float('total');
+			$table->integer('subtotal');
+			$table->integer('total');
 			$table->string('invoice_number');
 			$table->integer('coupon_id');
 			$table->integer('user_id');
 			$table->integer('shipping_id');
 			$table->integer('cart_id');
 			$table->enum('status', array('waiting','paid','error','cancelled'))->default('waiting');
-			$table->boolean('deleted')->default(false);
+			$table->dateTime('deleted_at');
 			
 			$table->timestamps();
 		});

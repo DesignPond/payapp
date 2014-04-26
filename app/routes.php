@@ -33,6 +33,9 @@ Route::resource('products', 'ProductController');
 // Orders
 Route::resource('orders', 'OrderController');
 
+// Payment
+Route::resource('payment', 'PaymentController');
+
 // Checkout
 Route::get('checkout/billing', array( 'uses' => 'CheckoutController@billing' ));
 Route::get('checkout/shipping', array( 'uses' => 'CheckoutController@shipping' ));

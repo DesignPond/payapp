@@ -23,7 +23,7 @@ class UserEloquent implements UserInterface{
 	 */
 	public function getCurrentUserId()
 	{
-	    return Auth::user()->id;
+	    return \Auth::user()->id;
 	}
 	
 	/**
@@ -33,7 +33,7 @@ class UserEloquent implements UserInterface{
 	 */
 	public function getCurrentUserEmail()
 	{
-	    return Auth::user()->email;
+	    return \Auth::user()->email;
 	}
 
 	/**

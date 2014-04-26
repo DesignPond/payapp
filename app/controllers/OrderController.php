@@ -66,6 +66,7 @@ class OrderController extends \BaseController {
 	{
 		
 		Log::info('Start order process');
+		
 		/* =============================
 		   User infos	
 		 ============================= */	
@@ -73,13 +74,15 @@ class OrderController extends \BaseController {
 		$user = $this->getUserInfo();
 		
 		Log::info('Get user infos');
+		
 		/* =============================
 		   Cart store
 		 ============================= */	
 		 
 		$dbcart = $this->storeCart($user);
 
-		Log::info('Store cart in DB');		
+		Log::info('Store cart in DB');	
+			
 		/* =============================
 		   Prepare order
 		 ============================= */	
@@ -87,6 +90,8 @@ class OrderController extends \BaseController {
 		$order = $this->storeOrder($user,$dbcart); 
 
 		Log::info('Process order');	
+		
+		// $event = Event::fire('order.create', array($order));
 			
 		echo '<pre>';
 		print_r($order);
@@ -106,15 +111,19 @@ class OrderController extends \BaseController {
 		$shipping       = \Session::get('shipping_option');
 		
 		// coupon
-		$coupon         = (Session::has('coupon') ? Session::get('coupon') : '' );
+		$coupon         = (\Session::has('coupon') ? \Session::get('coupon') : '' );
 		
 		// Total of cart
 		$cartSubTotal   = $this->cart->subtotal();
 		$cartTotal      = $this->cart->total($shippingPrice);
 		
-		// Create order 
-		$invoice_number = $this->order->makeNumber();
+		$cartSubTotal   = $cartSubTotal * 100;
+		$cartTotal      = $cartTotal * 100;
 		
+		// Create new invoice number  
+		$invoice_number = $this->order->newInvoiceNumber();
+		
+		// Prepare order
 		$order = array(
 			'subtotal'       => $cartSubTotal,
 			'total'          => $cartTotal,
@@ -124,8 +133,7 @@ class OrderController extends \BaseController {
 			'shipping_id'    => $shipping,
 			'cart_id'        => $dbcart->id
 		);
-	
-				
+					
 		$newOrder = $this->order->process($order);
 		
 		return $newOrder;
@@ -151,8 +159,8 @@ class OrderController extends \BaseController {
 		else
 		{
 			// Else store new user infos address and create new id 
-			$billing  = Session::get('billing');
-			$shipping = Session::get('shipping');
+			$billing  = \Session::get('billing');
+			$shipping = \Session::get('shipping');
 			
 			//Create new user
 
