@@ -45,12 +45,14 @@ class PaymentController extends \BaseController {
 	 */
 	public function store()
 	{
-	
+		
+		// Get all infos posted
 		$token    = Input::get('paymillToken');
 		$currency = Input::get('card-currency');
 		$amount   = Input::get('card-amount-int');
 		$email    = Input::get('email');
 		$invoice  = Input::get('invoice');
+		$order_id = Input::get('order_id');
 		
 		// Create client with email			
 		$client   = Laramill::newClient( $email );
@@ -71,9 +73,11 @@ class PaymentController extends \BaseController {
 					$paymentId = $payement->getId();
 					
 					// Create new transaction with payement token
-					$response  = Laramill::newTransactionToken($amount, $currency , $paymentId, $invoice);
+					$transaction  = Laramill::newTransactionToken($amount, $currency , $paymentId, $invoice);
 					
-					return Redirect::to('clients/'.$clientId);
+					// $event = Event::fire('order.update', array($order));
+
+					// return Redirect::to('clients/'.$clientId);
 				}
 				else
 				{
@@ -83,7 +87,8 @@ class PaymentController extends \BaseController {
 			} // end if client & token		
 		}
 		
-		return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with token') ); 
+		// return Redirect::back()->with( array('status' => 'danger' , 'message' => 'Problem with token') ); 
 	}
+
 
 }

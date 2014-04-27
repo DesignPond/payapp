@@ -269,6 +269,9 @@ ul {
 .list-none {
   list-style-type: none;
 }
+.list-none li{
+  margin-bottom: 5px;
+}
 .columns1 {
   -webkit-columns: 20px 1;
   -moz-columns: 20px 1;

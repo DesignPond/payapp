@@ -127,6 +127,8 @@ class CartWorker implements CartInterface {
 		{      	
         	$subtotal = $subtotal + (float)$shipping;
         }
+        
+        $subtotal = round($subtotal , 2); 
 		
 		return $subtotal;
 		

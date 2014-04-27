@@ -17,7 +17,7 @@ class CartTest extends TestCase {
 		$this->cart   = new Cartworker(new DBCart);
     	$this->coupon = new CouponEloquent(new Coupon);
 		
-		\Cart::add('234', 'Other product 4534', 1, 120.00, array('size' => 'M'));
+		\Cart::add('234', 'Other product 4534', 1,  128.63 , array('size' => 'M'));
 
 	}
 	
@@ -48,9 +48,9 @@ class CartTest extends TestCase {
 		
 		$actual = $this->cart->subtotal();
 
-		$this->assertEquals(120.00, $actual);
+		$this->assertEquals(128.63, $actual);
 	}
-	
+		
 	public function testUpdateOfCart(){
 		
 		// Get row id
@@ -73,12 +73,12 @@ class CartTest extends TestCase {
 	
 	public function testTotalWithCouponAndShipping(){
 		
-		$this->coupon->couponIsValid('promo'); // 50%
+		$this->coupon->couponIsValid('2014'); // 20%
 			
-		// get total of cart 120 - 50% + 10 = 70
+		// get total of cart 128.63 - 20% + 10 = 70
 		$items = $this->cart->total(10);
 
-		$this->assertEquals(70, $items);
+		$this->assertEquals(112.90, $items);
 		
 	}
 

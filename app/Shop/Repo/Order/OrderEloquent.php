@@ -30,7 +30,7 @@ class OrderEloquent implements OrderInterface {
 	*/
 	public function find($id){
 				
-		return $this->order->where('id','=',$id)->with( array('user') )->get()->first();														
+		return $this->order->where('id','=',$id)->with( array('user','shipping') )->get()->first();														
 	}
 	
 	/*
@@ -77,7 +77,7 @@ class OrderEloquent implements OrderInterface {
 		$invoiceNumber  = $new.'_'.$year;	
 		
 		return $invoiceNumber;
-	}
+	}	
 	
 	/*
 	* create an order

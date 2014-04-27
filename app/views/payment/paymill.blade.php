@@ -32,6 +32,7 @@
 							<input class="card-currency" name="card-currency" type="hidden" value="CHF" />
 							<input name="email" type="hidden" value="<?php echo $order->user->email; ?>" />
 							<input name="invoice" type="hidden" value="<?php echo $order->invoice_number; ?>" />
+							<input name="order_id" type="hidden" value="<?php echo $order->id; ?>" />
 							
 							<div class="row-fluid form-group">
 								<div class="span4">

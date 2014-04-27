@@ -52,9 +52,11 @@ class OrderController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function show($id)
 	{
-		//
+		$order = $this->order->find($id);
+		
+		return View::make('shop.success')->with( array( 'order' => $order ) );	
 	}
 
 	/**
@@ -91,11 +93,7 @@ class OrderController extends \BaseController {
 
 		Log::info('Process order');	
 		
-		// $event = Event::fire('order.create', array($order));
-			
-		echo '<pre>';
-		print_r($order);
-		echo '</pre>';
+		return Redirect::to('payment/'.$order->id);
 		
 	}
 

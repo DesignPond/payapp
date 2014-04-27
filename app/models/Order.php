@@ -17,5 +17,11 @@ class Order extends \Eloquent {
     {
         return $this->belongsTo('User','user_id');
     }
-    
+
+	
+	public function shipping()
+    {
+        return $this->belongsTo('Shipping','shipping_id');
+    }
+        
 }
